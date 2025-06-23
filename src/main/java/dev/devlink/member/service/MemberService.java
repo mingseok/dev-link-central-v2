@@ -1,7 +1,11 @@
 package dev.devlink.member.service;
 
+import dev.devlink.common.jwt.JwtToken;
+import dev.devlink.common.jwt.JwtTokenProvider;
 import dev.devlink.common.util.PasswordUtil;
+import dev.devlink.member.controller.request.SignInRequest;
 import dev.devlink.member.controller.request.SignUpRequest;
+import dev.devlink.member.controller.response.JwtTokenResponse;
 import dev.devlink.member.controller.response.SignUpResponse;
 import dev.devlink.member.entity.Member;
 import dev.devlink.member.exception.MemberError;
@@ -16,10 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final JwtTokenProvider jwtTokenProvider;
     private final PasswordUtil passwordUtil;
 
     @Transactional
     public SignUpResponse signUp(SignUpRequest signUpRequest) {
+        validateDuplicateMember(signUpRequest);
         String encodedPassword = passwordUtil.encode(signUpRequest.getPassword());
         Member member = signUpRequest.toEntity(encodedPassword);
         Member savedMember = memberRepository.save(member);
@@ -27,17 +33,30 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public Long signin(String email, String password) {
-        Member member = findByEmail(email);
-        if (!passwordUtil.matches(password, member.getPasswordHash())) {
+    public JwtTokenResponse signin(SignInRequest request) {
+        Member member = findByEmail(request.getEmail());
+        if (!passwordUtil.matches(request.getPassword(), member.getPasswordHash())) {
             throw new MemberException(MemberError.PASSWORD_NOT_MATCHED);
         }
-        return member.getId();
+
+        JwtToken token = jwtTokenProvider.generateToken(member.getId());
+        return JwtTokenResponse.from(token);
     }
 
     @Transactional(readOnly = true)
     public Member findByEmail(String email) {
         return memberRepository.findByEmailAndDeletedFalse(email)
                 .orElseThrow(() -> new MemberException(MemberError.EMAIL_NOT_FOUND));
+    }
+
+    @Transactional(readOnly = true)
+    public void validateDuplicateMember(SignUpRequest signUpRequest) {
+        if (memberRepository.existsByEmail(signUpRequest.getEmail())) {
+            throw new MemberException(MemberError.EMAIL_DUPLICATED);
+        }
+
+        if (memberRepository.existsByNickname(signUpRequest.getNickname())) {
+            throw new MemberException(MemberError.NICKNAME_DUPLICATED);
+        }
     }
 }

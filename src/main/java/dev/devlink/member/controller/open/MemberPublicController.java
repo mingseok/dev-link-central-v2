@@ -1,8 +1,6 @@
 package dev.devlink.member.controller.open;
 
 import dev.devlink.common.dto.ApiResponse;
-import dev.devlink.common.jwt.JwtToken;
-import dev.devlink.common.jwt.JwtTokenProvider;
 import dev.devlink.member.controller.request.SignInRequest;
 import dev.devlink.member.controller.request.SignUpRequest;
 import dev.devlink.member.controller.response.JwtTokenResponse;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberPublicController {
 
     private final MemberService memberService;
-    private final JwtTokenProvider jwtTokenProvider;
 
     @PostMapping
     public ResponseEntity<ApiResponse<SignUpResponse>> signup(
@@ -38,9 +35,7 @@ public class MemberPublicController {
     public ResponseEntity<ApiResponse<JwtTokenResponse>> signin(
             @Validated @RequestBody SignInRequest request
     ) {
-        Long memberId = memberService.signin(request.getEmail(), request.getPassword());
-        JwtToken token = jwtTokenProvider.generateToken(memberId);
-        JwtTokenResponse response = JwtTokenResponse.from(token);
+        JwtTokenResponse response = memberService.signin(request);
         return ResponseEntity.ok(ApiResponse.success(response));
     }
 }
