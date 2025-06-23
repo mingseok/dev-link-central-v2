@@ -3,6 +3,13 @@ package dev.devlink.member.repository;
 import dev.devlink.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
+    boolean existsByEmail(String email);
+
+    boolean existsByNickname(String nickname);
+
+    Optional<Member> findByEmailAndDeletedFalse(String email);
 }

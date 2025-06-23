@@ -20,18 +20,21 @@ public class Member extends BaseEntity {
     private String name;
 
     @Column(nullable = false)
-    private String password;
+    private String passwordHash;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nickname;
 
+    @Column(nullable = false)
+    private boolean deleted = Boolean.FALSE;
+
     @Builder
-    public Member(String name, String password, String email, String nickname) {
+    public Member(String name, String passwordHash, String email, String nickname) {
         this.name = name;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.email = email;
         this.nickname = nickname;
     }
