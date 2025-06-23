@@ -52,13 +52,13 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "/api/v1/members",
+                        url: "/api/v1/public/members",
                         contentType: "application/json",
                         data: JSON.stringify(formData),
                         success: function (response) {
                             if (response.status === "SUCCESS") {
                                 alert("회원가입 성공");
-                                window.location.href = "/";
+                                window.location.href = "/api/v1/view/members/signin";
                             } else {
                                 alert(response.message || "회원가입 실패");
                             }
@@ -110,7 +110,7 @@
         });
 
         function cancelButtonClicked() {
-            window.location.href = "/api/v1/view/members";
+            window.location.href = "/api/v1/view/members/signin";
         }
     </script>
 </head>
