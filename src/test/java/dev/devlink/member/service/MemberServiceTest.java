@@ -1,9 +1,15 @@
 package dev.devlink.member.service;
 
+import dev.devlink.common.jwt.JwtToken;
+import dev.devlink.common.jwt.JwtTokenProvider;
 import dev.devlink.common.util.PasswordUtil;
+import dev.devlink.member.controller.request.SignInRequest;
 import dev.devlink.member.controller.request.SignUpRequest;
+import dev.devlink.member.controller.response.JwtTokenResponse;
 import dev.devlink.member.controller.response.SignUpResponse;
 import dev.devlink.member.entity.Member;
+import dev.devlink.member.exception.MemberError;
+import dev.devlink.member.exception.MemberException;
 import dev.devlink.member.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +17,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -26,6 +34,9 @@ class MemberServiceTest {
     @Mock
     private PasswordUtil passwordUtil;
 
+    @Mock
+    private JwtTokenProvider jwtTokenProvider;
+
     @InjectMocks
     private MemberService memberService;
 
@@ -37,10 +48,10 @@ class MemberServiceTest {
         String encodedPassword = "encodedPassword123";
         
         Member savedMember = Member.builder()
-                .name("minseok")
+                .name("김민석")
                 .passwordHash(encodedPassword)
-                .email("minseok@example.com")
-                .nickname("testnick")
+                .email("minseok@naver.com")
+                .nickname("석석석")
                 .build();
         
         given(passwordUtil.encode("password123")).willReturn(encodedPassword);
@@ -76,6 +87,15 @@ class MemberServiceTest {
         ));
     }
 
+    private Member createMockMember(String encodedPassword) {
+        return Member.builder()
+                .name("김민석")
+                .passwordHash(encodedPassword)
+                .email("minseok@naver.com")
+                .nickname("석석석")
+                .build();
+    }
+
     @Test
     @DisplayName("회원 정보가 정확히 저장되는지 테스트")
     void signUp_MemberDataSaving() {
@@ -91,28 +111,91 @@ class MemberServiceTest {
 
         // then
         verify(memberRepository).save(argThat(member ->
-                member.getName().equals("minseok") &&
-                        member.getEmail().equals("minseok@example.com") &&
-                        member.getNickname().equals("testnick") &&
+                member.getName().equals("김민석") &&
+                        member.getEmail().equals("minseok@naver.com") &&
+                        member.getNickname().equals("석석석") &&
                         member.getPasswordHash().equals("encodedPassword123")
         ));
     }
 
-    private Member createMockMember(String encodedPassword) {
-        return Member.builder()
-                .name("minseok")
-                .passwordHash(encodedPassword)
-                .email("minseok@example.com")
-                .nickname("testnick")
-                .build();
-    }
-
     private SignUpRequest createSignUpRequest() {
         return new SignUpRequest(
-                "minseok",
-                "password123", 
-                "minseok@example.com",
-                "testnick"
+                "김민석",
+                "password123",
+                "minseok@naver.com",
+                "석석석"
         );
     }
+
+    @Test
+    @DisplayName("이메일 중복 예외 발생 테스트")
+    void validateDuplicateMember_EmailDuplicated() {
+        // given
+        SignUpRequest request = createSignUpRequest();
+        given(memberRepository.existsByEmail(request.getEmail())).willReturn(true);
+
+        // when & then
+        MemberException exception = assertThrows(MemberException.class, () -> {
+            memberService.validateDuplicateMember(request);
+        });
+
+        assertEquals(MemberError.EMAIL_DUPLICATED, exception.getCommonError());
+    }
+
+    @Test
+    @DisplayName("닉네임 중복 예외 발생 테스트")
+    void validateDuplicateMember_NicknameDuplicated() {
+        // given
+        SignUpRequest request = createSignUpRequest();
+        given(memberRepository.existsByEmail(request.getEmail())).willReturn(false);
+        given(memberRepository.existsByNickname(request.getNickname())).willReturn(true);
+
+        // when & then
+        MemberException exception = assertThrows(MemberException.class, () -> {
+            memberService.validateDuplicateMember(request);
+        });
+
+        assertEquals(MemberError.NICKNAME_DUPLICATED, exception.getCommonError());
+    }
+
+    @Test
+    @DisplayName("로그인 성공 테스트")
+    void signin_Success() {
+        // given
+        SignInRequest request = new SignInRequest("minseok@naver.com", "password123");
+        Member member = createMockMember("encodedPassword123");
+
+        given(memberRepository.findByEmailAndDeletedFalse(request.getEmail())).willReturn(Optional.of(member));
+        given(passwordUtil.matches(request.getPassword(), "encodedPassword123")).willReturn(true);
+
+        JwtToken mockToken = new JwtToken("Bearer", "access-token-value", "refresh-token-value");
+        given(jwtTokenProvider.generateToken(member.getId())).willReturn(mockToken);
+
+        // when
+        JwtTokenResponse tokenResponse = memberService.signin(request);
+
+        // then
+        assertNotNull(tokenResponse);
+        assertEquals("access-token-value", tokenResponse.getAccessToken());
+        assertEquals("refresh-token-value", tokenResponse.getRefreshToken());
+    }
+
+    @Test
+    @DisplayName("로그인 실패 테스트")
+    void signin_PasswordMismatch() {
+        // given
+        SignInRequest request = new SignInRequest("minseok@naver.com", "wrongPassword");
+        Member member = createMockMember("encodedPassword123");
+
+        given(memberRepository.findByEmailAndDeletedFalse(request.getEmail())).willReturn(Optional.of(member));
+        given(passwordUtil.matches(request.getPassword(), "encodedPassword123")).willReturn(false);
+
+        // when & then
+        MemberException exception = assertThrows(MemberException.class, () -> {
+            memberService.signin(request);
+        });
+
+        assertEquals(MemberError.PASSWORD_NOT_MATCHED, exception.getCommonError());
+    }
+
 }
