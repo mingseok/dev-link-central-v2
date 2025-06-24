@@ -59,4 +59,16 @@ public class MemberService {
             throw new MemberException(MemberError.NICKNAME_DUPLICATED);
         }
     }
+
+    @Transactional(readOnly = true)
+    public Member getMemberById(Long memberId) {
+        return memberRepository.findByIdAndDeletedFalse(memberId)
+                .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND));
+    }
+
+    @Transactional(readOnly = true)
+    public String findNicknameById(Long memberId) {
+        return memberRepository.findNicknameById(memberId)
+                .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND));
+    }
 }

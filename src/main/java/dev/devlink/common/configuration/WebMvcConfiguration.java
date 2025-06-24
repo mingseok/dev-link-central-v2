@@ -19,14 +19,16 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
                 // 인증이 필요한 경로
                 .addPathPatterns(
+                        "/api/v1/view/articles/save",
+                        "/api/v1/articles/**",
                         "/api/v1/members/**"
                 )
 
                 // 인증이 필요한 없는 경로
                 .excludePathPatterns(
+                        "/api/v1/public/articles/**",
                         "/api/v1/public/members/**",
                         "/favicon.ico",
-                        "/api/v1/view/**",
                         "/static/**",
                         "/css/**",
                         "/images/**"
