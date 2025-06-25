@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberViewController {
 
     @GetMapping("/signup")
-    public String showSignUp() {
+    public String showSignUpForm() {
         return "/members/sign-up";
     }
 
     @GetMapping("/signin")
-    public String showSignIn() {
+    public String showSignInForm() {
         return "/members/sign-in";
     }
 
     @GetMapping("/home")
-    public String showHome() {
+    public String showHomePage() {
         return "/members/home";
     }
 }

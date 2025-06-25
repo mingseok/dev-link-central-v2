@@ -48,7 +48,7 @@ public class SignUpRequest {
         return Member.builder()
                 .name(this.name)
                 .email(this.email)
-                .passwordHash(encodedPassword)
+                .password(encodedPassword)
                 .nickname(this.nickname)
                 .build();
     }

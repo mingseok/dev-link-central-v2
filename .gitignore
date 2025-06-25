@@ -1,8 +1,11 @@
 .idea/
 *.iml
 out/
-.gradle/
 *.lock
 *.bin
 .DS_Store
-target/
+/build/
+/.gradle/
+/out/
+/target/
+*.probe

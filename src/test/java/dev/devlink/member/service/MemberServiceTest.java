@@ -2,7 +2,6 @@ package dev.devlink.member.service;
 
 import dev.devlink.common.jwt.JwtToken;
 import dev.devlink.common.jwt.JwtTokenProvider;
-import dev.devlink.common.util.PasswordUtil;
 import dev.devlink.member.controller.request.SignInRequest;
 import dev.devlink.member.controller.request.SignUpRequest;
 import dev.devlink.member.controller.response.JwtTokenResponse;
@@ -17,13 +16,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.argThat;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class MemberServiceTest {
@@ -32,7 +33,7 @@ class MemberServiceTest {
     private MemberRepository memberRepository;
 
     @Mock
-    private PasswordUtil passwordUtil;
+    private PasswordEncoder passwordUtil;
 
     @Mock
     private JwtTokenProvider jwtTokenProvider;
@@ -49,7 +50,7 @@ class MemberServiceTest {
         
         Member savedMember = Member.builder()
                 .name("김민석")
-                .passwordHash(encodedPassword)
+                .password(encodedPassword)
                 .email("minseok@naver.com")
                 .nickname("석석석")
                 .build();
@@ -83,14 +84,14 @@ class MemberServiceTest {
         // then
         verify(passwordUtil).encode("password123");
         verify(memberRepository).save(argThat(member ->
-                member.getPasswordHash().equals("encodedPassword123")
+                member.getPassword().equals("encodedPassword123")
         ));
     }
 
     private Member createMockMember(String encodedPassword) {
         return Member.builder()
                 .name("김민석")
-                .passwordHash(encodedPassword)
+                .password(encodedPassword)
                 .email("minseok@naver.com")
                 .nickname("석석석")
                 .build();
@@ -114,7 +115,7 @@ class MemberServiceTest {
                 member.getName().equals("김민석") &&
                         member.getEmail().equals("minseok@naver.com") &&
                         member.getNickname().equals("석석석") &&
-                        member.getPasswordHash().equals("encodedPassword123")
+                        member.getPassword().equals("encodedPassword123")
         ));
     }
 
