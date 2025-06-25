@@ -50,7 +50,7 @@ class MemberServiceTest {
         
         Member savedMember = Member.builder()
                 .name("김민석")
-                .passwordHash(encodedPassword)
+                .password(encodedPassword)
                 .email("minseok@naver.com")
                 .nickname("석석석")
                 .build();
@@ -84,14 +84,14 @@ class MemberServiceTest {
         // then
         verify(passwordUtil).encode("password123");
         verify(memberRepository).save(argThat(member ->
-                member.getPasswordHash().equals("encodedPassword123")
+                member.getPassword().equals("encodedPassword123")
         ));
     }
 
     private Member createMockMember(String encodedPassword) {
         return Member.builder()
                 .name("김민석")
-                .passwordHash(encodedPassword)
+                .password(encodedPassword)
                 .email("minseok@naver.com")
                 .nickname("석석석")
                 .build();
@@ -115,7 +115,7 @@ class MemberServiceTest {
                 member.getName().equals("김민석") &&
                         member.getEmail().equals("minseok@naver.com") &&
                         member.getNickname().equals("석석석") &&
-                        member.getPasswordHash().equals("encodedPassword123")
+                        member.getPassword().equals("encodedPassword123")
         ));
     }
 

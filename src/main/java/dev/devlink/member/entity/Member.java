@@ -20,7 +20,7 @@ public class Member extends BaseEntity {
     private String name;
 
     @Column(nullable = false)
-    private String passwordHash;
+    private String password;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -32,9 +32,9 @@ public class Member extends BaseEntity {
     private boolean deleted = Boolean.FALSE;
 
     @Builder
-    public Member(String name, String passwordHash, String email, String nickname) {
+    public Member(String name, String password, String email, String nickname) {
         this.name = name;
-        this.passwordHash = passwordHash;
+        this.password = password;
         this.email = email;
         this.nickname = nickname;
     }
