@@ -26,7 +26,7 @@
       const jwtToken = localStorage.getItem("jwt");
       if (jwtToken) {
         // JWT 토큰이 있다면 로그인 후 페이지로 리디렉션
-        window.location.href = "/api/v1/view/members/home"; // TODO: 로그인된 홈으로 가야됨.
+        // window.location.href = "/api/v1/view/members/signin";
       }
 
       $("#loginButton").click(function (e) {
@@ -64,7 +64,7 @@
 </head>
 <body>
 <div class="form-container">
-  <h2 class="text-center mb-4">Login</h2>
+  <h2 class="text-center mb-4">Sign-In</h2>
   <form id="loginForm">
     <div class="form-group">
       <label for="email" class="form-label">이메일:</label>

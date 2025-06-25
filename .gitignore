@@ -1,12 +1,11 @@
 .idea/
 *.iml
 out/
-build/
 *.lock
 *.bin
 .DS_Store
 /build/
 /.gradle/
 /out/
-/target
+/target/
 *.probe
