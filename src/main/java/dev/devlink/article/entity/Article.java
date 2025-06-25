@@ -3,7 +3,9 @@ package dev.devlink.article.entity;
 import dev.devlink.common.BaseEntity;
 import dev.devlink.member.entity.Member;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
@@ -18,14 +20,14 @@ public class Article extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Column(name = "title", length = 100, nullable = false)
+    @Column(nullable = false)
+    private String writer;
+
+    @Column(nullable = false)
     private String title;
 
-    @Column(name = "content", columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
-
-    @Column(name = "writer", length = 50, nullable = false)
-    private String writer;
 
     public static Article create(Member member, String title, String content) {
         Article article = new Article();
@@ -34,5 +36,14 @@ public class Article extends BaseEntity {
         article.writer = member.getNickname();
         article.member = member;
         return article;
+    }
+
+    public Long getWriterId() {
+        return member.getId();
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
     }
 }
