@@ -4,6 +4,7 @@ import dev.devlink.common.jwt.JwtToken;
 import dev.devlink.common.jwt.JwtTokenProvider;
 import dev.devlink.member.controller.request.SignInRequest;
 import dev.devlink.member.controller.request.SignUpRequest;
+import dev.devlink.member.controller.response.AuthenticatedMemberResponse;
 import dev.devlink.member.controller.response.JwtTokenResponse;
 import dev.devlink.member.controller.response.SignUpResponse;
 import dev.devlink.member.entity.Member;
@@ -33,23 +34,6 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public JwtTokenResponse signin(SignInRequest request) {
-        Member member = findByEmail(request.getEmail());
-        if (!passwordEncoder.matches(request.getPassword(), member.getPasswordHash())) {
-            throw new MemberException(MemberError.PASSWORD_NOT_MATCHED);
-        }
-
-        JwtToken token = jwtTokenProvider.generateToken(member.getId());
-        return JwtTokenResponse.from(token);
-    }
-
-    @Transactional(readOnly = true)
-    public Member findByEmail(String email) {
-        return memberRepository.findByEmailAndDeletedFalse(email)
-                .orElseThrow(() -> new MemberException(MemberError.EMAIL_NOT_FOUND));
-    }
-
-    @Transactional(readOnly = true)
     public void validateDuplicateMember(SignUpRequest signUpRequest) {
         if (memberRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new MemberException(MemberError.EMAIL_DUPLICATED);
@@ -61,14 +45,37 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public Member getMemberById(Long memberId) {
+    public JwtTokenResponse signin(SignInRequest request) {
+        Member member = findByEmail(request.getEmail());
+        if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
+            throw new MemberException(MemberError.PASSWORD_NOT_MATCHED);
+        }
+
+        JwtToken token = jwtTokenProvider.generateToken(member.getId());
+        return JwtTokenResponse.from(token);
+    }
+
+    @Transactional(readOnly = true)
+    public Member findMemberById(Long memberId) {
         return memberRepository.findByIdAndDeletedFalse(memberId)
                 .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND));
+    }
+
+    @Transactional(readOnly = true)
+    public Member findByEmail(String email) {
+        return memberRepository.findByEmailAndDeletedFalse(email)
+                .orElseThrow(() -> new MemberException(MemberError.EMAIL_NOT_FOUND));
     }
 
     @Transactional(readOnly = true)
     public String findNicknameById(Long memberId) {
         return memberRepository.findNicknameById(memberId)
                 .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND));
+    }
+
+    @Transactional(readOnly = true)
+    public AuthenticatedMemberResponse getAuthenticatedMember(Long memberId) {
+        Member member = findMemberById(memberId);
+        return AuthenticatedMemberResponse.from(member);
     }
 }
