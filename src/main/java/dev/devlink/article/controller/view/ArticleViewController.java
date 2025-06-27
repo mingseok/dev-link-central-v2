@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +42,7 @@ public class ArticleViewController {
     }
 
     @GetMapping("/paging")
-    public String showPagedArticles(Pageable pageable, Model model) {
+    public String showPagedArticles(@PageableDefault(size = 8) Pageable pageable, Model model) {
         Page<ArticleListResponse> articlePage = articleService.findArticlesByPage(pageable);
         List<ArticleListResponse> articleList = articlePage.getContent();
         PageNavigationInfo pageInfo = articleService.getPageNavigation(articlePage);
