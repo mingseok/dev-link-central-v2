@@ -162,25 +162,25 @@
   </table>
 
   <nav class="pagination">
-    <a href="/api/v1/view/articles/paging?page=1">처음</a>
+    <a href="/api/v1/view/articles/paging?page=0">처음</a>
     <!-- 이전 페이지 링크 -->
     <c:choose>
       <c:when test="${articlePage.number eq 0}">
         <span>이전</span>
       </c:when>
       <c:otherwise>
-        <a href="/api/v1/view/articles/paging?page=${articlePage.number}">이전</a>
+        <a href="/api/v1/view/articles/paging?page=${articlePage.number - 1}">이전</a>
       </c:otherwise>
     </c:choose>
 
-    <!-- 페이지 번호 링크 -->
     <c:forEach begin="${startPage}" end="${endPage}" var="page">
       <c:choose>
         <c:when test="${page eq articlePage.number + 1}">
           <span class="active">${page}</span>
         </c:when>
         <c:otherwise>
-          <a href="/api/v1/view/articles/paging?page=${page}">${page}</a>
+          <!-- page-1 을 서버로 넘겨야 Pageable이 정상 동작 -->
+          <a href="/api/v1/view/articles/paging?page=${page - 1}">${page}</a>
         </c:otherwise>
       </c:choose>
     </c:forEach>
@@ -191,12 +191,12 @@
         <span>다음</span>
       </c:when>
       <c:otherwise>
-        <a href="/api/v1/view/articles/paging?page=${articlePage.number + 2}">다음</a>
+        <a href="/api/v1/view/articles/paging?page=${articlePage.number + 1}">다음</a>
       </c:otherwise>
     </c:choose>
 
     <!-- 마지막 페이지 링크 -->
-    <a href="/api/v1/view/articles/paging?page=${articlePage.totalPages}">마지막</a>
+    <a href="/api/v1/view/articles/paging?page=${articlePage.totalPages - 1}">마지막</a>
   </nav>
 </div>
 </body>

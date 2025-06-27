@@ -13,7 +13,9 @@ import dev.devlink.member.entity.Member;
 import dev.devlink.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,7 +42,13 @@ public class ArticleService {
 
     @Transactional(readOnly = true)
     public Page<ArticleListResponse> findArticlesByPage(Pageable pageable) {
-        Page<Article> articlePage = articleRepository.findAll(pageable);
+        Pageable sortedPageable = PageRequest.of(
+                pageable.getPageNumber(),
+                pageable.getPageSize(),
+                Sort.by(Sort.Direction.DESC, "id")
+        );
+
+        Page<Article> articlePage = articleRepository.findAll(sortedPageable);
         return articlePage.map(ArticleListResponse::from);
     }
 
