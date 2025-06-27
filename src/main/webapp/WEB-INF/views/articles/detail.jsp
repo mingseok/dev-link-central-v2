@@ -57,14 +57,17 @@
 
     // HTML 인코딩 함수 추가
     function escapeHtml(text) {
-      var map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-      };
-      return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+      if (!text) return '';
+      return text.replace(/[&<>"']/g, function (match) {
+        const escapeMap = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        };
+        return escapeMap[match];
+      });
     }
   </script>
 
@@ -106,6 +109,205 @@
         console.error("JWT 인증 사용자 조회 실패");
       }
     });
+  </script>
+
+  <script>
+    var articleId = <%= article.getId() %>;
+    var currentPage = 0;
+    var pageSize = 3;
+    var isFetchingComments = false;
+    var hasMoreComments = true;
+
+    // 댓글 작성
+    function commentWrite() {
+      var contents = $('#contents').val();
+      if (!contents) {
+        alert('댓글 내용을 입력해주세요.');
+        return;
+      }
+
+      $.ajax({
+        url: "/api/v1/articles/" + articleId + "/comments",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({ content: contents }),
+        headers: { 'Authorization': 'Bearer ' + localStorage.getItem("jwt") },
+        success: function() {
+          $('#contents').val('');
+          $("#comment-list table tbody").empty();
+          currentPage = 0;
+          hasMoreComments = true;
+          loadComments(); // 다시 불러오기
+        },
+        error: function(xhr) {
+          alert('댓글 작성 실패: ' + xhr.responseText);
+        }
+      });
+    }
+
+    // 댓글 목록 불러오기
+    function loadComments() {
+      if (isFetchingComments || !hasMoreComments) return;
+
+      isFetchingComments = true;
+
+      $.ajax({
+        url: "/api/v1/public/articles/" + articleId + "/comments",
+        type: "GET",
+        data: {
+          offset: currentPage * pageSize,
+          limit: pageSize
+        },
+        headers: { 'Authorization': 'Bearer ' + localStorage.getItem("jwt") },
+        success: function(response) {
+          const comments = response.data;
+
+          console.log("불러온 댓글 데이터:", comments);
+
+          if (comments.length > 0) {
+            let commentsHtml = '';
+            comments.forEach(function(comment) {
+              const rendered = renderComment(comment, 0);
+              console.log("렌더링된 HTML:", rendered);
+              commentsHtml += rendered;
+            });
+
+            console.log("최종 누적된 commentsHtml:", commentsHtml);
+            $("#comment-list table tbody").append(commentsHtml);
+            currentPage++;
+
+            // 무한스크롤 여부 설정
+            if (response.hasMoreComments) {
+              $("#moreCommentsIndicator").show();
+            } else {
+              hasMoreComments = false;
+              $("#moreCommentsIndicator").hide();
+            }
+          } else {
+            hasMoreComments = false;
+            $("#moreCommentsIndicator").hide();
+          }
+
+          isFetchingComments = false;
+        },
+        error: function(xhr) {
+          alert('댓글 목록 로딩 실패: ' + xhr.responseText);
+          isFetchingComments = false;
+        }
+      });
+    }
+
+    function renderComment(comment, depth) {
+      const commentId = comment.id;
+      const numericDepth = parseInt(depth, 10);
+      const calculatedIndent = isNaN(numericDepth) ? 0 : numericDepth * 40;
+      const indentStyle = "style=\"padding-left: " + calculatedIndent + "px !important;\"";
+
+      let html = '' +
+              '<tr id="comment-row-' + commentId + '">' +
+              '<td ' + indentStyle + '>' +
+              '<div class="comment-row d-flex justify-content-between align-items-center">' +
+              '<div class="comment-content">' +
+              '<strong>' + escapeHtml(comment.writer || '익명') + '</strong>: ' + escapeHtml(comment.content || '') +
+              '</div>' +
+              '<div class="comment-actions">' +
+              '<button class="btn btn-outline-primary btn-sm ml-2" onclick="showReplyInput(' + commentId + ')">답글</button>' +
+              '<button class="btn btn-outline-danger btn-sm ml-1" onclick="deleteComment(' + commentId + ')">삭제</button>' +
+              '</div>' +
+              '</div>' +
+              '<div id="reply-input-' + commentId + '" class="mt-2" style="display: none;">' +
+              '<div class="input-group input-group-sm">' +
+              '<input type="text" id="reply-content-' + commentId + '" class="form-control" placeholder="답글을 입력하세요..." />' +
+              '<div class="input-group-append">' +
+              '<button class="btn btn-secondary" onclick="submitReply(' + commentId + ')">작성</button>' +
+              '</div>' +
+              '</div>' +
+              '</div>' +
+              '<div class="comment-date text-muted small mt-1">' +
+              formatDateTime(comment.createdAt) +
+              '</div>' +
+              '</td>' +
+              '</tr>';
+
+      if (comment.children && comment.children.length > 0) {
+        comment.children.forEach(child => {
+          html += renderComment(child, numericDepth + 1);
+        });
+      } else {
+        console.log("대댓글 없음");
+      }
+
+
+      return html;
+    }
+
+    // 무한 스크롤
+    $(window).scroll(function() {
+      if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+        loadComments();
+      }
+    });
+
+    // 페이지 로드 시 댓글 초기화
+    $(document).ready(function() {
+      loadComments();
+    });
+
+    function showReplyInput(commentId) {
+      console.log("답글 버튼 클릭 - commentId:", commentId);
+      $("#reply-input-" + commentId).toggle(); // 클릭 시 보이거나 숨기기
+    }
+
+    function submitReply(parentId) {
+      const content = $("#reply-content-" + parentId).val();
+      if (!content) {
+        alert("답글 내용을 입력해주세요.");
+        return;
+      }
+
+      $.ajax({
+        url: "/api/v1/articles/" + articleId + "/comments",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({ content: content, parentId: parentId }),
+        headers: { 'Authorization': 'Bearer ' + localStorage.getItem("jwt") },
+        success: function() {
+          $("#comment-list table tbody").empty();
+          currentPage = 0;
+          hasMoreComments = true;
+          loadComments(); // 전체 댓글 새로 불러오기
+        },
+        error: function(xhr) {
+          alert("답글 작성 실패: " + xhr.responseText);
+        }
+      });
+    }
+
+    function deleteComment(commentId) {
+      if (!confirm("댓글을 삭제하시겠습니까?")) return;
+
+      $.ajax({
+        url: "/api/v1/articles/" + articleId + "/comments/" + commentId,
+        type: "DELETE",
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+        },
+        success: function () {
+          $("#comment-row-" + commentId).remove();
+        },
+        error: function (xhr) {
+          alert("댓글 삭제 실패: " + (xhr.responseJSON?.message || xhr.responseText));
+        }
+      });
+    }
+
+    function formatDateTime(datetimeString) {
+      const date = new Date(datetimeString);
+      return date.toLocaleString("ko-KR", {
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit'
+      });
+    }
   </script>
 </head>
 <body>
@@ -155,21 +357,22 @@
 
   <hr size="10"/>
 
+  <!-- 댓글 제목 -->
   <div class="comment-title">댓글</div>
 
-  <!-- 댓글 목록 출력 부분 -->
+  <!-- 댓글 목록 -->
   <div id="comment-list" class="comment-list">
     <table>
       <thead>
-      <tr>
-      </tr>
+      <tr></tr>
       </thead>
       <tbody>
-      <!-- 서버로부터 받은 댓글 데이터를 동적으로 삽입합니다. -->
+      <!-- 댓글이 여기 삽입됩니다 -->
       </tbody>
     </table>
   </div>
 
+  <!-- 더 보기 표시 -->
   <div id="moreCommentsIndicator">
     더 많은 댓글이 있습니다.
   </div>
