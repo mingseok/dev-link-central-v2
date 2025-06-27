@@ -40,7 +40,8 @@
         contentType: "application/json",
         success: function (response) {
           console.log("글이 업데이트되었습니다.");
-          window.location.href = `/api/v1/view/articles/paging?page=${page}`;
+          <%--window.location.href = `/api/v1/view/articles/paging?page=${page}`;--%>
+          window.location.href = `/api/v1/view/articles/${id}`;
         },
         error: function (error) {
           console.error("글 업데이트 중 오류가 발생했습니다.", error);
