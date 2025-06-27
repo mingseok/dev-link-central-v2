@@ -4,7 +4,7 @@ import dev.devlink.article.controller.request.ArticleCreateRequest;
 import dev.devlink.article.controller.request.ArticleUpdateRequest;
 import dev.devlink.article.service.ArticleService;
 import dev.devlink.common.dto.ApiResponse;
-import jakarta.servlet.http.HttpServletRequest;
+import dev.devlink.common.identity.annotation.AuthMemberId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +21,8 @@ public class ArticleController {
     @PostMapping
     public ResponseEntity<ApiResponse<Void>> create(
             @Validated @RequestBody ArticleCreateRequest request,
-            HttpServletRequest httpRequest
+            @AuthMemberId Long memberId
     ) {
-        Long memberId = (Long) httpRequest.getAttribute("memberId");
         articleService.save(request, memberId);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.successEmpty());
@@ -33,9 +32,8 @@ public class ArticleController {
     public ResponseEntity<ApiResponse<Void>> update(
             @PathVariable Long id,
             @Validated @RequestBody ArticleUpdateRequest request,
-            HttpServletRequest httpRequest
+            @AuthMemberId Long memberId
     ) {
-        Long memberId = (Long) httpRequest.getAttribute("memberId");
         articleService.update(id, request, memberId);
         return ResponseEntity.ok(ApiResponse.successEmpty());
     }
@@ -43,9 +41,8 @@ public class ArticleController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> delete(
             @PathVariable Long id,
-            HttpServletRequest request
+            @AuthMemberId Long memberId
     ) {
-        Long memberId = (Long) request.getAttribute("memberId");
         articleService.delete(id, memberId);
         return ResponseEntity.ok(ApiResponse.successEmpty());
     }

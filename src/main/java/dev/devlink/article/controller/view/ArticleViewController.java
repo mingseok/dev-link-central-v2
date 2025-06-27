@@ -4,8 +4,8 @@ import dev.devlink.article.controller.response.ArticleDetailsResponse;
 import dev.devlink.article.controller.response.ArticleListResponse;
 import dev.devlink.article.controller.response.PageNavigationInfo;
 import dev.devlink.article.service.ArticleService;
+import dev.devlink.common.identity.annotation.AuthMemberId;
 import dev.devlink.member.service.MemberService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,8 +27,7 @@ public class ArticleViewController {
     private final ArticleService articleService;
 
     @GetMapping("/save")
-    public String showSaveForm(Model model, HttpServletRequest request) {
-        Long memberId = (Long) request.getAttribute("memberId");
+    public String showSaveForm(@AuthMemberId Long memberId, Model model) {
         String nickname = memberService.findNicknameById(memberId);
         model.addAttribute("nickname", nickname);
         return "articles/save";

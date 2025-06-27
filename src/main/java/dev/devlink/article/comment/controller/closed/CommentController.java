@@ -3,7 +3,7 @@ package dev.devlink.article.comment.controller.closed;
 import dev.devlink.article.comment.controller.request.CommentCreateRequest;
 import dev.devlink.article.comment.service.CommentService;
 import dev.devlink.common.dto.ApiResponse;
-import jakarta.servlet.http.HttpServletRequest;
+import dev.devlink.common.identity.annotation.AuthMemberId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -20,9 +20,8 @@ public class CommentController {
     public ResponseEntity<ApiResponse<Void>> create(
             @PathVariable Long articleId,
             @Validated @RequestBody CommentCreateRequest request,
-            HttpServletRequest httpRequest
+            @AuthMemberId Long memberId
     ) {
-        Long memberId = (Long) httpRequest.getAttribute("memberId");
         commentService.save(memberId, articleId, request);
         return ResponseEntity.ok(ApiResponse.successEmpty());
     }
@@ -30,9 +29,8 @@ public class CommentController {
     @DeleteMapping("/{commentId}")
     public ResponseEntity<ApiResponse<Void>> delete(
             @PathVariable Long commentId,
-            HttpServletRequest request
+            @AuthMemberId Long memberId
     ) {
-        Long memberId = (Long) request.getAttribute("memberId");
         commentService.delete(commentId, memberId);
         return ResponseEntity.ok(ApiResponse.successEmpty());
     }
