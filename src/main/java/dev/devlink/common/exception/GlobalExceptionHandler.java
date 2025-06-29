@@ -1,6 +1,7 @@
 package dev.devlink.common.exception;
 
 import dev.devlink.common.dto.ApiResponse;
+import dev.devlink.common.identity.exception.UnauthorizedException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(
                 ApiResponse.failure(commonError.getMessage()),
                 HttpStatus.BAD_REQUEST
+        );
+    }
+
+    // 인증 오류 예외 처리
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ApiResponse<Void>> handleUnauthorized(UnauthorizedException ex) {
+        CommonError error = ex.getCommonError();
+        log.warn("인증 오류 발생: {}", error.getMessage());
+        return new ResponseEntity<>(
+                ApiResponse.failure(error.getMessage()),
+                error.getHttpStatus()
         );
     }
 

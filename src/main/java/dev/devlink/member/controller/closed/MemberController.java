@@ -1,9 +1,9 @@
 package dev.devlink.member.controller.closed;
 
 import dev.devlink.common.dto.ApiResponse;
+import dev.devlink.common.identity.annotation.AuthMemberId;
 import dev.devlink.member.controller.response.AuthenticatedMemberResponse;
 import dev.devlink.member.service.MemberService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +19,8 @@ public class MemberController {
 
     @GetMapping("/me")
     public ResponseEntity<ApiResponse<AuthenticatedMemberResponse>> getAuthenticatedMember(
-            HttpServletRequest request
+            @AuthMemberId Long memberId
     ) {
-        // TODO: 반복, 하드코딩 개선
-        Long memberId = (Long) request.getAttribute("memberId");
         AuthenticatedMemberResponse response = memberService.getAuthenticatedMember(memberId);
         return ResponseEntity.ok(ApiResponse.success(response));
     }
