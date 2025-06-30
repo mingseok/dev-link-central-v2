@@ -14,9 +14,7 @@ public class ArticleViewController {
     }
 
     @GetMapping("/{id}")
-    public String showDetailPage(@PathVariable Long id, Model model) {
-        ArticleDetailsResponse response = articleService.findDetail(id);
-        model.addAttribute("article", response);
+    public String showDetailPage() {
         return "articles/detail";
     }
 

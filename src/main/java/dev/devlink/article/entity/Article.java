@@ -51,4 +51,12 @@ public class Article extends BaseEntity {
         this.title = title;
         this.content = content;
     }
+
+    public boolean isAuthor(Long memberId) {
+        if (memberId == null) {
+            return false;
+        }
+        Long writerId = this.member.getId();
+        return writerId.equals(memberId);
+    }
 }

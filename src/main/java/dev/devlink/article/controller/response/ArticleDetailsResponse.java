@@ -17,8 +17,9 @@ public class ArticleDetailsResponse {
     private Long writerId;
     private String formattedCreatedAt;
     private LocalDateTime modifiedAt;
+    private boolean isWriter;
 
-    public static ArticleDetailsResponse from(Article article) {
+    public static ArticleDetailsResponse from(Article article, boolean isWriter) {
         return new ArticleDetailsResponse(
                 article.getId(),
                 article.getTitle(),
@@ -26,7 +27,8 @@ public class ArticleDetailsResponse {
                 article.getWriter(),
                 article.getWriterId(),
                 DateUtils.formatLocalDateTime(article.getCreatedAt()),
-                article.getUpdatedAt()
+                article.getUpdatedAt(),
+                isWriter
         );
     }
 }

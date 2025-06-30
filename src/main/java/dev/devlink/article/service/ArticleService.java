@@ -34,10 +34,12 @@ public class ArticleService {
     }
 
     @Transactional(readOnly = true)
-    public ArticleDetailsResponse findDetail(Long id) {
-        Article article = articleRepository.findDetailById(id)
+    public ArticleDetailsResponse findDetail(Long articleId, Long memberId) {
+        Article article = articleRepository.findDetailById(articleId)
                 .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
-        return ArticleDetailsResponse.from(article);
+
+        boolean isWriter = article.isAuthor(memberId);
+        return ArticleDetailsResponse.from(article, isWriter);
     }
 
     @Transactional(readOnly = true)

@@ -21,12 +21,11 @@
   <link rel="stylesheet" href="/css/articles/detail.css">
 
   <script>
-    <% ArticleDetailsResponse article = (ArticleDetailsResponse) request.getAttribute("article"); %>
-    var articleId = <%= article.getId() %>;
 
     // 게시글 수정 페이지로 이동하는 함수
     function updateReq() {
       console.log("수정 요청");
+      const articleId = new URLSearchParams(window.location.search).get('id');
       window.location.href = "/api/v1/view/articles/update/" + articleId;
     }
 
@@ -39,6 +38,7 @@
     // 게시글 삭제 요청 함수
     function deleteReq() {
       console.log("삭제 요청");
+      const articleId = new URLSearchParams(window.location.search).get('id');
       $.ajax({
         url: "/api/v1/articles/" + articleId,
         headers: {
@@ -73,16 +73,37 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const writer = "<%= article.getWriter() %>";
-      const loggedInUser = '<c:out value="${member.nickname}" />';
+      const articleId = new URLSearchParams(window.location.search).get('id');
 
-      console.log("writer:", writer);
-      console.log("loggedInUser:", loggedInUser);
+      $.ajax({
+        url: `/api/v1/public/articles/${articleId}`,
+        type: 'GET',
+        success: function(response) {
+          const article = response.data;
 
-      if (writer.trim() === loggedInUser.trim()) {
-        document.getElementById("updateBtn").style.display = "inline-block";
-        document.getElementById("deleteBtn").style.display = "inline-block";
-      }
+          // 게시글 정보 DOM에 삽입
+          document.getElementById("articleId").textContent = article.id || '';
+          document.getElementById("title").textContent = article.title || '';
+          document.getElementById("author").textContent = article.writer || '';
+          document.getElementById("content").textContent = article.content || '';
+          document.getElementById("viewsCount").textContent = article.views || '0';
+          document.getElementById("createdAt").textContent = article.formattedCreatedAt || '';
+
+          const writer = article.writer || '';
+          const loggedInUser = '<c:out value="${member.nickname}" />';
+
+          console.log("writer:", writer);
+          console.log("loggedInUser:", loggedInUser);
+
+          if (writer.trim() === loggedInUser.trim()) {
+            document.getElementById("updateBtn").style.display = "inline-block";
+            document.getElementById("deleteBtn").style.display = "inline-block";
+          }
+        },
+        error: function() {
+          console.error("게시글 정보를 불러오는데 실패했습니다.");
+        }
+      });
     });
   </script>
 
@@ -98,12 +119,24 @@
       },
       success: function(response) {
         const loggedInUserId = response.data.id;
-        const articleWriterId = <%= article.getWriterId() %>;
 
-        if (loggedInUserId === articleWriterId) {
-          $("#updateBtn").show();
-          $("#deleteBtn").show();
-        }
+        const articleId = new URLSearchParams(window.location.search).get('id');
+
+        $.ajax({
+          url: `/api/v1/public/articles/${articleId}`,
+          type: 'GET',
+          success: function(res) {
+            const articleWriterId = res.data.writerId;
+
+            if (loggedInUserId === articleWriterId) {
+              $("#updateBtn").show();
+              $("#deleteBtn").show();
+            }
+          },
+          error: function() {
+            console.error("게시글 작성자 정보 조회 실패");
+          }
+        });
       },
       error: function() {
         console.error("JWT 인증 사용자 조회 실패");
@@ -112,7 +145,7 @@
   </script>
 
   <script>
-    var articleId = <%= article.getId() %>;
+    const articleId = new URLSearchParams(window.location.search).get('id');
     var currentPage = 0;
     var pageSize = 3;
     var isFetchingComments = false;
@@ -326,19 +359,19 @@
   <div class="detail-grid">
     <div>
       <label for="articleId">글 번호:</label>
-      <div class="detail-box" id="articleId"><%= article.getId() %></div>
+      <div class="detail-box" id="articleId"></div>
     </div>
     <div>
       <label for="title">스터디 제목:</label>
-      <div class="detail-box" id="title"><%= article.getTitle() %></div>
+      <div class="detail-box" id="title"></div>
     </div>
     <div>
       <label for="author">작성자:</label>
-      <div class="detail-box" id="author"><%= article.getWriter() %></div>
+      <div class="detail-box" id="author"></div>
     </div>
   </div>
   <label for="content">스터디 상세 내용:</label>
-  <div class="content-box" id="content"><%= article.getContent() %></div>
+  <div class="content-box" id="content"></div>
   <div class="stats">
     <div class="like">
       <button onclick="toggleLike()">좋아요</button>
@@ -348,10 +381,10 @@
       조회수: <span id="viewsCount">000</span>
     </div>
     <div class="date">
-      작성일: <span>${article.formattedCreatedAt}</span>
+      작성일: <span id="createdAt"></span>
     </div>
     <div class="data">
-      <div id="articleData" data-article-id="<%= article.getId() %>"></div>
+      <div id="articleData"></div>
     </div>
   </div>
 
