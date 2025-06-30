@@ -4,8 +4,8 @@ import dev.devlink.common.jwt.JwtToken;
 import dev.devlink.common.jwt.JwtTokenProvider;
 import dev.devlink.member.controller.request.SignInRequest;
 import dev.devlink.member.controller.request.SignUpRequest;
-import dev.devlink.member.controller.response.AuthenticatedMemberResponse;
 import dev.devlink.member.controller.response.JwtTokenResponse;
+import dev.devlink.member.controller.response.NicknameResponse;
 import dev.devlink.member.controller.response.SignUpResponse;
 import dev.devlink.member.entity.Member;
 import dev.devlink.member.exception.MemberError;
@@ -31,6 +31,13 @@ public class MemberService {
         Member member = signUpRequest.toEntity(encodedPassword);
         Member savedMember = memberRepository.save(member);
         return SignUpResponse.from(savedMember.getId());
+    }
+
+    @Transactional(readOnly = true)
+    public NicknameResponse findNicknameById(Long memberId) {
+        String nickname = memberRepository.findNicknameById(memberId)
+                .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND));
+        return NicknameResponse.from(nickname);
     }
 
     @Transactional(readOnly = true)
@@ -65,17 +72,5 @@ public class MemberService {
     public Member findByEmail(String email) {
         return memberRepository.findByEmailAndDeletedFalse(email)
                 .orElseThrow(() -> new MemberException(MemberError.EMAIL_NOT_FOUND));
-    }
-
-    @Transactional(readOnly = true)
-    public String findNicknameById(Long memberId) {
-        return memberRepository.findNicknameById(memberId)
-                .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND));
-    }
-
-    @Transactional(readOnly = true)
-    public AuthenticatedMemberResponse getAuthenticatedMember(Long memberId) {
-        Member member = findMemberById(memberId);
-        return AuthenticatedMemberResponse.from(member);
     }
 }

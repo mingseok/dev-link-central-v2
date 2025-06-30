@@ -29,7 +29,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
                 // 인증이 필요한 경로
                 .addPathPatterns(
-                        "/api/v1/view/articles/save",
                         "/api/v1/articles/**",
                         "/api/v1/members/**"
                 )

@@ -35,60 +35,7 @@
     });
 
     function saveReq() {
-      const token = localStorage.getItem('jwt');
-      if (token) {
-        // AJAX 요청을 통해 서버에 JWT 전달
-        $.ajax({
-          url: '/api/v1/view/articles/save',
-          type: 'GET',
-          beforeSend: function(xhr) {
-            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-          },
-          success: function(response) {
-            // 서버로부터 응답이 성공적으로 돌아왔을 때
-            // 응답으로 받은 HTML을 현재 페이지에 삽입하거나 새로운 페이지로 이동
-            document.body.innerHTML = response; // 현재 페이지에 폼 삽입
-            $("#saveArticleBtn").on("click", function (e){
-              e.preventDefault();
-
-              const formData = {
-                writer: $('input[name="writer"]').val(),
-                title: $('input[name="title"]').val(),
-                content: $('textarea[name="content"]').val()
-              };
-
-              $.ajax({
-                url: "/api/v1/articles",
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(formData),
-                beforeSend: function(xhr) {
-                  xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('jwt'));
-                },
-                success: function(response) {
-                  console.log('성공:', response);
-                  alert('글이 성공적으로 작성되었습니다.');
-                  window.location.href = "/api/v1/view/articles/paging?page=0&sort=id,desc";
-                },
-                error: function(xhr, status, error) {
-                  console.log('Error Status:', status);
-                  console.log('Error:', error);
-                  console.log('Response Text:', xhr.responseText);
-                  alert('글 작성에 실패했습니다. 오류를 확인하세요.');
-                }
-              });
-            });
-          },
-          error: function(xhr, status, error) {
-            console.error('Error: ' + error);
-            alert('인증 오류가 발생했습니다. 로그인 페이지로 이동합니다.');
-            window.location.href = '/';
-          }
-        });
-      } else {
-        alert('로그인이 필요합니다.');
-        window.location.href = '/login';
-      }
+      window.location.href = "/api/v1/view/articles/save";
     }
   </script>
 
