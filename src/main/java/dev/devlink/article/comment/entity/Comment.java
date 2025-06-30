@@ -5,6 +5,7 @@ import dev.devlink.common.BaseEntity;
 import dev.devlink.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,18 +29,26 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "parent_id")
     private Comment parent;
 
+    @Builder
+    public Comment(Article article, Member member, String content, Comment parent) {
+        this.article = article;
+        this.member = member;
+        this.content = content;
+        this.parent = parent;
+    }
+
     public static Comment create(
             Article article,
             Member member,
             String content,
             Comment parent
     ) {
-        Comment comment = new Comment();
-        comment.article = article;
-        comment.member = member;
-        comment.content = content;
-        comment.parent = parent;
-        return comment;
+        return Comment.builder()
+                .article(article)
+                .member(member)
+                .content(content)
+                .parent(parent)
+                .build();
     }
 
     public Long getWriterId() {

@@ -4,6 +4,7 @@ import dev.devlink.common.BaseEntity;
 import dev.devlink.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,13 +26,21 @@ public class Article extends BaseEntity {
     @Column(name = "content", columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @Builder
+    public Article(Member member, String writer, String title, String content) {
+        this.member = member;
+        this.writer = writer;
+        this.title = title;
+        this.content = content;
+    }
+
     public static Article create(Member member, String title, String content) {
-        Article article = new Article();
-        article.title = title;
-        article.content = content;
-        article.writer = member.getNickname();
-        article.member = member;
-        return article;
+        return Article.builder()
+                .member(member)
+                .writer(member.getNickname())
+                .title(title)
+                .content(content)
+                .build();
     }
 
     public Long getWriterId() {
