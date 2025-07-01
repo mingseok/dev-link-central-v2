@@ -6,7 +6,6 @@ import dev.devlink.member.controller.request.SignInRequest;
 import dev.devlink.member.controller.request.SignUpRequest;
 import dev.devlink.member.controller.response.JwtTokenResponse;
 import dev.devlink.member.controller.response.NicknameResponse;
-import dev.devlink.member.controller.response.SignUpResponse;
 import dev.devlink.member.entity.Member;
 import dev.devlink.member.exception.MemberError;
 import dev.devlink.member.exception.MemberException;
@@ -25,23 +24,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public SignUpResponse signUp(SignUpRequest signUpRequest) {
-        validateDuplicateMember(signUpRequest);
-        String encodedPassword = passwordEncoder.encode(signUpRequest.getPassword());
-        Member member = signUpRequest.toEntity(encodedPassword);
-        Member savedMember = memberRepository.save(member);
-        return SignUpResponse.from(savedMember.getId());
-    }
-
-    @Transactional(readOnly = true)
-    public NicknameResponse findNicknameById(Long memberId) {
-        String nickname = memberRepository.findNicknameById(memberId)
-                .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND));
-        return NicknameResponse.from(nickname);
-    }
-
-    @Transactional(readOnly = true)
-    public void validateDuplicateMember(SignUpRequest signUpRequest) {
+    public void signUp(SignUpRequest signUpRequest) {
         if (memberRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new MemberException(MemberError.EMAIL_DUPLICATED);
         }
@@ -49,6 +32,17 @@ public class MemberService {
         if (memberRepository.existsByNickname(signUpRequest.getNickname())) {
             throw new MemberException(MemberError.NICKNAME_DUPLICATED);
         }
+
+        String encodedPassword = passwordEncoder.encode(signUpRequest.getPassword());
+        Member member = signUpRequest.toEntity(encodedPassword);
+        memberRepository.save(member);
+    }
+
+    @Transactional(readOnly = true)
+    public NicknameResponse findNicknameById(Long memberId) {
+        String nickname = memberRepository.findNicknameById(memberId)
+                .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND));
+        return NicknameResponse.from(nickname);
     }
 
     @Transactional(readOnly = true)

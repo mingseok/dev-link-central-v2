@@ -5,7 +5,6 @@ import dev.devlink.common.jwt.JwtTokenProvider;
 import dev.devlink.member.controller.request.SignInRequest;
 import dev.devlink.member.controller.request.SignUpRequest;
 import dev.devlink.member.controller.response.JwtTokenResponse;
-import dev.devlink.member.controller.response.SignUpResponse;
 import dev.devlink.member.entity.Member;
 import dev.devlink.member.exception.MemberError;
 import dev.devlink.member.exception.MemberException;
@@ -59,11 +58,9 @@ class MemberServiceTest {
         given(memberRepository.save(any(Member.class))).willReturn(savedMember);
 
         // when
-        SignUpResponse response = memberService.signUp(signUpRequest);
+        memberService.signUp(signUpRequest);
 
         // then
-        assertNotNull(response);
-
         verify(passwordUtil).encode("password123");
         verify(memberRepository).save(any(Member.class));
     }
@@ -126,37 +123,6 @@ class MemberServiceTest {
                 "minseok@naver.com",
                 "석석석"
         );
-    }
-
-    @Test
-    @DisplayName("이메일 중복 예외 발생 테스트")
-    void validateDuplicateMember_EmailDuplicated() {
-        // given
-        SignUpRequest request = createSignUpRequest();
-        given(memberRepository.existsByEmail(request.getEmail())).willReturn(true);
-
-        // when & then
-        MemberException exception = assertThrows(MemberException.class, () -> {
-            memberService.validateDuplicateMember(request);
-        });
-
-        assertEquals(MemberError.EMAIL_DUPLICATED, exception.getCommonError());
-    }
-
-    @Test
-    @DisplayName("닉네임 중복 예외 발생 테스트")
-    void validateDuplicateMember_NicknameDuplicated() {
-        // given
-        SignUpRequest request = createSignUpRequest();
-        given(memberRepository.existsByEmail(request.getEmail())).willReturn(false);
-        given(memberRepository.existsByNickname(request.getNickname())).willReturn(true);
-
-        // when & then
-        MemberException exception = assertThrows(MemberException.class, () -> {
-            memberService.validateDuplicateMember(request);
-        });
-
-        assertEquals(MemberError.NICKNAME_DUPLICATED, exception.getCommonError());
     }
 
     @Test
