@@ -1,5 +1,6 @@
 package dev.devlink.article.controller.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.devlink.article.entity.Article;
 import dev.devlink.common.utils.DateUtils;
 import lombok.AllArgsConstructor;
@@ -17,9 +18,11 @@ public class ArticleDetailsResponse {
     private Long writerId;
     private String formattedCreatedAt;
     private LocalDateTime modifiedAt;
-    private boolean isWriter;
 
-    public static ArticleDetailsResponse from(Article article, boolean isWriter) {
+    @JsonProperty("isAuthor")
+    private boolean author;
+
+    public static ArticleDetailsResponse from(Article article, boolean author) {
         return new ArticleDetailsResponse(
                 article.getId(),
                 article.getTitle(),
@@ -28,7 +31,7 @@ public class ArticleDetailsResponse {
                 article.getWriterId(),
                 DateUtils.formatLocalDateTime(article.getCreatedAt()),
                 article.getUpdatedAt(),
-                isWriter
+                author
         );
     }
 }

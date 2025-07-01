@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="dev.devlink.article.controller.response.ArticleDetailsResponse" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,11 +20,11 @@
   <link rel="stylesheet" href="/css/articles/detail.css">
 
   <script>
+    let articleId;
 
     // 게시글 수정 페이지로 이동하는 함수
     function updateReq() {
       console.log("수정 요청");
-      const articleId = new URLSearchParams(window.location.search).get('id');
       window.location.href = "/api/v1/view/articles/update/" + articleId;
     }
 
@@ -38,7 +37,6 @@
     // 게시글 삭제 요청 함수
     function deleteReq() {
       console.log("삭제 요청");
-      const articleId = new URLSearchParams(window.location.search).get('id');
       $.ajax({
         url: "/api/v1/articles/" + articleId,
         headers: {
@@ -69,15 +67,16 @@
         return escapeMap[match];
       });
     }
-  </script>
 
-  <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const articleId = new URLSearchParams(window.location.search).get('id');
+      articleId = window.location.pathname.split("/").pop();
 
       $.ajax({
-        url: `/api/v1/public/articles/${articleId}`,
+        url: "/api/v1/articles/" + articleId,
         type: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+        },
         success: function(response) {
           const article = response.data;
 
@@ -89,13 +88,7 @@
           document.getElementById("viewsCount").textContent = article.views || '0';
           document.getElementById("createdAt").textContent = article.formattedCreatedAt || '';
 
-          const writer = article.writer || '';
-          const loggedInUser = '<c:out value="${member.nickname}" />';
-
-          console.log("writer:", writer);
-          console.log("loggedInUser:", loggedInUser);
-
-          if (writer.trim() === loggedInUser.trim()) {
+          if (article.isAuthor === true) {
             document.getElementById("updateBtn").style.display = "inline-block";
             document.getElementById("deleteBtn").style.display = "inline-block";
           }
@@ -104,48 +97,11 @@
           console.error("게시글 정보를 불러오는데 실패했습니다.");
         }
       });
+      loadComments();
     });
-  </script>
 
-  <script type="text/javascript">
     var loggedInUserNickname = '<c:out value="${member.nickname}"/>';
-  </script>
 
-  <script>
-    $.ajax({
-      url: "/api/v1/members/me",
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("jwt")
-      },
-      success: function(response) {
-        const loggedInUserId = response.data.id;
-
-        const articleId = new URLSearchParams(window.location.search).get('id');
-
-        $.ajax({
-          url: `/api/v1/public/articles/${articleId}`,
-          type: 'GET',
-          success: function(res) {
-            const articleWriterId = res.data.writerId;
-
-            if (loggedInUserId === articleWriterId) {
-              $("#updateBtn").show();
-              $("#deleteBtn").show();
-            }
-          },
-          error: function() {
-            console.error("게시글 작성자 정보 조회 실패");
-          }
-        });
-      },
-      error: function() {
-        console.error("JWT 인증 사용자 조회 실패");
-      }
-    });
-  </script>
-
-  <script>
-    const articleId = new URLSearchParams(window.location.search).get('id');
     var currentPage = 0;
     var pageSize = 3;
     var isFetchingComments = false;
@@ -177,6 +133,18 @@
         }
       });
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const pathSegments = window.location.pathname.split("/");
+      const articleIndex = pathSegments.indexOf("articles");
+      if (articleIndex !== -1 && pathSegments.length > articleIndex + 1) {
+        articleId = pathSegments[articleIndex + 1];
+      } else {
+        console.error("articleId를 URL에서 추출하지 못했습니다.");
+      }
+
+      loadComments();
+    });
 
     // 댓글 목록 불러오기
     function loadComments() {
@@ -281,14 +249,8 @@
       }
     });
 
-    // 페이지 로드 시 댓글 초기화
-    $(document).ready(function() {
-      loadComments();
-    });
-
     function showReplyInput(commentId) {
-      console.log("답글 버튼 클릭 - commentId:", commentId);
-      $("#reply-input-" + commentId).toggle(); // 클릭 시 보이거나 숨기기
+      $("#reply-input-" + commentId).toggle();
     }
 
     function submitReply(parentId) {

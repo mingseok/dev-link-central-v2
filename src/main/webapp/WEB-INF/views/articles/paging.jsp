@@ -64,7 +64,6 @@
         const currentPage = pageParam && !isNaN(pageParam) ? parseInt(pageParam) : 0;
 
         const pageSize = 8;
-        console.log('✅ currentPage:', currentPage);
         loadArticles(currentPage, pageSize);
     });
 
@@ -73,13 +72,11 @@
         const validSize = (typeof size === 'number' && !isNaN(size)) ? size : 8;
 
         const apiUrl = '/api/v1/public/articles?page=' + validPage + '&size=' + validSize;
-        console.log("📡 Fetching articles:", apiUrl);
 
         $.ajax({
             url: apiUrl,
             type: 'GET',
             success: function (res) {
-                console.log("✅ API 응답", res);
                 const articlePage = res.data;
                 renderTable(articlePage.content);
                 renderPagination(articlePage);
@@ -92,7 +89,6 @@
 
     function renderTable(articles) {
         const tbody = $('#articleTableBody');
-        console.log("🔍 tbody length:", tbody.length); // 1이어야 정상
         tbody.empty();
 
         if (!articles || articles.length === 0) {
@@ -101,7 +97,6 @@
         }
 
         articles.forEach(article => {
-            console.log("📌 article 객체 확인:", article);
             console.log("id:", article.id);
             console.log("title:", article.title);
             console.log("writer:", article.writer);
@@ -116,7 +111,6 @@
                 '<td>' + article.formattedCreatedAt + '</td>' +
                 '</tr>';
 
-            console.log("✅ append row", row);
             tbody.append(row);
         });
     }
