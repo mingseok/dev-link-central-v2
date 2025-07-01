@@ -56,14 +56,12 @@ public class MemberService {
         return JwtTokenResponse.from(token);
     }
 
-    @Transactional(readOnly = true)
     public Member findMemberById(Long memberId) {
         return memberRepository.findByIdAndDeletedFalse(memberId)
                 .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND));
     }
 
-    @Transactional(readOnly = true)
-    public Member findByEmail(String email) {
+    private Member findByEmail(String email) {
         return memberRepository.findByEmailAndDeletedFalse(email)
                 .orElseThrow(() -> new MemberException(MemberError.EMAIL_NOT_FOUND));
     }

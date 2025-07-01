@@ -53,12 +53,6 @@ public class ArticleService {
         return articlePage.map(ArticleListResponse::from);
     }
 
-    @Transactional(readOnly = true)
-    public Article findArticleById(Long id) {
-        return articleRepository.findById(id)
-                .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
-    }
-
     @Transactional
     public void update(Long articleId, ArticleUpdateRequest request, Long memberId) {
         Article article = findArticleById(articleId);
@@ -71,6 +65,11 @@ public class ArticleService {
         Article article = findArticleById(articleId);
         validateOwnership(article, memberId);
         articleRepository.delete(article);
+    }
+
+    public Article findArticleById(Long id) {
+        return articleRepository.findById(id)
+                .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
     }
 
     private void validateOwnership(Article article, Long memberId) {

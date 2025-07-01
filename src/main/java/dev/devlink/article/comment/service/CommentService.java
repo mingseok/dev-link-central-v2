@@ -38,14 +38,6 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-    private Comment findParentOrNull(Long parentId) {
-        if (parentId == null) {
-            return null; // 최상위 댓글
-        }
-        return commentRepository.findById(parentId)
-                .orElseThrow(() -> new CommentException(CommentError.PARENT_NOT_FOUND));
-    }
-
     @Transactional(readOnly = true)
     public List<CommentResponse> getCommentTreeByArticleId(Long articleId) {
         List<Comment> comments = commentRepository.findAllByArticleId(articleId);
@@ -80,6 +72,14 @@ public class CommentService {
         validateHasNoChildComments(commentId);
 
         commentRepository.delete(comment);
+    }
+
+    private Comment findParentOrNull(Long parentId) {
+        if (parentId == null) {
+            return null; // 최상위 댓글
+        }
+        return commentRepository.findById(parentId)
+                .orElseThrow(() -> new CommentException(CommentError.PARENT_NOT_FOUND));
     }
 
     private void validateWriterId(Comment comment, Long currentMemberId) {
