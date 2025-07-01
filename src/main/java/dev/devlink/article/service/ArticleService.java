@@ -2,7 +2,7 @@ package dev.devlink.article.service;
 
 import dev.devlink.article.controller.request.ArticleCreateRequest;
 import dev.devlink.article.controller.request.ArticleUpdateRequest;
-import dev.devlink.article.controller.response.ArticleDetailsResponse;
+import dev.devlink.article.controller.response.ArticleDetailResponse;
 import dev.devlink.article.controller.response.ArticleListResponse;
 import dev.devlink.article.entity.Article;
 import dev.devlink.article.exception.ArticleError;
@@ -33,12 +33,12 @@ public class ArticleService {
     }
 
     @Transactional(readOnly = true)
-    public ArticleDetailsResponse findDetail(Long articleId, Long memberId) {
+    public ArticleDetailResponse findDetail(Long articleId, Long memberId) {
         Article article = articleRepository.findDetailById(articleId)
                 .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
 
         boolean isWriter = article.isAuthor(memberId);
-        return ArticleDetailsResponse.from(article, isWriter);
+        return ArticleDetailResponse.from(article, isWriter);
     }
 
     @Transactional(readOnly = true)

@@ -27,5 +27,4 @@ public class ArticlePublicController {
         Page<ArticleListResponse> articlePage = articleService.findArticlesByPage(pageable);
         return ResponseEntity.ok(ApiResponse.success(articlePage));
     }
-
 }

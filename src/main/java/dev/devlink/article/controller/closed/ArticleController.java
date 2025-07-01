@@ -2,7 +2,7 @@ package dev.devlink.article.controller.closed;
 
 import dev.devlink.article.controller.request.ArticleCreateRequest;
 import dev.devlink.article.controller.request.ArticleUpdateRequest;
-import dev.devlink.article.controller.response.ArticleDetailsResponse;
+import dev.devlink.article.controller.response.ArticleDetailResponse;
 import dev.devlink.article.service.ArticleService;
 import dev.devlink.common.dto.ApiResponse;
 import dev.devlink.common.identity.annotation.AuthMemberId;
@@ -49,11 +49,11 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<ArticleDetailsResponse>> findDetail(
+    public ResponseEntity<ApiResponse<ArticleDetailResponse>> findDetail(
             @PathVariable Long id,
             @AuthMemberId Long memberId
     ) {
-        ArticleDetailsResponse response = articleService.findDetail(id, memberId);
+        ArticleDetailResponse response = articleService.findDetail(id, memberId);
         return ResponseEntity.ok(ApiResponse.success(response));
     }
 }

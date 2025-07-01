@@ -24,9 +24,7 @@ public class ArticleViewController {
     }
 
     @GetMapping("/update/{id}")
-    public String showUpdateForm(@PathVariable Long id, Model model) {
-        ArticleDetailsResponse article = articleService.findDetail(id);
-        model.addAttribute("articleUpdate", article);
+    public String showUpdateForm() {
         return "/articles/update";
     }
 }

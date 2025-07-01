@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class ArticleDetailsResponse {
+public class ArticleDetailResponse {
     private Long id;
     private String title;
     private String content;
@@ -22,8 +22,8 @@ public class ArticleDetailsResponse {
     @JsonProperty("isAuthor")
     private boolean author;
 
-    public static ArticleDetailsResponse from(Article article, boolean author) {
-        return new ArticleDetailsResponse(
+    public static ArticleDetailResponse from(Article article, boolean author) {
+        return new ArticleDetailResponse(
                 article.getId(),
                 article.getTitle(),
                 article.getContent(),
