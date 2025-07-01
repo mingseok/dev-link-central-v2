@@ -65,7 +65,7 @@
                     success: function (response) {
                         console.log('성공:', response);
                         alert('글이 성공적으로 작성되었습니다.');
-                        window.location.href = "/api/v1/view/articles/paging?page=0&sort=id,desc";
+                        window.location.href = "/api/v1/view/articles/paging";
                     },
                     error: function (xhr) {
                         Swal.fire('오류', '글 작성 실패: ' + xhr.responseText, 'error');

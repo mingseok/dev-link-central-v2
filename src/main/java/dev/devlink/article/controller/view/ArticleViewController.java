@@ -19,15 +19,7 @@ public class ArticleViewController {
     }
 
     @GetMapping("/paging")
-    public String showPagedArticles(@PageableDefault(size = 8) Pageable pageable, Model model) {
-        Page<ArticleListResponse> articlePage = articleService.findArticlesByPage(pageable);
-        List<ArticleListResponse> articleList = articlePage.getContent();
-        PageNavigationInfo pageInfo = articleService.getPageNavigation(articlePage);
-
-        model.addAttribute("articleList", articleList);
-        model.addAttribute("articlePage", articlePage);
-        model.addAttribute("startPage", pageInfo.getStartPage());
-        model.addAttribute("endPage", pageInfo.getEndPage());
+    public String showPagedArticles() {
         return "/articles/paging";
     }
 

@@ -4,7 +4,6 @@ import dev.devlink.article.controller.request.ArticleCreateRequest;
 import dev.devlink.article.controller.request.ArticleUpdateRequest;
 import dev.devlink.article.controller.response.ArticleDetailsResponse;
 import dev.devlink.article.controller.response.ArticleListResponse;
-import dev.devlink.article.controller.response.PageNavigationInfo;
 import dev.devlink.article.entity.Article;
 import dev.devlink.article.exception.ArticleError;
 import dev.devlink.article.exception.ArticleException;
@@ -78,13 +77,5 @@ public class ArticleService {
         if (!article.getWriterId().equals(memberId)) {
             throw new ArticleException(ArticleError.NO_PERMISSION);
         }
-    }
-
-    public PageNavigationInfo getPageNavigation(Page<?> articlePage) {
-        int blockLimit = 3;
-        int currentPage = articlePage.getNumber();
-        int startPage = Math.max(1, ((currentPage) / blockLimit) * blockLimit + 1);
-        int endPage = Math.min(startPage + blockLimit - 1, articlePage.getTotalPages());
-        return new PageNavigationInfo(startPage, endPage);
     }
 }

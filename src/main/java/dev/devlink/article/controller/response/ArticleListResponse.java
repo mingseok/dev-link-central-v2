@@ -19,7 +19,7 @@ public class ArticleListResponse {
                 article.getId(),
                 article.getTitle(),
                 article.getWriter(),
-                article.getMember().getId(),
+                article.getWriterId(),
                 DateUtils.formatLocalDateTime(article.getCreatedAt())
         );
     }
