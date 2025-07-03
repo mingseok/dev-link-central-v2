@@ -57,12 +57,12 @@ public class MemberService {
     }
 
     public Member findMemberById(Long memberId) {
-        return memberRepository.findByIdAndDeletedFalse(memberId)
+        return memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND));
     }
 
     private Member findByEmail(String email) {
-        return memberRepository.findByEmailAndDeletedFalse(email)
+        return memberRepository.findByEmail(email)
                 .orElseThrow(() -> new MemberException(MemberError.EMAIL_NOT_FOUND));
     }
 }
