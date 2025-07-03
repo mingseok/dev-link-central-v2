@@ -17,9 +17,6 @@ public class Article extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Column(name = "writer", nullable = false)
-    private String writer;
-
     @Column(name = "title", nullable = false)
     private String title;
 
@@ -27,9 +24,8 @@ public class Article extends BaseEntity {
     private String content;
 
     @Builder
-    public Article(Member member, String writer, String title, String content) {
+    public Article(Member member, String title, String content) {
         this.member = member;
-        this.writer = writer;
         this.title = title;
         this.content = content;
     }
@@ -37,7 +33,6 @@ public class Article extends BaseEntity {
     public static Article create(Member member, String title, String content) {
         return Article.builder()
                 .member(member)
-                .writer(member.getNickname())
                 .title(title)
                 .content(content)
                 .build();
@@ -45,6 +40,10 @@ public class Article extends BaseEntity {
 
     public Long getWriterId() {
         return member.getId();
+    }
+
+    public String getWriterNickname() {
+        return member.getNickname();
     }
 
     public void update(String title, String content) {
@@ -56,7 +55,6 @@ public class Article extends BaseEntity {
         if (memberId == null) {
             return false;
         }
-        Long writerId = this.member.getId();
-        return writerId.equals(memberId);
+        return member.getId().equals(memberId);
     }
 }

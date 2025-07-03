@@ -18,7 +18,7 @@ public class ArticleListResponse {
         return new ArticleListResponse(
                 article.getId(),
                 article.getTitle(),
-                article.getWriter(),
+                article.getWriterNickname(),
                 article.getWriterId(),
                 DateUtils.formatLocalDateTime(article.getCreatedAt())
         );

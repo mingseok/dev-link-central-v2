@@ -27,7 +27,7 @@ public class ArticleDetailResponse {
                 article.getId(),
                 article.getTitle(),
                 article.getContent(),
-                article.getWriter(),
+                article.getWriterNickname(),
                 article.getWriterId(),
                 DateUtils.formatLocalDateTime(article.getCreatedAt()),
                 article.getUpdatedAt(),
