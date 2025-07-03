@@ -1,7 +1,5 @@
 package dev.devlink.article.service;
 
-import dev.devlink.article.controller.request.ArticleCreateRequest;
-import dev.devlink.article.controller.request.ArticleUpdateRequest;
 import dev.devlink.article.controller.response.ArticleDetailResponse;
 import dev.devlink.article.controller.response.ArticleListResponse;
 import dev.devlink.article.entity.Article;
@@ -26,9 +24,9 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     @Transactional
-    public void save(ArticleCreateRequest request, Long memberId) {
+    public void save(Long memberId, String title, String content) {
         Member member = memberService.findMemberById(memberId);
-        Article article = Article.create(member, request.getTitle(), request.getContent());
+        Article article = Article.create(member, title, content);
         articleRepository.save(article);
     }
 
@@ -54,10 +52,10 @@ public class ArticleService {
     }
 
     @Transactional
-    public void update(Long articleId, ArticleUpdateRequest request, Long memberId) {
+    public void update(String title, String content, Long articleId, Long memberId) {
         Article article = findArticleById(articleId);
         validateOwnership(article, memberId);
-        article.update(request.getTitle(), request.getContent());
+        article.update(title, content);
     }
 
     @Transactional

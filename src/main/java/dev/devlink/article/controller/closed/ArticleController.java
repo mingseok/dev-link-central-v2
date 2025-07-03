@@ -24,18 +24,27 @@ public class ArticleController {
             @Validated @RequestBody ArticleCreateRequest request,
             @AuthMemberId Long memberId
     ) {
-        articleService.save(request, memberId);
+        articleService.save(
+                memberId,
+                request.getTitle(),
+                request.getContent()
+        );
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.successEmpty());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> update(
-            @PathVariable Long id,
             @Validated @RequestBody ArticleUpdateRequest request,
+            @PathVariable Long id,
             @AuthMemberId Long memberId
     ) {
-        articleService.update(id, request, memberId);
+        articleService.update(
+                request.getTitle(),
+                request.getContent(),
+                id,
+                memberId
+        );
         return ResponseEntity.ok(ApiResponse.successEmpty());
     }
 

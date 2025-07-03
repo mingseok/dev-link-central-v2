@@ -18,11 +18,16 @@ public class CommentController {
 
     @PostMapping
     public ResponseEntity<ApiResponse<Void>> create(
-            @PathVariable Long articleId,
             @Validated @RequestBody CommentCreateRequest request,
+            @PathVariable Long articleId,
             @AuthMemberId Long memberId
     ) {
-        commentService.save(memberId, articleId, request);
+        commentService.save(
+                request.getParentId(),
+                request.getContent(),
+                memberId,
+                articleId
+        );
         return ResponseEntity.ok(ApiResponse.successEmpty());
     }
 

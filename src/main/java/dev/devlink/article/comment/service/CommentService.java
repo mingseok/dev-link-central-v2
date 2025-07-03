@@ -1,6 +1,5 @@
 package dev.devlink.article.comment.service;
 
-import dev.devlink.article.comment.controller.request.CommentCreateRequest;
 import dev.devlink.article.comment.controller.response.CommentResponse;
 import dev.devlink.article.comment.entity.Comment;
 import dev.devlink.article.comment.exception.CommentError;
@@ -28,13 +27,13 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     @Transactional
-    public void save(Long articleId, Long memberId, CommentCreateRequest request) {
+    public void save(Long parentId, String content, Long articleId, Long memberId) {
         Article article = articleService.findArticleById(articleId);
         Member member = memberService.findMemberById(memberId);
 
-        Comment parent = findParentOrNull(request.getParentId());
+        Comment parent = findParentOrNull(parentId);
 
-        Comment comment = Comment.create(article, member, request.getContent(), parent);
+        Comment comment = Comment.create(article, member, content, parent);
         commentRepository.save(comment);
     }
 
@@ -64,11 +63,11 @@ public class CommentService {
     }
 
     @Transactional
-    public void delete(Long commentId, Long currentMemberId) {
+    public void delete(Long commentId, Long memberId) {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new CommentException(CommentError.NOT_FOUND));
 
-        validateWriterId(comment, currentMemberId);
+        validateWriterId(comment, memberId);
         validateHasNoChildComments(commentId);
 
         commentRepository.delete(comment);
@@ -82,8 +81,8 @@ public class CommentService {
                 .orElseThrow(() -> new CommentException(CommentError.PARENT_NOT_FOUND));
     }
 
-    private void validateWriterId(Comment comment, Long currentMemberId) {
-        if (!comment.getWriterId().equals(currentMemberId)) {
+    private void validateWriterId(Comment comment, Long memberId) {
+        if (!comment.getWriterId().equals(memberId)) {
             throw new CommentException(CommentError.NO_PERMISSION);
         }
     }
