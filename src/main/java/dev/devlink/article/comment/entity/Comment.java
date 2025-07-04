@@ -30,7 +30,12 @@ public class Comment extends BaseEntity {
     private Comment parent;
 
     @Builder
-    public Comment(Article article, Member member, String content, Comment parent) {
+    public Comment(
+            Article article,
+            Member member,
+            String content,
+            Comment parent
+    ) {
         this.article = article;
         this.member = member;
         this.content = content;

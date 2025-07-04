@@ -2,7 +2,6 @@ package dev.devlink.common.exception;
 
 import dev.devlink.common.dto.ApiResponse;
 import dev.devlink.common.identity.exception.UnauthorizedException;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,6 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @Slf4j
 @RestControllerAdvice
-@RequiredArgsConstructor
 public class GlobalExceptionHandler {
 
     // ServiceException

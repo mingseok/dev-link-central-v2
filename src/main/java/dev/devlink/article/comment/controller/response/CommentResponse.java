@@ -18,13 +18,26 @@ public class CommentResponse {
     private List<CommentResponse> children = new ArrayList<>();
     private LocalDateTime createdAt;
 
+    private CommentResponse(
+            Long id,
+            String content,
+            String writer,
+            LocalDateTime createdAt
+    ) {
+        this.id = id;
+        this.content = content;
+        this.writer = writer;
+        this.createdAt = createdAt;
+        this.children = new ArrayList<>();
+    }
+
     public static CommentResponse from(Comment comment) {
-        CommentResponse response = new CommentResponse();
-        response.id = comment.getId();
-        response.content = comment.getContent();
-        response.writer = comment.getWriterNickname();
-        response.createdAt = comment.getCreatedAt();
-        return response;
+        return new CommentResponse(
+                comment.getId(),
+                comment.getContent(),
+                comment.getWriterNickname(),
+                comment.getCreatedAt()
+        );
     }
 
     public void addChild(CommentResponse child) {
