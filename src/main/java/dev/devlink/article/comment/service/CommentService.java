@@ -67,8 +67,8 @@ public class CommentService {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new CommentException(CommentError.NOT_FOUND));
 
-        validateWriterId(comment, memberId);
-        validateHasNoChildComments(commentId);
+        comment.checkAuthor(memberId);
+        validateDeletable(commentId);
 
         commentRepository.delete(comment);
     }
@@ -81,13 +81,7 @@ public class CommentService {
                 .orElseThrow(() -> new CommentException(CommentError.PARENT_NOT_FOUND));
     }
 
-    private void validateWriterId(Comment comment, Long memberId) {
-        if (!comment.getWriterId().equals(memberId)) {
-            throw new CommentException(CommentError.NO_PERMISSION);
-        }
-    }
-
-    private void validateHasNoChildComments(Long commentId) {
+    private void validateDeletable(Long commentId) {
         if (commentRepository.existsByParentId(commentId)) {
             throw new CommentException(CommentError.HAS_CHILD_COMMENTS);
         }

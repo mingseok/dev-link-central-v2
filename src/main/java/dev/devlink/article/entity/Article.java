@@ -1,5 +1,7 @@
 package dev.devlink.article.entity;
 
+import dev.devlink.article.exception.ArticleError;
+import dev.devlink.article.exception.ArticleException;
 import dev.devlink.common.BaseEntity;
 import dev.devlink.member.entity.Member;
 import jakarta.persistence.*;
@@ -56,5 +58,11 @@ public class Article extends BaseEntity {
             return false;
         }
         return member.getId().equals(memberId);
+    }
+
+    public void checkAuthor(Long memberId) {
+        if (!isAuthor(memberId)) {
+            throw new ArticleException(ArticleError.NO_PERMISSION);
+        }
     }
 }

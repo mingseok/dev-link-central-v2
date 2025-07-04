@@ -54,25 +54,19 @@ public class ArticleService {
     @Transactional
     public void update(String title, String content, Long articleId, Long memberId) {
         Article article = findArticleById(articleId);
-        validateOwnership(article, memberId);
+        article.checkAuthor(memberId);
         article.update(title, content);
     }
 
     @Transactional
     public void delete(Long articleId, Long memberId) {
         Article article = findArticleById(articleId);
-        validateOwnership(article, memberId);
+        article.checkAuthor(memberId);
         articleRepository.delete(article);
     }
 
     public Article findArticleById(Long id) {
         return articleRepository.findById(id)
                 .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
-    }
-
-    private void validateOwnership(Article article, Long memberId) {
-        if (!article.getWriterId().equals(memberId)) {
-            throw new ArticleException(ArticleError.NO_PERMISSION);
-        }
     }
 }

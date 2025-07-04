@@ -1,5 +1,7 @@
 package dev.devlink.article.comment.entity;
 
+import dev.devlink.article.comment.exception.CommentError;
+import dev.devlink.article.comment.exception.CommentException;
 import dev.devlink.article.entity.Article;
 import dev.devlink.common.BaseEntity;
 import dev.devlink.member.entity.Member;
@@ -56,10 +58,6 @@ public class Comment extends BaseEntity {
                 .build();
     }
 
-    public Long getWriterId() {
-        return this.member.getId();
-    }
-
     public String getWriterNickname() {
         return member.getNickname();
     }
@@ -69,5 +67,15 @@ public class Comment extends BaseEntity {
             return parent.getId();
         }
         return null;
+    }
+
+    public void checkAuthor(Long memberId) {
+        if (!isAuthor(memberId)) {
+            throw new CommentException(CommentError.NO_PERMISSION);
+        }
+    }
+
+    private boolean isAuthor(Long memberId) {
+        return this.member.getId().equals(memberId);
     }
 }
