@@ -55,6 +55,10 @@ public class Comment extends BaseEntity {
         return this.member.getId();
     }
 
+    public String getWriterNickname() {
+        return member.getNickname();
+    }
+
     public Long getParentIdOrNull() {
         if (parent != null) {
             return parent.getId();

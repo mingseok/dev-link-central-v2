@@ -47,7 +47,7 @@ public class ArticleService {
                 Sort.by(Sort.Direction.DESC, "id")
         );
 
-        Page<Article> articlePage = articleRepository.findAll(sortedPageable);
+        Page<Article> articlePage = articleRepository.findAllWithMember(sortedPageable);
         return articlePage.map(ArticleListResponse::from);
     }
 
