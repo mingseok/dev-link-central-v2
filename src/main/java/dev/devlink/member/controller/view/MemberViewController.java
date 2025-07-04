@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api/v1/view/members")
+@RequestMapping("/view/members")
 public class MemberViewController {
 
     @GetMapping("/signup")
