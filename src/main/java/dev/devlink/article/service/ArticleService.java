@@ -53,20 +53,34 @@ public class ArticleService {
 
     @Transactional
     public void update(String title, String content, Long articleId, Long memberId) {
-        Article article = findArticleById(articleId);
-        article.checkAuthor(memberId);
+        Article article = getArticleForUpdate(articleId, memberId);
         article.update(title, content);
     }
 
     @Transactional
     public void delete(Long articleId, Long memberId) {
-        Article article = findArticleById(articleId);
-        article.checkAuthor(memberId);
+        Article article = getArticleForDelete(articleId, memberId);
         articleRepository.delete(article);
     }
 
-    public Article findArticleById(Long id) {
+    private Article findArticleById(Long id) {
         return articleRepository.findById(id)
                 .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
+    }
+
+    private Article getArticleForUpdate(Long articleId, Long memberId) {
+        Article article = findArticleById(articleId);
+        article.checkAuthor(memberId);
+        return article;
+    }
+
+    private Article getArticleForDelete(Long articleId, Long memberId) {
+        Article article = findArticleById(articleId);
+        article.checkAuthor(memberId);
+        return article;
+    }
+
+    public Article findArticleRequired(Long articleId) {
+        return findArticleById(articleId);
     }
 }

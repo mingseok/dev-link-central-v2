@@ -28,7 +28,7 @@ public class CommentService {
 
     @Transactional
     public void save(Long parentId, String content, Long articleId, Long memberId) {
-        Article article = articleService.findArticleById(articleId);
+        Article article = articleService.findArticleRequired(articleId);
         Member member = memberService.findMemberById(memberId);
 
         Comment parent = findParentOrNull(parentId);
