@@ -65,7 +65,7 @@
                     success: function (response) {
                         console.log('성공:', response);
                         alert('글이 성공적으로 작성되었습니다.');
-                        window.location.href = "/api/v1/view/articles/paging";
+                        window.location.href = "/view/articles/paging";
                     },
                     error: function (xhr) {
                         Swal.fire('오류', '글 작성 실패: ' + xhr.responseText, 'error');
@@ -81,7 +81,7 @@
     <div class="form-title">스터디 모집 글 작성</div>
     <form id="articleForm" action="/api/v1/articles" method="post">
         <label for="writer">작성자:</label>
-        <input type="text" id="writer" name="writer" readonly><br>
+        <input type="text" id="writer" class="form-control" name="writer" readonly><br>
 
         <label for="title">스터디 제목:</label>
         <input type="text" id="title" name="title"><br>

@@ -19,6 +19,11 @@ body {
     overflow: hidden;
 }
 
+.form-control {
+    border-radius: 5px;
+    line-height: 2.4;
+}
+
 .form-title {
     font-size: 22px;
     font-weight: bold;

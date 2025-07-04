@@ -24,7 +24,7 @@
 
             function validateForm() {
                 var isFormValid = checkFormValidity();
-                $("#signupButton").prop("disabled", !isFormValid); // 조건에 따라 회원가입 버튼 활성화/비활성화
+                $("#signupButton").prop("disabled", !isFormValid);
             }
 
             function checkFormValidity() {
@@ -52,13 +52,13 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "/api/v1/public/members",
+                        url: "/api/public/members",
                         contentType: "application/json",
                         data: JSON.stringify(formData),
                         success: function (response) {
                             if (response.status === "SUCCESS") {
                                 alert("회원가입 성공");
-                                window.location.href = "/api/v1/view/members/signin";
+                                window.location.href = "/view/members/signin";
                             } else {
                                 alert(response.message || "회원가입 실패");
                             }
@@ -110,7 +110,7 @@
         });
 
         function cancelButtonClicked() {
-            window.location.href = "/api/v1/view/members/signin";
+            window.location.href = "/view/members/signin";
         }
     </script>
 </head>

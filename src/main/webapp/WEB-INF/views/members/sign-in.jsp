@@ -31,7 +31,7 @@
 
         $.ajax({
           type: "POST",
-          url: "/api/v1/public/members/signin",
+          url: "/api/public/members/signin",
           contentType: "application/json",
           data: JSON.stringify({email: email, password: password}),
           success: function (response) {
@@ -40,7 +40,7 @@
 
             if (response.status === "SUCCESS" && accessToken) {
               localStorage.setItem("jwt", accessToken);
-              window.location.href = "/api/v1/view/members/home";
+              window.location.href = "/view/members/home";
             } else {
               console.error("응답에서 accessToken을 찾을 수 없습니다.");
               alert("로그인 실패: 응답에서 토큰을 찾을 수 없습니다.");
@@ -71,7 +71,7 @@
     <button type="submit" class="btn btn-primary btn-block" id="loginButton">로그인하기</button>
   </form>
   <p class="text-center mt-4">
-    처음이신가요? <a href="/api/v1/view/members/signup" class="link-button">회원가입하기</a>
+    처음이신가요? <a href="/view/members/signup" class="link-button">회원가입하기</a>
   </p>
 </div>
 </body>

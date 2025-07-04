@@ -51,11 +51,11 @@
 <!-- 스크립트: 기존 버튼/링크/토큰 처리 유지 -->
 <script>
     function home() {
-        window.location.href = "/api/v1/view/members/home";
+        window.location.href = "/view/members/home";
     }
 
     function saveReq() {
-        window.location.href = "/api/v1/view/articles/save";
+        window.location.href = "/view/articles/save";
     }
 
     $(document).ready(function () {
@@ -71,7 +71,7 @@
         const validPage = (typeof page === 'number' && !isNaN(page)) ? page : 0;
         const validSize = (typeof size === 'number' && !isNaN(size)) ? size : 8;
 
-        const apiUrl = '/api/v1/public/articles?page=' + validPage + '&size=' + validSize;
+        const apiUrl = '/api/public/articles?page=' + validPage + '&size=' + validSize;
 
         $.ajax({
             url: apiUrl,
@@ -106,8 +106,8 @@
             const row =
                 '<tr>' +
                 '<td>' + article.id + '</td>' +
-                '<td><a href="/api/v1/view/profile/view?memberId=' + article.writerId + '">' + article.writer + '</a></td>' +
-                '<td><a class="article-link" href="/api/v1/view/articles/' + article.id + '">' + article.title + '</a></td>' +
+                '<td><a href="/view/profile/view?memberId=' + article.writerId + '">' + article.writer + '</a></td>' +
+                '<td><a class="article-link" href="/view/articles/' + article.id + '">' + article.title + '</a></td>' +
                 '<td>' + article.formattedCreatedAt + '</td>' +
                 '</tr>';
 

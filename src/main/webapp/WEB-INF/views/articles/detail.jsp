@@ -25,13 +25,13 @@
     // 게시글 수정 페이지로 이동하는 함수
     function updateReq() {
       console.log("수정 요청");
-      window.location.href = "/api/v1/view/articles/update/" + articleId;
+      window.location.href = "/view/articles/update/" + articleId;
     }
 
     // 게시글 목록 페이지로 이동하는 함수
     function listReq() {
       console.log("목록 요청");
-      window.location.href = "/api/v1/view/articles/paging?page=${page}";
+      window.location.href = "/view/articles/paging?page=${page}";
     }
 
     // 게시글 삭제 요청 함수
@@ -45,7 +45,7 @@
         type: "DELETE",
         success: function (response) {
           alert("게시글이 삭제되었습니다.");
-          window.location.href = "/api/v1/view/articles/paging";
+          window.location.href = "/view/articles/paging";
         },
         error: function (error) {
           alert("삭제 중 오류가 발생했습니다: " + error);
@@ -153,7 +153,7 @@
       isFetchingComments = true;
 
       $.ajax({
-        url: "/api/v1/public/articles/" + articleId + "/comments",
+        url: "/api/public/articles/" + articleId + "/comments",
         type: "GET",
         data: {
           offset: currentPage * pageSize,
