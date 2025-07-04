@@ -31,9 +31,9 @@ public class CommentService {
         Article article = articleService.findArticleRequired(articleId);
         Member member = memberService.findMemberById(memberId);
 
-        Comment parent = findParentOrNull(parentId);
+        validateParent(parentId);
+        Comment comment = Comment.create(article, member, content, parentId);
 
-        Comment comment = Comment.create(article, member, content, parent);
         commentRepository.save(comment);
     }
 
@@ -48,7 +48,7 @@ public class CommentService {
             CommentResponse response = CommentResponse.from(comment);
             responseMap.put(comment.getId(), response);
 
-            Long parentId = comment.getParentIdOrNull();
+            Long parentId = comment.getParentId();
             if (parentId == null) {
                 rootComments.add(response);
                 continue;
@@ -73,12 +73,15 @@ public class CommentService {
         commentRepository.delete(comment);
     }
 
-    private Comment findParentOrNull(Long parentId) {
+    private void validateParent(Long parentId) {
         if (parentId == null) {
-            return null; // 최상위 댓글
+            return;
         }
-        return commentRepository.findById(parentId)
-                .orElseThrow(() -> new CommentException(CommentError.PARENT_NOT_FOUND));
+
+        boolean parentExists = commentRepository.existsById(parentId);
+        if (!parentExists) {
+            throw new CommentException(CommentError.PARENT_NOT_FOUND);
+        }
     }
 
     private void validateDeletable(Long commentId) {

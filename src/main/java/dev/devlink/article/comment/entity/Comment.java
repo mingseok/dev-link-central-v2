@@ -27,46 +27,38 @@ public class Comment extends BaseEntity {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private Comment parent;
+    @Column(name = "parent_id")
+    private Long parentId;
 
     @Builder
     public Comment(
             Article article,
             Member member,
             String content,
-            Comment parent
+            Long parentId
     ) {
         this.article = article;
         this.member = member;
         this.content = content;
-        this.parent = parent;
+        this.parentId = parentId;
     }
 
     public static Comment create(
             Article article,
             Member member,
             String content,
-            Comment parent
+            Long parentId
     ) {
         return Comment.builder()
                 .article(article)
                 .member(member)
                 .content(content)
-                .parent(parent)
+                .parentId(parentId)
                 .build();
     }
 
     public String getWriterNickname() {
         return member.getNickname();
-    }
-
-    public Long getParentIdOrNull() {
-        if (parent != null) {
-            return parent.getId();
-        }
-        return null;
     }
 
     public void checkAuthor(Long memberId) {

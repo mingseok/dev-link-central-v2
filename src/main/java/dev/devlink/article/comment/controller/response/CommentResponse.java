@@ -15,6 +15,7 @@ public class CommentResponse {
     private Long id;
     private String content;
     private String writer;
+    private Long parentId;
     private List<CommentResponse> children = new ArrayList<>();
     private LocalDateTime createdAt;
 
@@ -22,11 +23,13 @@ public class CommentResponse {
             Long id,
             String content,
             String writer,
+            Long parentId,
             LocalDateTime createdAt
     ) {
         this.id = id;
         this.content = content;
         this.writer = writer;
+        this.parentId = parentId;
         this.createdAt = createdAt;
         this.children = new ArrayList<>();
     }
@@ -36,6 +39,7 @@ public class CommentResponse {
                 comment.getId(),
                 comment.getContent(),
                 comment.getWriterNickname(),
+                comment.getParentId(),
                 comment.getCreatedAt()
         );
     }

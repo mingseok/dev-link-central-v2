@@ -69,7 +69,13 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-      articleId = window.location.pathname.split("/").pop();
+      const pathSegments = window.location.pathname.split("/");
+      const articleIndex = pathSegments.indexOf("articles");
+      if (articleIndex !== -1 && pathSegments.length > articleIndex + 1) {
+        articleId = pathSegments[articleIndex + 1];
+      } else {
+        console.error("articleId를 URL에서 추출하지 못했습니다.");
+      }
 
       $.ajax({
         url: "/api/v1/articles/" + articleId,
@@ -79,8 +85,6 @@
         },
         success: function(response) {
           const article = response.data;
-
-          // 게시글 정보 DOM에 삽입
           document.getElementById("articleId").textContent = article.id || '';
           document.getElementById("title").textContent = article.title || '';
           document.getElementById("author").textContent = article.writer || '';
@@ -119,7 +123,10 @@
         url: "/api/v1/articles/" + articleId + "/comments",
         type: "POST",
         contentType: "application/json",
-        data: JSON.stringify({ content: contents }),
+        data: JSON.stringify({
+          content: contents,
+          parentId: null
+        }),
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem("jwt") },
         success: function() {
           $('#contents').val('');
@@ -133,18 +140,6 @@
         }
       });
     }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      const pathSegments = window.location.pathname.split("/");
-      const articleIndex = pathSegments.indexOf("articles");
-      if (articleIndex !== -1 && pathSegments.length > articleIndex + 1) {
-        articleId = pathSegments[articleIndex + 1];
-      } else {
-        console.error("articleId를 URL에서 추출하지 못했습니다.");
-      }
-
-      loadComments();
-    });
 
     // 댓글 목록 불러오기
     function loadComments() {
