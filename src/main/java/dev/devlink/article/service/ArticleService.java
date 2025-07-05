@@ -1,10 +1,7 @@
 package dev.devlink.article.service;
 
-import dev.devlink.article.controller.request.ArticleCreateRequest;
-import dev.devlink.article.controller.request.ArticleUpdateRequest;
-import dev.devlink.article.controller.response.ArticleDetailsResponse;
+import dev.devlink.article.controller.response.ArticleDetailResponse;
 import dev.devlink.article.controller.response.ArticleListResponse;
-import dev.devlink.article.controller.response.PageNavigationInfo;
 import dev.devlink.article.entity.Article;
 import dev.devlink.article.exception.ArticleError;
 import dev.devlink.article.exception.ArticleException;
@@ -27,17 +24,19 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     @Transactional
-    public void save(ArticleCreateRequest request, Long memberId) {
+    public void save(Long memberId, String title, String content) {
         Member member = memberService.findMemberById(memberId);
-        Article article = Article.create(member, request.getTitle(), request.getContent());
+        Article article = Article.create(member, title, content);
         articleRepository.save(article);
     }
 
     @Transactional(readOnly = true)
-    public ArticleDetailsResponse findDetail(Long id) {
-        Article article = articleRepository.findDetailById(id)
+    public ArticleDetailResponse findDetail(Long articleId, Long memberId) {
+        Article article = articleRepository.findDetailById(articleId)
                 .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
-        return ArticleDetailsResponse.from(article);
+
+        boolean isWriter = article.isAuthor(memberId);
+        return ArticleDetailResponse.from(article, isWriter);
     }
 
     @Transactional(readOnly = true)
@@ -48,41 +47,40 @@ public class ArticleService {
                 Sort.by(Sort.Direction.DESC, "id")
         );
 
-        Page<Article> articlePage = articleRepository.findAll(sortedPageable);
+        Page<Article> articlePage = articleRepository.findAllWithMember(sortedPageable);
         return articlePage.map(ArticleListResponse::from);
     }
 
-    @Transactional(readOnly = true)
-    public Article findArticleById(Long id) {
-        return articleRepository.findById(id)
-                .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
-    }
-
     @Transactional
-    public void update(Long articleId, ArticleUpdateRequest request, Long memberId) {
-        Article article = findArticleById(articleId);
-        validateOwnership(article, memberId);
-        article.update(request.getTitle(), request.getContent());
+    public void update(String title, String content, Long articleId, Long memberId) {
+        Article article = getArticleForUpdate(articleId, memberId);
+        article.update(title, content);
     }
 
     @Transactional
     public void delete(Long articleId, Long memberId) {
-        Article article = findArticleById(articleId);
-        validateOwnership(article, memberId);
+        Article article = getArticleForDelete(articleId, memberId);
         articleRepository.delete(article);
     }
 
-    private void validateOwnership(Article article, Long memberId) {
-        if (!article.getWriterId().equals(memberId)) {
-            throw new ArticleException(ArticleError.NO_PERMISSION);
-        }
+    private Article findArticleById(Long id) {
+        return articleRepository.findById(id)
+                .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
     }
 
-    public PageNavigationInfo getPageNavigation(Page<?> articlePage) {
-        int blockLimit = 3;
-        int currentPage = articlePage.getNumber();
-        int startPage = Math.max(1, ((currentPage) / blockLimit) * blockLimit + 1);
-        int endPage = Math.min(startPage + blockLimit - 1, articlePage.getTotalPages());
-        return new PageNavigationInfo(startPage, endPage);
+    private Article getArticleForUpdate(Long articleId, Long memberId) {
+        Article article = findArticleById(articleId);
+        article.checkAuthor(memberId);
+        return article;
+    }
+
+    private Article getArticleForDelete(Long articleId, Long memberId) {
+        Article article = findArticleById(articleId);
+        article.checkAuthor(memberId);
+        return article;
+    }
+
+    public Article findArticleRequired(Long articleId) {
+        return findArticleById(articleId);
     }
 }

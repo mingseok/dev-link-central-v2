@@ -31,7 +31,7 @@
       };
 
       $.ajax({
-        url: "/api/v1/articles/${id}",
+        url: "/api/v1/articles/" + id,
         type: "PUT",
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem("jwt")
@@ -41,7 +41,7 @@
         success: function (response) {
           console.log("글이 업데이트되었습니다.");
           <%--window.location.href = `/api/v1/view/articles/paging?page=${page}`;--%>
-          window.location.href = `/api/v1/view/articles/${id}`;
+          window.location.href = "/view/articles/" + id;
         },
         error: function (error) {
           console.error("글 업데이트 중 오류가 발생했습니다.", error);
@@ -54,24 +54,50 @@
       window.history.back();
     }
   </script>
+
+  <script>
+    $(document).ready(function () {
+      const token = localStorage.getItem("jwt");
+      const articleId = window.location.pathname.split("/").pop();
+
+      $.ajax({
+        url: "/api/v1/articles/" + articleId,
+        type: "GET",
+        headers: {
+          'Authorization': 'Bearer ' + token
+        },
+        success: function (res) {
+          const article = res.data;
+          $("#id").val(article.id);
+          $("#writerId").val(article.writerId);
+          $("#writer").val(article.writer);
+          $("#title").val(article.title);
+          $("#content").val(article.content);
+        },
+        error: function () {
+          alert("글 정보를 불러오는 데 실패했습니다.");
+        }
+      });
+    });
+  </script>
 </head>
 <body>
 <div class="container">
   <h3 class="text-center mb-4" style="font-weight: 600;">게시글 수정</h3>
   <form name="updateForm">
-    <input type="hidden" id="id" value="${articleUpdate.id}">
-    <input type="hidden" id="writerId" value="${articleUpdate.writerId}">
+    <input type="hidden" id="id" value="">
+    <input type="hidden" id="writerId" value="">
     <div class="form-group">
       <label for="writer">작성자:</label>
-      <input type="text" id="writer" class="form-control" value="${articleUpdate.writer}" readonly>
+      <input type="text" id="writer" class="form-control" value="" readonly>
     </div>
     <div class="form-group">
       <label for="title">스터디 제목:</label>
-      <input type="text" id="title" class="form-control" value="${articleUpdate.title}">
+      <input type="text" id="title" class="form-control" value="">
     </div>
     <div class="form-group">
       <label for="content">스터디 상세 내용:</label>
-      <textarea id="content" class="form-control" rows="5">${articleUpdate.content}</textarea>
+      <textarea id="content" class="form-control" rows="5"></textarea>
     </div>
     <div class="form-group button-container">
       <button type="button" class="menu-button" onclick="home()">이전으로</button>

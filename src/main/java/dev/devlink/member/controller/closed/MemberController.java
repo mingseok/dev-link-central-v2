@@ -2,7 +2,7 @@ package dev.devlink.member.controller.closed;
 
 import dev.devlink.common.dto.ApiResponse;
 import dev.devlink.common.identity.annotation.AuthMemberId;
-import dev.devlink.member.controller.response.AuthenticatedMemberResponse;
+import dev.devlink.member.controller.response.NicknameResponse;
 import dev.devlink.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +17,11 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/me")
-    public ResponseEntity<ApiResponse<AuthenticatedMemberResponse>> getAuthenticatedMember(
+    @GetMapping("/self")
+    public ResponseEntity<ApiResponse<NicknameResponse>> findCurrentNickname(
             @AuthMemberId Long memberId
     ) {
-        AuthenticatedMemberResponse response = memberService.getAuthenticatedMember(memberId);
+        NicknameResponse response = memberService.findNicknameById(memberId);
         return ResponseEntity.ok(ApiResponse.success(response));
     }
 }

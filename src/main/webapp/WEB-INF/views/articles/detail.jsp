@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="dev.devlink.article.controller.response.ArticleDetailsResponse" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,19 +20,18 @@
   <link rel="stylesheet" href="/css/articles/detail.css">
 
   <script>
-    <% ArticleDetailsResponse article = (ArticleDetailsResponse) request.getAttribute("article"); %>
-    var articleId = <%= article.getId() %>;
+    let articleId;
 
     // 게시글 수정 페이지로 이동하는 함수
     function updateReq() {
       console.log("수정 요청");
-      window.location.href = "/api/v1/view/articles/update/" + articleId;
+      window.location.href = "/view/articles/update/" + articleId;
     }
 
     // 게시글 목록 페이지로 이동하는 함수
     function listReq() {
       console.log("목록 요청");
-      window.location.href = "/api/v1/view/articles/paging?page=${page}";
+      window.location.href = "/view/articles/paging?page=${page}";
     }
 
     // 게시글 삭제 요청 함수
@@ -47,7 +45,7 @@
         type: "DELETE",
         success: function (response) {
           alert("게시글이 삭제되었습니다.");
-          window.location.href = "/api/v1/view/articles/paging";
+          window.location.href = "/view/articles/paging";
         },
         error: function (error) {
           alert("삭제 중 오류가 발생했습니다: " + error);
@@ -69,50 +67,45 @@
         return escapeMap[match];
       });
     }
-  </script>
 
-  <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const writer = "<%= article.getWriter() %>";
-      const loggedInUser = '<c:out value="${member.nickname}" />';
-
-      console.log("writer:", writer);
-      console.log("loggedInUser:", loggedInUser);
-
-      if (writer.trim() === loggedInUser.trim()) {
-        document.getElementById("updateBtn").style.display = "inline-block";
-        document.getElementById("deleteBtn").style.display = "inline-block";
+      const pathSegments = window.location.pathname.split("/");
+      const articleIndex = pathSegments.indexOf("articles");
+      if (articleIndex !== -1 && pathSegments.length > articleIndex + 1) {
+        articleId = pathSegments[articleIndex + 1];
+      } else {
+        console.error("articleId를 URL에서 추출하지 못했습니다.");
       }
-    });
-  </script>
 
-  <script type="text/javascript">
-    var loggedInUserNickname = '<c:out value="${member.nickname}"/>';
-  </script>
+      $.ajax({
+        url: "/api/v1/articles/" + articleId,
+        type: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+        },
+        success: function(response) {
+          const article = response.data;
+          document.getElementById("articleId").textContent = article.id || '';
+          document.getElementById("title").textContent = article.title || '';
+          document.getElementById("author").textContent = article.writer || '';
+          document.getElementById("content").textContent = article.content || '';
+          document.getElementById("viewsCount").textContent = article.views || '0';
+          document.getElementById("createdAt").textContent = article.formattedCreatedAt || '';
 
-  <script>
-    $.ajax({
-      url: "/api/v1/members/me",
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("jwt")
-      },
-      success: function(response) {
-        const loggedInUserId = response.data.id;
-        const articleWriterId = <%= article.getWriterId() %>;
-
-        if (loggedInUserId === articleWriterId) {
-          $("#updateBtn").show();
-          $("#deleteBtn").show();
+          if (article.isAuthor === true) {
+            document.getElementById("updateBtn").style.display = "inline-block";
+            document.getElementById("deleteBtn").style.display = "inline-block";
+          }
+        },
+        error: function() {
+          console.error("게시글 정보를 불러오는데 실패했습니다.");
         }
-      },
-      error: function() {
-        console.error("JWT 인증 사용자 조회 실패");
-      }
+      });
+      loadComments();
     });
-  </script>
 
-  <script>
-    var articleId = <%= article.getId() %>;
+    var loggedInUserNickname = '<c:out value="${member.nickname}"/>';
+
     var currentPage = 0;
     var pageSize = 3;
     var isFetchingComments = false;
@@ -130,7 +123,10 @@
         url: "/api/v1/articles/" + articleId + "/comments",
         type: "POST",
         contentType: "application/json",
-        data: JSON.stringify({ content: contents }),
+        data: JSON.stringify({
+          content: contents,
+          parentId: null
+        }),
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem("jwt") },
         success: function() {
           $('#contents').val('');
@@ -152,7 +148,7 @@
       isFetchingComments = true;
 
       $.ajax({
-        url: "/api/v1/public/articles/" + articleId + "/comments",
+        url: "/api/public/articles/" + articleId + "/comments",
         type: "GET",
         data: {
           offset: currentPage * pageSize,
@@ -248,14 +244,8 @@
       }
     });
 
-    // 페이지 로드 시 댓글 초기화
-    $(document).ready(function() {
-      loadComments();
-    });
-
     function showReplyInput(commentId) {
-      console.log("답글 버튼 클릭 - commentId:", commentId);
-      $("#reply-input-" + commentId).toggle(); // 클릭 시 보이거나 숨기기
+      $("#reply-input-" + commentId).toggle();
     }
 
     function submitReply(parentId) {
@@ -326,19 +316,19 @@
   <div class="detail-grid">
     <div>
       <label for="articleId">글 번호:</label>
-      <div class="detail-box" id="articleId"><%= article.getId() %></div>
+      <div class="detail-box" id="articleId"></div>
     </div>
     <div>
       <label for="title">스터디 제목:</label>
-      <div class="detail-box" id="title"><%= article.getTitle() %></div>
+      <div class="detail-box" id="title"></div>
     </div>
     <div>
       <label for="author">작성자:</label>
-      <div class="detail-box" id="author"><%= article.getWriter() %></div>
+      <div class="detail-box" id="author"></div>
     </div>
   </div>
   <label for="content">스터디 상세 내용:</label>
-  <div class="content-box" id="content"><%= article.getContent() %></div>
+  <div class="content-box" id="content"></div>
   <div class="stats">
     <div class="like">
       <button onclick="toggleLike()">좋아요</button>
@@ -348,10 +338,10 @@
       조회수: <span id="viewsCount">000</span>
     </div>
     <div class="date">
-      작성일: <span>${article.formattedCreatedAt}</span>
+      작성일: <span id="createdAt"></span>
     </div>
     <div class="data">
-      <div id="articleData" data-article-id="<%= article.getId() %>"></div>
+      <div id="articleData"></div>
     </div>
   </div>
 

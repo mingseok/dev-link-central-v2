@@ -1,7 +1,8 @@
 package dev.devlink.member.entity;
 
 import dev.devlink.common.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,30 +13,42 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "nickname", nullable = false, unique = true)
     private String nickname;
 
-    @Column(nullable = false)
-    private boolean deleted = Boolean.FALSE;
-
     @Builder
-    public Member(String name, String password, String email, String nickname) {
+    public Member(
+            String name,
+            String password,
+            String email,
+            String nickname
+    ) {
         this.name = name;
         this.password = password;
         this.email = email;
         this.nickname = nickname;
+    }
+
+    public static Member create(
+            String name,
+            String email,
+            String nickname,
+            String encodedPassword
+    ) {
+        return Member.builder()
+                .name(name)
+                .email(email)
+                .nickname(nickname)
+                .password(encodedPassword)
+                .build();
     }
 }

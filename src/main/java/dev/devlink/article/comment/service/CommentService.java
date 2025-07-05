@@ -1,6 +1,5 @@
 package dev.devlink.article.comment.service;
 
-import dev.devlink.article.comment.controller.request.CommentCreateRequest;
 import dev.devlink.article.comment.controller.response.CommentResponse;
 import dev.devlink.article.comment.entity.Comment;
 import dev.devlink.article.comment.exception.CommentError;
@@ -28,22 +27,14 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     @Transactional
-    public void save(Long articleId, Long memberId, CommentCreateRequest request) {
-        Article article = articleService.findArticleById(articleId);
+    public void save(Long parentId, String content, Long articleId, Long memberId) {
+        Article article = articleService.findArticleRequired(articleId);
         Member member = memberService.findMemberById(memberId);
 
-        Comment parent = findParentOrNull(request.getParentId());
+        validateParent(parentId);
+        Comment comment = Comment.create(article, member, content, parentId);
 
-        Comment comment = Comment.create(article, member, request.getContent(), parent);
         commentRepository.save(comment);
-    }
-
-    private Comment findParentOrNull(Long parentId) {
-        if (parentId == null) {
-            return null; // 최상위 댓글
-        }
-        return commentRepository.findById(parentId)
-                .orElseThrow(() -> new CommentException(CommentError.PARENT_NOT_FOUND));
     }
 
     @Transactional(readOnly = true)
@@ -57,7 +48,7 @@ public class CommentService {
             CommentResponse response = CommentResponse.from(comment);
             responseMap.put(comment.getId(), response);
 
-            Long parentId = comment.getParentIdOrNull();
+            Long parentId = comment.getParentId();
             if (parentId == null) {
                 rootComments.add(response);
                 continue;
@@ -72,23 +63,28 @@ public class CommentService {
     }
 
     @Transactional
-    public void delete(Long commentId, Long currentMemberId) {
+    public void delete(Long commentId, Long memberId) {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new CommentException(CommentError.NOT_FOUND));
 
-        validateWriterId(comment, currentMemberId);
-        validateHasNoChildComments(commentId);
+        comment.checkAuthor(memberId);
+        validateDeletable(commentId);
 
         commentRepository.delete(comment);
     }
 
-    private void validateWriterId(Comment comment, Long currentMemberId) {
-        if (!comment.getWriterId().equals(currentMemberId)) {
-            throw new CommentException(CommentError.NO_PERMISSION);
+    private void validateParent(Long parentId) {
+        if (parentId == null) {
+            return;
+        }
+
+        boolean parentExists = commentRepository.existsById(parentId);
+        if (!parentExists) {
+            throw new CommentException(CommentError.PARENT_NOT_FOUND);
         }
     }
 
-    private void validateHasNoChildComments(Long commentId) {
+    private void validateDeletable(Long commentId) {
         if (commentRepository.existsByParentId(commentId)) {
             throw new CommentException(CommentError.HAS_CHILD_COMMENTS);
         }

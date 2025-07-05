@@ -1,6 +1,5 @@
 package dev.devlink.member.controller.request;
 
-import dev.devlink.member.entity.Member;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -42,14 +41,5 @@ public class SignUpRequest {
         this.confirmPassword = password;
         this.email = email;
         this.nickname = nickname;
-    }
-
-    public Member toEntity(String encodedPassword) {
-        return Member.builder()
-                .name(this.name)
-                .email(this.email)
-                .password(encodedPassword)
-                .nickname(this.nickname)
-                .build();
     }
 }

@@ -2,31 +2,54 @@ package dev.devlink.common.exception;
 
 import dev.devlink.common.dto.ApiResponse;
 import dev.devlink.common.identity.exception.UnauthorizedException;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @Slf4j
 @RestControllerAdvice
-@RequiredArgsConstructor
 public class GlobalExceptionHandler {
 
-    // ServiceException
     @ExceptionHandler(ServiceException.class)
     public ResponseEntity<ApiResponse<Void>> handleServiceException(ServiceException ex) {
         CommonError commonError = ex.getCommonError();
-        log.error("ServiceException 발생했습니다: {}", commonError.getMessage());
+        log.warn("ServiceException 발생: {}", commonError.getMessage());
         return new ResponseEntity<>(
                 ApiResponse.failure(commonError.getMessage()),
-                HttpStatus.BAD_REQUEST
+                commonError.getHttpStatus()
         );
     }
 
-    // 인증 오류 예외 처리
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiResponse<Void>> handleValidationException(MethodArgumentNotValidException ex) {
+        FieldError fieldError = ex.getBindingResult().getFieldError();
+        String errorMessage = ErrorCode.BAD_REQUEST.getMessage();
+        if (fieldError != null) {
+            errorMessage = fieldError.getDefaultMessage();
+        }
+
+        log.warn("MethodArgumentNotValidException 발생: {}", errorMessage);
+        return new ResponseEntity<>(
+                ApiResponse.failure(errorMessage),
+                ErrorCode.BAD_REQUEST.getHttpStatus()
+        );
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiResponse<Void>> handleDataViolation(DataIntegrityViolationException ex) {
+        log.warn("DataIntegrityViolationException 발생: {}", ex.getMessage());
+        return new ResponseEntity<>(
+                ApiResponse.failure("연관된 데이터가 있어 삭제할 수 없습니다."),
+                HttpStatus.CONFLICT
+        );
+    }
+
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<ApiResponse<Void>> handleUnauthorized(UnauthorizedException ex) {
         CommonError error = ex.getCommonError();
@@ -37,7 +60,6 @@ public class GlobalExceptionHandler {
         );
     }
 
-    // 기타 모든 예외 처리
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handleException(Exception ex) {
         log.error("Unhandled Exception", ex);
