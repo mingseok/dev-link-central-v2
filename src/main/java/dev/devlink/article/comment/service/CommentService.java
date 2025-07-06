@@ -5,6 +5,7 @@ import dev.devlink.article.comment.entity.Comment;
 import dev.devlink.article.comment.exception.CommentError;
 import dev.devlink.article.comment.exception.CommentException;
 import dev.devlink.article.comment.repository.CommentRepository;
+import dev.devlink.article.comment.service.command.CommentCreateCommand;
 import dev.devlink.article.entity.Article;
 import dev.devlink.article.service.ArticleService;
 import dev.devlink.member.entity.Member;
@@ -27,12 +28,16 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     @Transactional
-    public void save(Long parentId, String content, Long articleId, Long memberId) {
-        Article article = articleService.findArticleById(articleId);
-        Member member = memberService.findMemberById(memberId);
+    public void save(CommentCreateCommand command) {
+        Article article = articleService.findArticleById(command.getArticleId());
+        Member member = memberService.findMemberById(command.getMemberId());
 
-        validateParent(parentId);
-        Comment comment = Comment.create(article, member, content, parentId);
+        validateParent(command.getParentId());
+        Comment comment = Comment.create(
+                article, member,
+                command.getParentId(),
+                command.getContent()
+        );
 
         commentRepository.save(comment);
     }

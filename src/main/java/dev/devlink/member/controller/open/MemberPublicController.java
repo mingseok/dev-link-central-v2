@@ -25,12 +25,7 @@ public class MemberPublicController {
     public ResponseEntity<ApiResponse<Void>> signup(
             @Validated @RequestBody SignUpRequest request
     ) {
-        memberService.signUp(
-                request.getName(),
-                request.getEmail(),
-                request.getNickname(),
-                request.getPassword()
-        );
+        memberService.signUp(request.toCommand());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.successEmpty());
     }
@@ -39,10 +34,7 @@ public class MemberPublicController {
     public ResponseEntity<ApiResponse<JwtTokenResponse>> signin(
             @Validated @RequestBody SignInRequest request
     ) {
-        JwtTokenResponse response = memberService.signin(
-                request.getEmail(),
-                request.getPassword()
-        );
+        JwtTokenResponse response = memberService.signin(request.toCommand());
         return ResponseEntity.ok(ApiResponse.success(response));
     }
 }

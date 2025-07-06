@@ -46,14 +46,14 @@ public class Comment extends BaseEntity {
     public static Comment create(
             Article article,
             Member member,
-            String content,
-            Long parentId
+            Long parentId,
+            String content
     ) {
         return Comment.builder()
                 .article(article)
                 .member(member)
-                .content(content)
                 .parentId(parentId)
+                .content(content)
                 .build();
     }
 

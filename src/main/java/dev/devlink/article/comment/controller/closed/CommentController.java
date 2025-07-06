@@ -22,12 +22,7 @@ public class CommentController {
             @PathVariable Long articleId,
             @AuthMemberId Long memberId
     ) {
-        commentService.save(
-                request.getParentId(),
-                request.getContent(),
-                memberId,
-                articleId
-        );
+        commentService.save(request.toCommand(articleId, memberId));
         return ResponseEntity.ok(ApiResponse.successEmpty());
     }
 

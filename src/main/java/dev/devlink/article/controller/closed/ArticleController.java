@@ -24,11 +24,7 @@ public class ArticleController {
             @Validated @RequestBody ArticleCreateRequest request,
             @AuthMemberId Long memberId
     ) {
-        articleService.save(
-                memberId,
-                request.getTitle(),
-                request.getContent()
-        );
+        articleService.save(request.toCommand(memberId));
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.successEmpty());
     }
@@ -39,12 +35,7 @@ public class ArticleController {
             @PathVariable Long id,
             @AuthMemberId Long memberId
     ) {
-        articleService.update(
-                request.getTitle(),
-                request.getContent(),
-                id,
-                memberId
-        );
+        articleService.update(request.toCommand(id, memberId));
         return ResponseEntity.ok(ApiResponse.successEmpty());
     }
 

@@ -6,6 +6,8 @@ import dev.devlink.article.entity.Article;
 import dev.devlink.article.exception.ArticleError;
 import dev.devlink.article.exception.ArticleException;
 import dev.devlink.article.repository.ArticleRepository;
+import dev.devlink.article.service.command.ArticleCreateCommand;
+import dev.devlink.article.service.command.ArticleUpdateCommand;
 import dev.devlink.member.entity.Member;
 import dev.devlink.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +26,9 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     @Transactional
-    public void save(Long memberId, String title, String content) {
-        Member member = memberService.findMemberById(memberId);
-        Article article = Article.create(member, title, content);
+    public void save(ArticleCreateCommand command) {
+        Member member = memberService.findMemberById(command.getMemberId());
+        Article article = Article.create(member, command.getTitle(), command.getContent());
         articleRepository.save(article);
     }
 
@@ -52,10 +54,10 @@ public class ArticleService {
     }
 
     @Transactional
-    public void update(String title, String content, Long articleId, Long memberId) {
-        Article article = findArticleById(articleId);
-        article.checkAuthor(memberId);
-        article.update(title, content);
+    public void update(ArticleUpdateCommand command) {
+        Article article = findArticleById(command.getArticleId());
+        article.checkAuthor(command.getMemberId());
+        article.update(command.getTitle(), command.getContent());
     }
 
     @Transactional
