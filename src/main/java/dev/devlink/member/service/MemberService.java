@@ -2,15 +2,14 @@ package dev.devlink.member.service;
 
 import dev.devlink.common.jwt.JwtToken;
 import dev.devlink.common.jwt.JwtTokenProvider;
-import dev.devlink.member.controller.request.SignInRequest;
-import dev.devlink.member.controller.request.SignUpRequest;
-import dev.devlink.member.controller.response.AuthenticatedMemberResponse;
 import dev.devlink.member.controller.response.JwtTokenResponse;
-import dev.devlink.member.controller.response.SignUpResponse;
+import dev.devlink.member.controller.response.NicknameResponse;
 import dev.devlink.member.entity.Member;
 import dev.devlink.member.exception.MemberError;
 import dev.devlink.member.exception.MemberException;
 import dev.devlink.member.repository.MemberRepository;
+import dev.devlink.member.service.command.SignInCommand;
+import dev.devlink.member.service.command.SignUpCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,29 +24,36 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public SignUpResponse signUp(SignUpRequest signUpRequest) {
-        validateDuplicateMember(signUpRequest);
-        String encodedPassword = passwordEncoder.encode(signUpRequest.getPassword());
-        Member member = signUpRequest.toEntity(encodedPassword);
-        Member savedMember = memberRepository.save(member);
-        return SignUpResponse.from(savedMember.getId());
-    }
-
-    @Transactional(readOnly = true)
-    public void validateDuplicateMember(SignUpRequest signUpRequest) {
-        if (memberRepository.existsByEmail(signUpRequest.getEmail())) {
+    public void signUp(SignUpCommand command) {
+        if (memberRepository.existsByEmail(command.getEmail())) {
             throw new MemberException(MemberError.EMAIL_DUPLICATED);
         }
 
-        if (memberRepository.existsByNickname(signUpRequest.getNickname())) {
+        if (memberRepository.existsByNickname(command.getNickname())) {
             throw new MemberException(MemberError.NICKNAME_DUPLICATED);
         }
+
+        String encodedPassword = passwordEncoder.encode(command.getPassword());
+        Member member = Member.create(
+                command.getName(),
+                command.getEmail(),
+                command.getNickname(),
+                encodedPassword
+        );
+        memberRepository.save(member);
     }
 
     @Transactional(readOnly = true)
-    public JwtTokenResponse signin(SignInRequest request) {
-        Member member = findByEmail(request.getEmail());
-        if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
+    public NicknameResponse findNicknameById(Long memberId) {
+        String nickname = memberRepository.findNicknameById(memberId)
+                .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND));
+        return NicknameResponse.from(nickname);
+    }
+
+    @Transactional(readOnly = true)
+    public JwtTokenResponse signin(SignInCommand command) {
+        Member member = findByEmail(command.getEmail());
+        if (!passwordEncoder.matches(command.getPassword(), member.getPassword())) {
             throw new MemberException(MemberError.PASSWORD_NOT_MATCHED);
         }
 
@@ -55,27 +61,13 @@ public class MemberService {
         return JwtTokenResponse.from(token);
     }
 
-    @Transactional(readOnly = true)
     public Member findMemberById(Long memberId) {
-        return memberRepository.findByIdAndDeletedFalse(memberId)
+        return memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND));
     }
 
-    @Transactional(readOnly = true)
-    public Member findByEmail(String email) {
-        return memberRepository.findByEmailAndDeletedFalse(email)
+    private Member findByEmail(String email) {
+        return memberRepository.findByEmail(email)
                 .orElseThrow(() -> new MemberException(MemberError.EMAIL_NOT_FOUND));
-    }
-
-    @Transactional(readOnly = true)
-    public String findNicknameById(Long memberId) {
-        return memberRepository.findNicknameById(memberId)
-                .orElseThrow(() -> new MemberException(MemberError.MEMBER_NOT_FOUND));
-    }
-
-    @Transactional(readOnly = true)
-    public AuthenticatedMemberResponse getAuthenticatedMember(Long memberId) {
-        Member member = findMemberById(memberId);
-        return AuthenticatedMemberResponse.from(member);
     }
 }

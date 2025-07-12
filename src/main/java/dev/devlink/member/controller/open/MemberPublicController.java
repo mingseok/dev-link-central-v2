@@ -4,7 +4,6 @@ import dev.devlink.common.dto.ApiResponse;
 import dev.devlink.member.controller.request.SignInRequest;
 import dev.devlink.member.controller.request.SignUpRequest;
 import dev.devlink.member.controller.response.JwtTokenResponse;
-import dev.devlink.member.controller.response.SignUpResponse;
 import dev.devlink.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,25 +16,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/public/members")
+@RequestMapping("/api/public/members")
 public class MemberPublicController {
 
     private final MemberService memberService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<SignUpResponse>> signup(
+    public ResponseEntity<ApiResponse<Void>> signup(
             @Validated @RequestBody SignUpRequest request
     ) {
-        SignUpResponse response = memberService.signUp(request);
+        memberService.signUp(request.toCommand());
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ApiResponse.success(response));
+                .body(ApiResponse.successEmpty());
     }
 
     @PostMapping("/signin")
     public ResponseEntity<ApiResponse<JwtTokenResponse>> signin(
             @Validated @RequestBody SignInRequest request
     ) {
-        JwtTokenResponse response = memberService.signin(request);
+        JwtTokenResponse response = memberService.signin(request.toCommand());
         return ResponseEntity.ok(ApiResponse.success(response));
     }
 }

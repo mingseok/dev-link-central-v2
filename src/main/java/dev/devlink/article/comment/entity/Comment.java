@@ -1,10 +1,13 @@
 package dev.devlink.article.comment.entity;
 
+import dev.devlink.article.comment.exception.CommentError;
+import dev.devlink.article.comment.exception.CommentException;
 import dev.devlink.article.entity.Article;
 import dev.devlink.common.BaseEntity;
 import dev.devlink.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,10 +15,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id", nullable = false)
@@ -25,35 +24,50 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @Column(nullable = false)
+    @Column(name = "content", nullable = false)
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private Comment parent;
+    @Column(name = "parent_id")
+    private Long parentId;
+
+    @Builder
+    public Comment(
+            Article article,
+            Member member,
+            String content,
+            Long parentId
+    ) {
+        this.article = article;
+        this.member = member;
+        this.content = content;
+        this.parentId = parentId;
+    }
 
     public static Comment create(
             Article article,
             Member member,
-            String content,
-            Comment parent
+            Long parentId,
+            String content
     ) {
-        Comment comment = new Comment();
-        comment.article = article;
-        comment.member = member;
-        comment.content = content;
-        comment.parent = parent;
-        return comment;
+        return Comment.builder()
+                .article(article)
+                .member(member)
+                .parentId(parentId)
+                .content(content)
+                .build();
     }
 
-    public Long getWriterId() {
-        return this.member.getId();
+    public String getWriterNickname() {
+        return member.getNickname();
     }
 
-    public Long getParentIdOrNull() {
-        if (parent != null) {
-            return parent.getId();
+    public void checkAuthor(Long memberId) {
+        if (!isAuthor(memberId)) {
+            throw new CommentException(CommentError.NO_PERMISSION);
         }
-        return null;
+    }
+
+    private boolean isAuthor(Long memberId) {
+        return this.member.getId().equals(memberId);
     }
 }

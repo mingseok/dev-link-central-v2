@@ -1,14 +1,13 @@
 package dev.devlink.article.service;
 
-import dev.devlink.article.controller.request.ArticleCreateRequest;
-import dev.devlink.article.controller.request.ArticleUpdateRequest;
-import dev.devlink.article.controller.response.ArticleDetailsResponse;
+import dev.devlink.article.controller.response.ArticleDetailResponse;
 import dev.devlink.article.controller.response.ArticleListResponse;
-import dev.devlink.article.controller.response.PageNavigationInfo;
 import dev.devlink.article.entity.Article;
 import dev.devlink.article.exception.ArticleError;
 import dev.devlink.article.exception.ArticleException;
 import dev.devlink.article.repository.ArticleRepository;
+import dev.devlink.article.service.command.ArticleCreateCommand;
+import dev.devlink.article.service.command.ArticleUpdateCommand;
 import dev.devlink.member.entity.Member;
 import dev.devlink.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -27,17 +26,19 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     @Transactional
-    public void save(ArticleCreateRequest request, Long memberId) {
-        Member member = memberService.findMemberById(memberId);
-        Article article = Article.create(member, request.getTitle(), request.getContent());
+    public void save(ArticleCreateCommand command) {
+        Member member = memberService.findMemberById(command.getMemberId());
+        Article article = Article.create(member, command.getTitle(), command.getContent());
         articleRepository.save(article);
     }
 
     @Transactional(readOnly = true)
-    public ArticleDetailsResponse findDetail(Long id) {
-        Article article = articleRepository.findDetailById(id)
+    public ArticleDetailResponse findDetail(Long articleId, Long memberId) {
+        Article article = articleRepository.findDetailById(articleId)
                 .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
-        return ArticleDetailsResponse.from(article);
+
+        boolean isWriter = article.isAuthor(memberId);
+        return ArticleDetailResponse.from(article, isWriter);
     }
 
     @Transactional(readOnly = true)
@@ -48,41 +49,26 @@ public class ArticleService {
                 Sort.by(Sort.Direction.DESC, "id")
         );
 
-        Page<Article> articlePage = articleRepository.findAll(sortedPageable);
+        Page<Article> articlePage = articleRepository.findAllWithMember(sortedPageable);
         return articlePage.map(ArticleListResponse::from);
     }
 
-    @Transactional(readOnly = true)
-    public Article findArticleById(Long id) {
-        return articleRepository.findById(id)
-                .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
-    }
-
     @Transactional
-    public void update(Long articleId, ArticleUpdateRequest request, Long memberId) {
-        Article article = findArticleById(articleId);
-        validateOwnership(article, memberId);
-        article.update(request.getTitle(), request.getContent());
+    public void update(ArticleUpdateCommand command) {
+        Article article = findArticleById(command.getArticleId());
+        article.checkAuthor(command.getMemberId());
+        article.update(command.getTitle(), command.getContent());
     }
 
     @Transactional
     public void delete(Long articleId, Long memberId) {
         Article article = findArticleById(articleId);
-        validateOwnership(article, memberId);
+        article.checkAuthor(memberId);
         articleRepository.delete(article);
     }
 
-    private void validateOwnership(Article article, Long memberId) {
-        if (!article.getWriterId().equals(memberId)) {
-            throw new ArticleException(ArticleError.NO_PERMISSION);
-        }
-    }
-
-    public PageNavigationInfo getPageNavigation(Page<?> articlePage) {
-        int blockLimit = 3;
-        int currentPage = articlePage.getNumber();
-        int startPage = Math.max(1, ((currentPage) / blockLimit) * blockLimit + 1);
-        int endPage = Math.min(startPage + blockLimit - 1, articlePage.getTotalPages());
-        return new PageNavigationInfo(startPage, endPage);
+    public Article findArticleById(Long id) {
+        return articleRepository.findById(id)
+                .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
     }
 }

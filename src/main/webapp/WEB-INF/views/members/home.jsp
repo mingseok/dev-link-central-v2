@@ -24,20 +24,20 @@
             // JWT 토큰 삭제
             localStorage.removeItem('jwt');
             // 로그아웃 후 홈페이지로 리디렉션
-            window.location.href = "/api/v1/view/members/signin";
+            window.location.href = "/view/members/signin";
         }
 
         function editProfile() {
-            window.location.href = "/api/v1/view/member/edit-form";
+            window.location.href = "/view/member/edit-form";
         }
 
         function deletePage() {
-            window.location.href = "/api/v1/view/member/delete-page";
+            window.location.href = "/view/member/delete-page";
         }
 
         // 게시판 링크
         function Article() {
-            window.location.href = "/api/v1/view/articles/paging";
+            window.location.href = "/view/articles/paging";
         }
 
 
@@ -47,12 +47,12 @@
             const token = localStorage.getItem('jwt');
             if (!token) {
                 alert("로그인이 필요합니다.");
-                window.location.href = "/api/v1/view/members/signin";
+                window.location.href = "/view/members/signin";
                 return;
             }
 
             $.ajax({
-                url: "/api/v1/view/articles/save",
+                url: "/view/articles/save",
                 type: "GET",
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Bearer " + token);
@@ -81,9 +81,7 @@
                             },
                             success: function () {
                                 alert("글이 등록되었습니다.");
-
-                                //TODO: 등록 후 페이지 이동 설정하기
-                                window.location.href = "/api/v1/view/articles/paging";
+                                window.location.href = "/view/articles/paging";
                             },
                             error: function (xhr) {
                                 console.error("글 등록 실패:", xhr.responseText);
@@ -95,7 +93,7 @@
                 error: function (xhr) {
                     console.error("페이지 접근 실패:", xhr.responseText);
                     alert("접근 권한이 없습니다. 다시 로그인해주세요.");
-                    window.location.href = "/api/v1/view/members/signin";
+                    window.location.href = "/view/members/signin";
                 }
             });
         }

@@ -15,8 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
-    private final TokenProvider tokenProvider;
+    public static final String CLOSED_API_PREFIX = "/api/v1/**";
+    public static final String PUBLIC_API_PREFIX = "/api/public/**";
+    public static final String VIEW_PAGE_PREFIX = "/view/**";
+
     private final AuthMemberIdArgumentResolver authResolver;
+    private final TokenProvider tokenProvider;
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
@@ -26,18 +30,10 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new JwtAuthInterceptor(tokenProvider))
-
-                // 인증이 필요한 경로
-                .addPathPatterns(
-                        "/api/v1/view/articles/save",
-                        "/api/v1/articles/**",
-                        "/api/v1/members/**"
-                )
-
-                // 인증이 필요한 없는 경로
+                .addPathPatterns(CLOSED_API_PREFIX)
                 .excludePathPatterns(
-                        "/api/v1/public/articles/**",
-                        "/api/v1/public/members/**",
+                        PUBLIC_API_PREFIX,
+                        VIEW_PAGE_PREFIX,
                         "/favicon.ico",
                         "/static/**",
                         "/css/**",

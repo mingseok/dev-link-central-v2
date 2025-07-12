@@ -2,6 +2,7 @@ package dev.devlink.article.controller.closed;
 
 import dev.devlink.article.controller.request.ArticleCreateRequest;
 import dev.devlink.article.controller.request.ArticleUpdateRequest;
+import dev.devlink.article.controller.response.ArticleDetailResponse;
 import dev.devlink.article.service.ArticleService;
 import dev.devlink.common.dto.ApiResponse;
 import dev.devlink.common.identity.annotation.AuthMemberId;
@@ -23,18 +24,18 @@ public class ArticleController {
             @Validated @RequestBody ArticleCreateRequest request,
             @AuthMemberId Long memberId
     ) {
-        articleService.save(request, memberId);
+        articleService.save(request.toCommand(memberId));
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.successEmpty());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> update(
-            @PathVariable Long id,
             @Validated @RequestBody ArticleUpdateRequest request,
+            @PathVariable Long id,
             @AuthMemberId Long memberId
     ) {
-        articleService.update(id, request, memberId);
+        articleService.update(request.toCommand(id, memberId));
         return ResponseEntity.ok(ApiResponse.successEmpty());
     }
 
@@ -45,5 +46,14 @@ public class ArticleController {
     ) {
         articleService.delete(id, memberId);
         return ResponseEntity.ok(ApiResponse.successEmpty());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<ArticleDetailResponse>> findDetail(
+            @PathVariable Long id,
+            @AuthMemberId Long memberId
+    ) {
+        ArticleDetailResponse response = articleService.findDetail(id, memberId);
+        return ResponseEntity.ok(ApiResponse.success(response));
     }
 }

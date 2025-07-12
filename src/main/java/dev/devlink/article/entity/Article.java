@@ -1,9 +1,12 @@
 package dev.devlink.article.entity;
 
+import dev.devlink.article.exception.ArticleError;
+import dev.devlink.article.exception.ArticleException;
 import dev.devlink.common.BaseEntity;
 import dev.devlink.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,38 +15,54 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Article extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Column(nullable = false)
-    private String writer;
-
-    @Column(nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(name = "content", columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @Builder
+    public Article(Member member, String title, String content) {
+        this.member = member;
+        this.title = title;
+        this.content = content;
+    }
+
     public static Article create(Member member, String title, String content) {
-        Article article = new Article();
-        article.title = title;
-        article.content = content;
-        article.writer = member.getNickname();
-        article.member = member;
-        return article;
+        return Article.builder()
+                .member(member)
+                .title(title)
+                .content(content)
+                .build();
     }
 
     public Long getWriterId() {
         return member.getId();
     }
 
+    public String getWriterNickname() {
+        return member.getNickname();
+    }
+
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    public boolean isAuthor(Long memberId) {
+        if (memberId == null) {
+            return false;
+        }
+        return member.getId().equals(memberId);
+    }
+
+    public void checkAuthor(Long memberId) {
+        if (!isAuthor(memberId)) {
+            throw new ArticleException(ArticleError.NO_PERMISSION);
+        }
     }
 }
