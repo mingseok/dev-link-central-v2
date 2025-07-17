@@ -89,7 +89,7 @@
           document.getElementById("title").textContent = article.title || '';
           document.getElementById("author").textContent = article.writer || '';
           document.getElementById("content").textContent = article.content || '';
-          document.getElementById("viewsCount").textContent = article.views || '0';
+          document.getElementById("viewsCount").textContent = article.viewsCount || '0';
           document.getElementById("createdAt").textContent = article.formattedCreatedAt || '';
 
           if (article.isAuthor === true) {
