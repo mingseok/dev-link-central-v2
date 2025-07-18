@@ -1,4 +1,4 @@
-package dev.devlink.article.comment.exception;
+package dev.devlink.comment.exception;
 
 import dev.devlink.common.exception.CommonError;
 import dev.devlink.common.exception.ServiceException;

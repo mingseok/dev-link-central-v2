@@ -1,7 +1,7 @@
-package dev.devlink.article.comment.controller.closed;
+package dev.devlink.comment.controller.closed;
 
-import dev.devlink.article.comment.controller.request.CommentCreateRequest;
-import dev.devlink.article.comment.service.CommentService;
+import dev.devlink.comment.controller.request.CommentCreateRequest;
+import dev.devlink.comment.service.CommentService;
 import dev.devlink.common.dto.ApiResponse;
 import dev.devlink.common.identity.annotation.AuthMemberId;
 import lombok.RequiredArgsConstructor;

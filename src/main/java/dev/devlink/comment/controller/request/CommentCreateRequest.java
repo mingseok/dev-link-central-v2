@@ -1,6 +1,6 @@
-package dev.devlink.article.comment.controller.request;
+package dev.devlink.comment.controller.request;
 
-import dev.devlink.article.comment.service.command.CommentCreateCommand;
+import dev.devlink.comment.service.command.CommentCreateCommand;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;

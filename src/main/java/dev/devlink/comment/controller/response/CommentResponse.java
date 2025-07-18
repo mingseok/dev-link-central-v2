@@ -1,6 +1,6 @@
-package dev.devlink.article.comment.controller.response;
+package dev.devlink.comment.controller.response;
 
-import dev.devlink.article.comment.entity.Comment;
+import dev.devlink.comment.entity.Comment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

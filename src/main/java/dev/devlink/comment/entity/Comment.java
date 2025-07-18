@@ -1,7 +1,7 @@
-package dev.devlink.article.comment.entity;
+package dev.devlink.comment.entity;
 
-import dev.devlink.article.comment.exception.CommentError;
-import dev.devlink.article.comment.exception.CommentException;
+import dev.devlink.comment.exception.CommentError;
+import dev.devlink.comment.exception.CommentException;
 import dev.devlink.article.entity.Article;
 import dev.devlink.common.BaseEntity;
 import dev.devlink.member.entity.Member;

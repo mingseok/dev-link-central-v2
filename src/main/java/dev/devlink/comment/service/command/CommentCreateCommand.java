@@ -1,4 +1,4 @@
-package dev.devlink.article.comment.service.command;
+package dev.devlink.comment.service.command;
 
 import lombok.Builder;
 import lombok.Getter;

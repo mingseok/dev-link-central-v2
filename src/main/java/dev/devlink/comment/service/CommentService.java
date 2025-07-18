@@ -1,11 +1,11 @@
-package dev.devlink.article.comment.service;
+package dev.devlink.comment.service;
 
-import dev.devlink.article.comment.controller.response.CommentResponse;
-import dev.devlink.article.comment.entity.Comment;
-import dev.devlink.article.comment.exception.CommentError;
-import dev.devlink.article.comment.exception.CommentException;
-import dev.devlink.article.comment.repository.CommentRepository;
-import dev.devlink.article.comment.service.command.CommentCreateCommand;
+import dev.devlink.comment.controller.response.CommentResponse;
+import dev.devlink.comment.entity.Comment;
+import dev.devlink.comment.exception.CommentError;
+import dev.devlink.comment.exception.CommentException;
+import dev.devlink.comment.repository.CommentRepository;
+import dev.devlink.comment.service.command.CommentCreateCommand;
 import dev.devlink.article.entity.Article;
 import dev.devlink.article.service.ArticleService;
 import dev.devlink.member.entity.Member;

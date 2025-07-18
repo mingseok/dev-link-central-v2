@@ -1,6 +1,6 @@
-package dev.devlink.article.comment.repository;
+package dev.devlink.comment.repository;
 
-import dev.devlink.article.comment.entity.Comment;
+import dev.devlink.comment.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
