@@ -2,6 +2,7 @@ package dev.devlink.article.controller.closed;
 
 import dev.devlink.article.controller.request.ArticleCreateRequest;
 import dev.devlink.article.controller.request.ArticleUpdateRequest;
+import dev.devlink.article.service.ArticleLikeService;
 import dev.devlink.article.service.ArticleService;
 import dev.devlink.article.service.dto.response.ArticleDetailResponse;
 import dev.devlink.common.dto.ApiResponse;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final ArticleLikeService articleLikeService;
 
     @PostMapping
     public ResponseEntity<ApiResponse<Void>> create(
@@ -55,5 +57,14 @@ public class ArticleController {
     ) {
         ArticleDetailResponse response = articleService.findDetail(id, memberId);
         return ResponseEntity.ok(ApiResponse.success(response));
+    }
+
+    @PostMapping("/{id}/likes")
+    public ResponseEntity<ApiResponse<Boolean>> toggleLike(
+            @PathVariable Long id,
+            @AuthMemberId Long memberId
+    ) {
+        boolean isLiked = articleLikeService.toggleLike(id, memberId);
+        return ResponseEntity.ok(ApiResponse.success(isLiked));
     }
 }
