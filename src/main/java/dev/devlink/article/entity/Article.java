@@ -25,6 +25,9 @@ public class Article extends BaseEntity {
     @Column(name = "content", columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @Column(name = "view_count", nullable = false)
+    private Long viewCount = 0L;
+
     @Builder
     public Article(Member member, String title, String content) {
         this.member = member;
@@ -64,5 +67,9 @@ public class Article extends BaseEntity {
         if (!isAuthor(memberId)) {
             throw new ArticleException(ArticleError.NO_PERMISSION);
         }
+    }
+
+    public void addViewCount(Long value) {
+        this.viewCount += value;
     }
 }

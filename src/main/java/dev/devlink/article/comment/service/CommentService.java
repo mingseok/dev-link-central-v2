@@ -46,8 +46,8 @@ public class CommentService {
     public List<CommentResponse> getCommentTreeByArticleId(Long articleId) {
         List<Comment> comments = commentRepository.findAllByArticleId(articleId);
 
-        Map<Long, CommentResponse> responseMap = new HashMap<>();
         List<CommentResponse> rootComments = new ArrayList<>();
+        Map<Long, CommentResponse> responseMap = new HashMap<>();
 
         for (Comment comment : comments) {
             CommentResponse response = CommentResponse.from(comment);

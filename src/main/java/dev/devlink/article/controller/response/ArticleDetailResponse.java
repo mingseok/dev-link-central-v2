@@ -18,11 +18,12 @@ public class ArticleDetailResponse {
     private Long writerId;
     private String formattedCreatedAt;
     private LocalDateTime modifiedAt;
+    private Long viewsCount;
 
     @JsonProperty("isAuthor")
     private boolean author;
 
-    public static ArticleDetailResponse from(Article article, boolean author) {
+    public static ArticleDetailResponse from(Article article, boolean author, Long viewsCount) {
         return new ArticleDetailResponse(
                 article.getId(),
                 article.getTitle(),
@@ -31,6 +32,7 @@ public class ArticleDetailResponse {
                 article.getWriterId(),
                 DateUtils.formatLocalDateTime(article.getCreatedAt()),
                 article.getUpdatedAt(),
+                viewsCount,
                 author
         );
     }
