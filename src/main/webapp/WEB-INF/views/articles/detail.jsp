@@ -101,6 +101,7 @@
           console.error("게시글 정보를 불러오는데 실패했습니다.");
         }
       });
+      loadLikeCount();
       loadComments();
     });
 
@@ -296,6 +297,38 @@
       return date.toLocaleString("ko-KR", {
         year: 'numeric', month: '2-digit', day: '2-digit',
         hour: '2-digit', minute: '2-digit'
+      });
+    }
+
+
+
+    function toggleLike() {
+      $.ajax({
+        url: "/api/v1/articles/" + articleId + "/likes",
+        type: "POST",
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+        },
+        success: function(response) {
+          const liked = response.data;
+          loadLikeCount(); // 최신 좋아요 수 다시 로딩
+        },
+        error: function(xhr) {
+          Swal.fire("오류", "좋아요 요청 실패: " + (xhr.responseJSON?.message || xhr.responseText), "error");
+        }
+      });
+    }
+
+    function loadLikeCount() {
+      $.ajax({
+        url: "/api/public/articles/" + articleId + "/likes",
+        type: "GET",
+        success: function(response) {
+          $("#likesCount").text(response.data);
+        },
+        error: function(xhr) {
+          console.error("좋아요 수 조회 실패:", xhr.responseText);
+        }
       });
     }
   </script>
