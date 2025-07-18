@@ -1,7 +1,7 @@
 package dev.devlink.article.controller.open;
 
-import dev.devlink.article.controller.response.ArticleListResponse;
 import dev.devlink.article.service.ArticleService;
+import dev.devlink.article.service.dto.response.ArticleListResponse;
 import dev.devlink.common.dto.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

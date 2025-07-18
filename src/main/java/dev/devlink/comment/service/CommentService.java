@@ -1,13 +1,13 @@
 package dev.devlink.comment.service;
 
-import dev.devlink.comment.controller.response.CommentResponse;
+import dev.devlink.article.entity.Article;
+import dev.devlink.article.service.ArticleService;
 import dev.devlink.comment.entity.Comment;
 import dev.devlink.comment.exception.CommentError;
 import dev.devlink.comment.exception.CommentException;
 import dev.devlink.comment.repository.CommentRepository;
-import dev.devlink.comment.service.command.CommentCreateCommand;
-import dev.devlink.article.entity.Article;
-import dev.devlink.article.service.ArticleService;
+import dev.devlink.comment.service.dto.CommentCreateServiceDto;
+import dev.devlink.comment.service.dto.response.CommentResponse;
 import dev.devlink.member.entity.Member;
 import dev.devlink.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     @Transactional
-    public void save(CommentCreateCommand command) {
+    public void save(CommentCreateServiceDto command) {
         Article article = articleService.findArticleById(command.getArticleId());
         Member member = memberService.findMemberById(command.getMemberId());
 

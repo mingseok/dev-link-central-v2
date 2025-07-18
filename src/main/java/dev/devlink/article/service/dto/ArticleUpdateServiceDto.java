@@ -1,23 +1,26 @@
-package dev.devlink.article.service.command;
+package dev.devlink.article.service.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class ArticleCreateCommand {
+public class ArticleUpdateServiceDto {
 
     private final String title;
     private final String content;
+    private final Long articleId;
     private final Long memberId;
 
     @Builder
-    public ArticleCreateCommand(
-            Long memberId,
+    public ArticleUpdateServiceDto(
             String title,
-            String content
+            String content,
+            Long memberId,
+            Long articleId
     ) {
         this.title = title;
         this.content = content;
         this.memberId = memberId;
+        this.articleId = articleId;
     }
 }

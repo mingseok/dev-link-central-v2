@@ -2,8 +2,8 @@ package dev.devlink.article.controller.closed;
 
 import dev.devlink.article.controller.request.ArticleCreateRequest;
 import dev.devlink.article.controller.request.ArticleUpdateRequest;
-import dev.devlink.article.controller.response.ArticleDetailResponse;
 import dev.devlink.article.service.ArticleService;
+import dev.devlink.article.service.dto.response.ArticleDetailResponse;
 import dev.devlink.common.dto.ApiResponse;
 import dev.devlink.common.identity.annotation.AuthMemberId;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class ArticleController {
             @Validated @RequestBody ArticleCreateRequest request,
             @AuthMemberId Long memberId
     ) {
-        articleService.save(request.toCommand(memberId));
+        articleService.save(request.toServiceDto(memberId));
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.successEmpty());
     }
@@ -35,7 +35,7 @@ public class ArticleController {
             @PathVariable Long id,
             @AuthMemberId Long memberId
     ) {
-        articleService.update(request.toCommand(id, memberId));
+        articleService.update(request.toServiceDto(id, memberId));
         return ResponseEntity.ok(ApiResponse.successEmpty());
     }
 

@@ -1,4 +1,4 @@
-package dev.devlink.article.controller.response;
+package dev.devlink.article.service.dto.response;
 
 import dev.devlink.article.entity.Article;
 import dev.devlink.common.utils.DateUtils;

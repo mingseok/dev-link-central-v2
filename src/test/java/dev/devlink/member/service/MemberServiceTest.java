@@ -4,10 +4,7 @@ import dev.devlink.common.jwt.JwtToken;
 import dev.devlink.common.jwt.JwtTokenProvider;
 import dev.devlink.member.controller.request.SignInRequest;
 import dev.devlink.member.controller.request.SignUpRequest;
-import dev.devlink.member.controller.response.JwtTokenResponse;
 import dev.devlink.member.entity.Member;
-import dev.devlink.member.exception.MemberError;
-import dev.devlink.member.exception.MemberException;
 import dev.devlink.member.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,9 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.argThat;

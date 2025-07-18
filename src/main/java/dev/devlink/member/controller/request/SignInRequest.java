@@ -1,6 +1,6 @@
 package dev.devlink.member.controller.request;
 
-import dev.devlink.member.service.command.SignInCommand;
+import dev.devlink.member.service.dto.SignInServiceDto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -24,8 +24,8 @@ public class SignInRequest {
     @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d).+$", message = "비밀번호는 최소 하나의 영문자와 숫자를 포함해야 합니다.")
     private String password;
 
-    public SignInCommand toCommand() {
-        return SignInCommand.builder()
+    public SignInServiceDto toServiceDto() {
+        return SignInServiceDto.builder()
                 .email(this.email)
                 .password(this.password)
                 .build();

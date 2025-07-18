@@ -2,14 +2,14 @@ package dev.devlink.member.service;
 
 import dev.devlink.common.jwt.JwtToken;
 import dev.devlink.common.jwt.JwtTokenProvider;
-import dev.devlink.member.controller.response.JwtTokenResponse;
-import dev.devlink.member.controller.response.NicknameResponse;
 import dev.devlink.member.entity.Member;
 import dev.devlink.member.exception.MemberError;
 import dev.devlink.member.exception.MemberException;
 import dev.devlink.member.repository.MemberRepository;
-import dev.devlink.member.service.command.SignInCommand;
-import dev.devlink.member.service.command.SignUpCommand;
+import dev.devlink.member.service.dto.SignInServiceDto;
+import dev.devlink.member.service.dto.SignUpServiceDto;
+import dev.devlink.member.service.dto.response.JwtTokenResponse;
+import dev.devlink.member.service.dto.response.NicknameResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void signUp(SignUpCommand command) {
+    public void signUp(SignUpServiceDto command) {
         if (memberRepository.existsByEmail(command.getEmail())) {
             throw new MemberException(MemberError.EMAIL_DUPLICATED);
         }
@@ -51,7 +51,7 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public JwtTokenResponse signin(SignInCommand command) {
+    public JwtTokenResponse signin(SignInServiceDto command) {
         Member member = findByEmail(command.getEmail());
         if (!passwordEncoder.matches(command.getPassword(), member.getPassword())) {
             throw new MemberException(MemberError.PASSWORD_NOT_MATCHED);

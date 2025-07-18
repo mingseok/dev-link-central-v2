@@ -1,16 +1,16 @@
-package dev.devlink.member.service.command;
+package dev.devlink.member.service.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class SignInCommand {
+public class SignInServiceDto {
 
     private final String email;
     private final String password;
 
     @Builder
-    public SignInCommand(String email, String password) {
+    public SignInServiceDto(String email, String password) {
         this.email = email;
         this.password = password;
     }

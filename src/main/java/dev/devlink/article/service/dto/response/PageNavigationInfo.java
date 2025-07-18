@@ -1,4 +1,4 @@
-package dev.devlink.article.controller.response;
+package dev.devlink.article.service.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

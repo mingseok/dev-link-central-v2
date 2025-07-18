@@ -1,4 +1,4 @@
-package dev.devlink.article.controller.response;
+package dev.devlink.article.service.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.devlink.article.entity.Article;

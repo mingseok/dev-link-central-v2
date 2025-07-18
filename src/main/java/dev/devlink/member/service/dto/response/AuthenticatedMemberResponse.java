@@ -1,4 +1,4 @@
-package dev.devlink.member.controller.response;
+package dev.devlink.member.service.dto.response;
 
 import dev.devlink.member.entity.Member;
 import lombok.AllArgsConstructor;

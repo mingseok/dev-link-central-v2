@@ -1,6 +1,6 @@
 package dev.devlink.member.controller.request;
 
-import dev.devlink.member.service.command.SignUpCommand;
+import dev.devlink.member.service.dto.SignUpServiceDto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -44,8 +44,8 @@ public class SignUpRequest {
         this.nickname = nickname;
     }
 
-    public SignUpCommand toCommand() {
-        return SignUpCommand.builder()
+    public SignUpServiceDto toServiceDto() {
+        return SignUpServiceDto.builder()
                 .name(this.name)
                 .email(this.email)
                 .nickname(this.nickname)

@@ -1,6 +1,6 @@
 package dev.devlink.article.controller.request;
 
-import dev.devlink.article.service.command.ArticleCreateCommand;
+import dev.devlink.article.service.dto.ArticleCreateServiceDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -20,8 +20,8 @@ public class ArticleCreateRequest {
     @Size(min = 3, max = 10000, message = "게시글 내용은 3자 이상 10000자 이하이어야 합니다.")
     private String content;
 
-    public ArticleCreateCommand toCommand(Long memberId) {
-        return ArticleCreateCommand.builder()
+    public ArticleCreateServiceDto toServiceDto(Long memberId) {
+        return ArticleCreateServiceDto.builder()
                 .title(this.title)
                 .content(this.content)
                 .memberId(memberId)

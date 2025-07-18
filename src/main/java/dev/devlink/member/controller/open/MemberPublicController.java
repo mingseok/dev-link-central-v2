@@ -3,8 +3,8 @@ package dev.devlink.member.controller.open;
 import dev.devlink.common.dto.ApiResponse;
 import dev.devlink.member.controller.request.SignInRequest;
 import dev.devlink.member.controller.request.SignUpRequest;
-import dev.devlink.member.controller.response.JwtTokenResponse;
 import dev.devlink.member.service.MemberService;
+import dev.devlink.member.service.dto.response.JwtTokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class MemberPublicController {
     public ResponseEntity<ApiResponse<Void>> signup(
             @Validated @RequestBody SignUpRequest request
     ) {
-        memberService.signUp(request.toCommand());
+        memberService.signUp(request.toServiceDto());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.successEmpty());
     }
@@ -34,7 +34,7 @@ public class MemberPublicController {
     public ResponseEntity<ApiResponse<JwtTokenResponse>> signin(
             @Validated @RequestBody SignInRequest request
     ) {
-        JwtTokenResponse response = memberService.signin(request.toCommand());
+        JwtTokenResponse response = memberService.signin(request.toServiceDto());
         return ResponseEntity.ok(ApiResponse.success(response));
     }
 }

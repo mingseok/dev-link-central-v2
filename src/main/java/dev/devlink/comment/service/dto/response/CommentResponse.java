@@ -1,4 +1,4 @@
-package dev.devlink.comment.controller.response;
+package dev.devlink.comment.service.dto.response;
 
 import dev.devlink.comment.entity.Comment;
 import lombok.Getter;

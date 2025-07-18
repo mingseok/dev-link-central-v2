@@ -1,7 +1,7 @@
 package dev.devlink.comment.controller.open;
 
-import dev.devlink.comment.controller.response.CommentResponse;
 import dev.devlink.comment.service.CommentService;
+import dev.devlink.comment.service.dto.response.CommentResponse;
 import dev.devlink.common.dto.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

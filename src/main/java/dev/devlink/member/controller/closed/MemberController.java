@@ -2,8 +2,8 @@ package dev.devlink.member.controller.closed;
 
 import dev.devlink.common.dto.ApiResponse;
 import dev.devlink.common.identity.annotation.AuthMemberId;
-import dev.devlink.member.controller.response.NicknameResponse;
 import dev.devlink.member.service.MemberService;
+import dev.devlink.member.service.dto.response.NicknameResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

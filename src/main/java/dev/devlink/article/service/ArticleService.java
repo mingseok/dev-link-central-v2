@@ -1,13 +1,13 @@
 package dev.devlink.article.service;
 
-import dev.devlink.article.controller.response.ArticleDetailResponse;
-import dev.devlink.article.controller.response.ArticleListResponse;
 import dev.devlink.article.entity.Article;
 import dev.devlink.article.exception.ArticleError;
 import dev.devlink.article.exception.ArticleException;
 import dev.devlink.article.repository.ArticleRepository;
-import dev.devlink.article.service.command.ArticleCreateCommand;
-import dev.devlink.article.service.command.ArticleUpdateCommand;
+import dev.devlink.article.service.dto.ArticleCreateServiceDto;
+import dev.devlink.article.service.dto.ArticleUpdateServiceDto;
+import dev.devlink.article.service.dto.response.ArticleDetailResponse;
+import dev.devlink.article.service.dto.response.ArticleListResponse;
 import dev.devlink.member.entity.Member;
 import dev.devlink.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     @Transactional
-    public void save(ArticleCreateCommand command) {
+    public void save(ArticleCreateServiceDto command) {
         Member member = memberService.findMemberById(command.getMemberId());
         Article article = Article.create(member, command.getTitle(), command.getContent());
         articleRepository.save(article);
@@ -59,7 +59,7 @@ public class ArticleService {
     }
 
     @Transactional
-    public void update(ArticleUpdateCommand command) {
+    public void update(ArticleUpdateServiceDto command) {
         Article article = findArticleById(command.getArticleId());
         article.checkAuthor(command.getMemberId());
         article.update(command.getTitle(), command.getContent());

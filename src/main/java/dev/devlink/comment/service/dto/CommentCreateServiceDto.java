@@ -1,10 +1,10 @@
-package dev.devlink.comment.service.command;
+package dev.devlink.comment.service.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class CommentCreateCommand {
+public class CommentCreateServiceDto {
 
     private final String content;
     private final Long parentId;
@@ -12,7 +12,7 @@ public class CommentCreateCommand {
     private final Long articleId;
 
     @Builder
-    public CommentCreateCommand(
+    public CommentCreateServiceDto(
             String content,
             Long parentId,
             Long memberId,

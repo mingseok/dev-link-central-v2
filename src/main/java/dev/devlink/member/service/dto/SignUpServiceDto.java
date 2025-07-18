@@ -1,10 +1,10 @@
-package dev.devlink.member.service.command;
+package dev.devlink.member.service.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class SignUpCommand {
+public class SignUpServiceDto {
 
     private final String name;
     private final String email;
@@ -12,7 +12,7 @@ public class SignUpCommand {
     private final String password;
 
     @Builder
-    public SignUpCommand(
+    public SignUpServiceDto(
             String name,
             String email,
             String nickname,
