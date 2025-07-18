@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -18,9 +19,19 @@ public class ArticleViewService {
     private final StringRedisTemplate redisTemplate;
     private final ArticleRepository articleRepository;
 
-    public void addViewCount(Long articleId) {
-        String key = RedisKey.articleViewKey(articleId);
-        redisTemplate.opsForValue().increment(key);
+    public void addUniqueView(Long articleId, Long memberId) {
+        String key = RedisKey.articleMemberViewKey(articleId, memberId);
+        Boolean isFirstVisit = redisTemplate.opsForValue()
+                .setIfAbsent(
+                        key,
+                        RedisConstants.VIEW_TRACKING_MARKER,
+                        RedisConstants.VIEW_DUPLICATE_PREVENTION_TTL,
+                        TimeUnit.SECONDS
+                );
+
+        if (Boolean.TRUE.equals(isFirstVisit)) {
+            redisTemplate.opsForValue().increment(RedisKey.articleViewKey(articleId));
+        }
     }
 
     public Long getTotalViewCount(Long articleId, Long dbViewCount) {

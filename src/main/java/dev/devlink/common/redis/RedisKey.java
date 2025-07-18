@@ -23,4 +23,8 @@ public class RedisKey {
     public static Long extractArticleId(String key) {
         return Long.parseLong(key.replace(RedisPrefix.ARTICLE_VIEW.getValue(), ""));
     }
+
+    public static String articleMemberViewKey(Long articleId, Long memberId) {
+        return String.format(RedisPrefix.ARTICLE_MEMBER_VIEW.getValue(), articleId, memberId);
+    }
 }

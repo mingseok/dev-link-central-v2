@@ -38,7 +38,7 @@ public class ArticleService {
         Article article = articleRepository.findDetailById(articleId)
                 .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
 
-        articleViewService.addViewCount(articleId);
+        articleViewService.addUniqueView(articleId, memberId);
         Long dbViewCount = article.getViewCount();
         Long totalViewCount = articleViewService.getTotalViewCount(articleId, dbViewCount);
 
