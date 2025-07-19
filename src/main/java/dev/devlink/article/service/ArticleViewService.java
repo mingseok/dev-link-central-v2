@@ -19,19 +19,25 @@ public class ArticleViewService {
     private final StringRedisTemplate redisTemplate;
     private final ArticleRepository articleRepository;
 
-    public void addUniqueView(Long articleId, Long memberId) {
-        String key = RedisKey.articleMemberViewKey(articleId, memberId);
+    public boolean addView(Long articleId, Long memberId) {
+        return addViewIfFirstVisit(articleId, memberId);
+    }
+
+    private boolean addViewIfFirstVisit(Long articleId, Long memberId) {
+        String memberViewKey = RedisKey.articleMemberViewKey(articleId, memberId);
         Boolean isFirstVisit = redisTemplate.opsForValue()
                 .setIfAbsent(
-                        key,
-                        RedisConstants.VIEW_TRACKING_MARKER,
-                        RedisConstants.VIEW_DUPLICATE_PREVENTION_TTL,
+                        memberViewKey,
+                        RedisConstants.TRACKING_MARKER,
+                        RedisConstants.DUPLICATE_PREVENTION_TTL,
                         TimeUnit.SECONDS
                 );
 
         if (Boolean.TRUE.equals(isFirstVisit)) {
             redisTemplate.opsForValue().increment(RedisKey.articleViewKey(articleId));
+            return true;
         }
+        return false;
     }
 
     public Long getTotalViewCount(Long articleId, Long dbViewCount) {
@@ -45,7 +51,7 @@ public class ArticleViewService {
     }
 
     @Transactional
-    @Scheduled(fixedRate = RedisConstants.VIEW_SYNC_INTERVAL)
+    @Scheduled(fixedRate = RedisConstants.SYNC_INTERVAL_MILLIS)
     public void flushViewCount() {
         String keyPattern = RedisKey.articleViewKeyPattern();
         Set<String> keys = redisTemplate.keys(keyPattern);

@@ -13,6 +13,7 @@ public class ArticleListResponse {
     private String writer;
     private Long writerId;
     private String formattedCreatedAt;
+    private Long viewCount;
 
     public static ArticleListResponse from(Article article) {
         return new ArticleListResponse(
@@ -20,7 +21,19 @@ public class ArticleListResponse {
                 article.getTitle(),
                 article.getWriterNickname(),
                 article.getWriterId(),
-                DateUtils.formatLocalDateTime(article.getCreatedAt())
+                DateUtils.formatLocalDateTime(article.getCreatedAt()),
+                article.getViewCount()
+        );
+    }
+
+    public static ArticleListResponse from(Article article, Long totalViewCount) {
+        return new ArticleListResponse(
+                article.getId(),
+                article.getTitle(),
+                article.getWriterNickname(),
+                article.getWriterId(),
+                DateUtils.formatLocalDateTime(article.getCreatedAt()),
+                totalViewCount
         );
     }
 }
