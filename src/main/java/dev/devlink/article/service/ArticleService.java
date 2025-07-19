@@ -23,8 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class ArticleService {
 
     private final MemberService memberService;
-    private final ArticleViewService articleViewService;
     private final ArticleRepository articleRepository;
+    private final ArticleViewService articleViewService;
+    private final ArticleRankingService articleRankingService;
 
     @Transactional
     public void save(ArticleCreateServiceDto command) {
@@ -38,7 +39,7 @@ public class ArticleService {
         Article article = articleRepository.findDetailById(articleId)
                 .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
 
-        articleViewService.addUniqueView(articleId, memberId);
+        articleRankingService.addViewAndRank(articleId, memberId);
         Long dbViewCount = article.getViewCount();
         Long totalViewCount = articleViewService.getTotalViewCount(articleId, dbViewCount);
 
