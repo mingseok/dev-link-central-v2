@@ -103,3 +103,7 @@ button {
 button:hover {
     background-color: #357ABD;
 }
+
+.top-articles {
+    padding: 10px 0;
+}

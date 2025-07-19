@@ -31,6 +31,14 @@
         </div>
     </div>
 
+    <!-- Top 5 인기글 영역: 여기 추가 -->
+    <div class="top-articles mb-4">
+        <h4 style="margin-bottom: 16px;">🔥인기 스터디 TOP 5</h4>
+        <ul id="topArticlesList" class="list-group">
+            <!-- JS에서 동적으로 인기글 삽입 -->
+        </ul>
+    </div>
+
     <table>
         <thead>
         <tr>
@@ -65,6 +73,7 @@
 
         const pageSize = 8;
         loadArticles(currentPage, pageSize);
+        loadTopArticles();
     });
 
     function loadArticles(page, size) {
@@ -112,6 +121,43 @@
                 '</tr>';
 
             tbody.append(row);
+        });
+    }
+
+    function loadTopArticles() {
+        $.ajax({
+            url: '/api/public/articles/best',
+            type: 'GET',
+            success: function (res) {
+                const topArticles = res.data;
+                renderTopArticles(topArticles);
+            },
+            error: function () {
+                console.error('인기 게시글을 불러오는 데 실패했습니다.');
+            }
+        });
+    }
+
+    function renderTopArticles(articles) {
+        const list = $('#topArticlesList');
+        list.empty();
+
+        if (!articles || articles.length === 0) {
+            list.append('<li class="list-group-item">인기 게시글이 없습니다.</li>');
+            return;
+        }
+
+        articles.forEach((article, index) => {
+            const rank = index + 1; // 1위부터 시작
+            const item =
+                '<li class="list-group-item d-flex justify-content-between align-items-center">' +
+                '<div>' +
+                '<strong>' + rank + '위. </strong>' +
+                '<a href="/view/articles/' + article.id + '">' + article.title + '</a>' +
+                '</div>' +
+                '<span class="badge badge-primary badge-pill">' + article.viewCount + ' 조회</span>' +
+                '</li>';
+            list.append(item);
         });
     }
 
