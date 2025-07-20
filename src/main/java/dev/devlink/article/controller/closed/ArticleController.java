@@ -1,5 +1,6 @@
 package dev.devlink.article.controller.closed;
 
+import dev.devlink.article.constant.LikeStatus;
 import dev.devlink.article.controller.request.ArticleCreateRequest;
 import dev.devlink.article.controller.request.ArticleUpdateRequest;
 import dev.devlink.article.service.ArticleLikeService;
@@ -60,11 +61,11 @@ public class ArticleController {
     }
 
     @PostMapping("/{id}/likes")
-    public ResponseEntity<ApiResponse<Boolean>> toggleLike(
+    public ResponseEntity<ApiResponse<LikeStatus>> toggleLike(
             @PathVariable Long id,
             @AuthMemberId Long memberId
     ) {
-        boolean isLiked = articleLikeService.toggleLike(id, memberId);
-        return ResponseEntity.ok(ApiResponse.success(isLiked));
+        LikeStatus status = articleLikeService.updateLikeStatus(id, memberId);
+        return ResponseEntity.ok(ApiResponse.success(status));
     }
 }

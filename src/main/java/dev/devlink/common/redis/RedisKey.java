@@ -27,4 +27,8 @@ public class RedisKey {
     public static String articleMemberViewKey(Long articleId, Long memberId) {
         return String.format(RedisPrefix.ARTICLE_MEMBER_VIEW.getValue(), articleId, memberId);
     }
+
+    public static String articleLikeLockKey(Long articleId, Long memberId) {
+        return "lock:article:like:" + articleId + ":" + memberId;
+    }
 }
