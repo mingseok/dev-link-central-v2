@@ -53,13 +53,13 @@ public class ArticleViewService {
     @Transactional
     @Scheduled(fixedRate = RedisConstants.SYNC_INTERVAL_MILLIS)
     public void flushViewCount() {
-        String keyPattern = RedisKey.articleViewKeyPattern();
+        String keyPattern = RedisKey.articleViewKeyScanPattern();
         Set<String> keys = redisTemplate.keys(keyPattern);
 
         if (keys.isEmpty()) return;
 
         for (String key : keys) {
-            Long articleId = RedisKey.extractArticleId(key);
+            Long articleId = RedisKey.getArticleIdFromKey(key);
             String countStr = redisTemplate.opsForValue().get(key);
             if (countStr == null) continue;
 
