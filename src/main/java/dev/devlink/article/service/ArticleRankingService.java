@@ -7,6 +7,7 @@ import dev.devlink.common.redis.RedisConstants;
 import dev.devlink.common.redis.RedisKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,15 +27,41 @@ public class ArticleRankingService {
 
     @Transactional(readOnly = true)
     public List<ArticleListResponse> findTopRankedArticles() {
-        List<Long> topArticleIds = getTopFiveArticleIds();
-        Map<Long, Article> articleMap = articleRepository.findAllById(topArticleIds)
+        List<Long> cachedIds = redisTemplate.opsForList()
+                .range(
+                        RedisKey.cachedTopRanking(),
+                        RedisConstants.START_INDEX,
+                        RedisConstants.END_INDEX
+                )
+                .stream()
+                .map(Long::parseLong)
+                .toList();
+
+        Map<Long, Article> articleMap = articleRepository.findAllById(cachedIds)
                 .stream()
                 .collect(Collectors.toMap(Article::getId, Function.identity()));
 
-        return topArticleIds.stream()
+        return cachedIds.stream()
                 .map(id -> createResponse(id, articleMap.get(id)))
                 .filter(Objects::nonNull)
                 .toList();
+    }
+
+    @Scheduled(fixedRate = RedisConstants.RANKING_REFRESH_INTERVAL)
+    public void refreshTopRankingCache() {
+        List<String> topIds = redisTemplate.opsForZSet()
+                .reverseRange(
+                        RedisKey.articleRanking(),
+                        RedisConstants.START_INDEX,
+                        RedisConstants.TOP_LIMIT - 1
+                )
+                .stream()
+                .toList();
+
+        redisTemplate.delete(RedisKey.cachedTopRanking());
+        if (!topIds.isEmpty()) {
+            redisTemplate.opsForList().rightPushAll(RedisKey.cachedTopRanking(), topIds);
+        }
     }
 
     private ArticleListResponse createResponse(Long id, Article article) {
@@ -43,13 +70,5 @@ public class ArticleRankingService {
         Long dbViewCount = article.getViewCount();
         Long totalViewCount = articleViewService.getTotalViewCount(id, dbViewCount);
         return ArticleListResponse.from(article, totalViewCount);
-    }
-
-    public List<Long> getTopFiveArticleIds() {
-        return redisTemplate.opsForZSet()
-                .reverseRange(RedisKey.articleRanking(), 0, RedisConstants.TOP_LIMIT - 1)
-                .stream()
-                .map(Long::parseLong)
-                .collect(Collectors.toList());
     }
 }

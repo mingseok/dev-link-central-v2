@@ -26,7 +26,6 @@ public class ArticleService {
     private final MemberService memberService;
     private final ArticleRepository articleRepository;
     private final ArticleViewService articleViewService;
-    private final ArticleRankingService articleRankingService;
 
     @Transactional
     public void save(ArticleCreateServiceDto command) {

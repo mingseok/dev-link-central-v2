@@ -8,10 +8,10 @@ public class RedisKey {
 
     private static final String ARTICLE_VIEW_PREFIX = "view:article:";
     private static final String ARTICLE_RANKING_KEY = "ranking:article:";
-    private static final String ARTICLE_MEMBER_VIEW_PATTERN = "viewed:article:%s:member:%s";
+    private static final String CACHED_TOP_RANKING_KEY = "ranking:article:top5:cached";
     private static final String ARTICLE_LIKE_LOCK_PREFIX = "lock:article:like:";
-    private static final String ARTICLE_VIEW_SCAN_PATTERN = ARTICLE_VIEW_PREFIX + "*";
     private static final String ARTICLE_VIEW_TRACKING_KEY_SET = "view:article:keys";
+    private static final String ARTICLE_MEMBER_VIEW_PATTERN = "viewed:article:%s:member:%s";
 
     public static String articleViewKey(Long articleId) {
         return ARTICLE_VIEW_PREFIX + articleId;
@@ -21,8 +21,8 @@ public class RedisKey {
         return ARTICLE_VIEW_TRACKING_KEY_SET;
     }
 
-    public static String articleViewKeyScanPattern() {
-        return ARTICLE_VIEW_SCAN_PATTERN;
+    public static String cachedTopRanking() {
+        return CACHED_TOP_RANKING_KEY;
     }
 
     public static String articleRanking() {
