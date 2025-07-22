@@ -310,8 +310,17 @@
           'Authorization': 'Bearer ' + localStorage.getItem("jwt")
         },
         success: function(response) {
-          const liked = response.data;
-          loadLikeCount(); // 최신 좋아요 수 다시 로딩
+          const likeStatus = response.data;
+
+          if (likeStatus === 'LIKE_ADDED') {
+            // 좋아요 상태로 버튼 UI 변경
+            $("#like-button").addClass("liked");
+          } else if (likeStatus === 'LIKE_REMOVED') {
+            // 좋아요 해제 상태로 UI 복원
+            $("#like-button").removeClass("liked");
+          }
+
+          loadLikeCount(); // 좋아요 수 최신화
         },
         error: function(xhr) {
           Swal.fire("오류", "좋아요 요청 실패: " + (xhr.responseJSON?.message || xhr.responseText), "error");

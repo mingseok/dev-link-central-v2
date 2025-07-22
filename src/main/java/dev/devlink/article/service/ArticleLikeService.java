@@ -53,6 +53,13 @@ public class ArticleLikeService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public long countLikes(Long articleId) {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
+        return articleLikeRepository.countByArticle(article);
+    }
+
     private LikeStatus addOrRemoveLike(Long articleId, Long memberId) {
         Member member = memberService.findMemberById(memberId);
         Article article = articleRepository.findById(articleId)
@@ -66,12 +73,5 @@ public class ArticleLikeService {
 
         articleLikeRepository.save(ArticleLike.create(article, member));
         return LikeStatus.LIKE_ADDED;
-    }
-
-    @Transactional(readOnly = true)
-    public long countLikes(Long articleId) {
-        Article article = articleRepository.findById(articleId)
-                .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
-        return articleLikeRepository.countByArticle(article);
     }
 }

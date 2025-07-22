@@ -61,7 +61,7 @@ public class ArticleController {
     }
 
     @PostMapping("/{id}/likes")
-    public ResponseEntity<ApiResponse<LikeStatus>> toggleLike(
+    public ResponseEntity<ApiResponse<LikeStatus>> updateLikeStatus(
             @PathVariable Long id,
             @AuthMemberId Long memberId
     ) {
