@@ -3,12 +3,18 @@ package dev.devlink.article.service;
 import dev.devlink.article.repository.ArticleRepository;
 import dev.devlink.common.redis.RedisConstants;
 import dev.devlink.common.redis.RedisKey;
+import dev.devlink.common.redis.RedisScripts;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.connection.ReturnType;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -52,24 +58,34 @@ public class ArticleViewService {
 
     @Transactional
     @Scheduled(fixedRate = RedisConstants.SYNC_INTERVAL_MILLIS)
-    public void flushViewCount() {
-        String keyPattern = RedisKey.articleViewKeyScanPattern();
-        Set<String> keys = redisTemplate.keys(keyPattern);
+    public void bulkUpdateViewCounts() {
+        Set<String> keys = redisTemplate.opsForSet().members(RedisKey.viewTrackingKeySet());
+        if (keys == null || keys.isEmpty()) return;
 
-        if (keys.isEmpty()) return;
+        Map<Long, Long> pendingViewCounts = new HashMap<>();
 
         for (String key : keys) {
-            Long articleId = RedisKey.getArticleIdFromKey(key);
-            String countStr = redisTemplate.opsForValue().get(key);
-            if (countStr == null) continue;
-
-            Long redisViewCount = Long.parseLong(countStr);
-
-            articleRepository.findById(articleId)
-                    .ifPresent(article -> {
-                        article.addViewCount(redisViewCount);
-                        redisTemplate.delete(key);
-                    });
+            consumeViewCount(key).ifPresent(countStr -> {
+                Long articleId = RedisKey.getArticleIdFromKey(key);
+                Long redisViewCount = Long.parseLong(countStr);
+                pendingViewCounts.put(articleId, redisViewCount);
+                redisTemplate.opsForSet().remove(RedisKey.viewTrackingKeySet(), key);
+            });
         }
+
+        pendingViewCounts.forEach(articleRepository::bulkAddViewCount);
+    }
+
+    public Optional<String> consumeViewCount(String key) {
+        Object result = redisTemplate.execute(
+                (RedisCallback<Object>) connection ->
+                        connection.eval(
+                                RedisScripts.VIEW_COUNT_POP_SCRIPT.getBytes(),
+                                ReturnType.VALUE,
+                                1,
+                                key.getBytes()
+                        )
+        );
+        return Optional.ofNullable(result).map(Object::toString);
     }
 }

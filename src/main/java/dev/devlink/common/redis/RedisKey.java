@@ -11,9 +11,14 @@ public class RedisKey {
     private static final String ARTICLE_MEMBER_VIEW_PATTERN = "viewed:article:%s:member:%s";
     private static final String ARTICLE_LIKE_LOCK_PREFIX = "lock:article:like:";
     private static final String ARTICLE_VIEW_SCAN_PATTERN = ARTICLE_VIEW_PREFIX + "*";
+    private static final String ARTICLE_VIEW_TRACKING_KEY_SET = "view:article:keys";
 
     public static String articleViewKey(Long articleId) {
         return ARTICLE_VIEW_PREFIX + articleId;
+    }
+
+    public static String viewTrackingKeySet() {
+        return ARTICLE_VIEW_TRACKING_KEY_SET;
     }
 
     public static String articleViewKeyScanPattern() {
