@@ -14,4 +14,6 @@ public class RedisConstants {
     // 랭킹 관련
     public static final int TOP_LIMIT = 5;
     public static final double SCORE = 1.0;
+
+    public static final int SINGLE_KEY = 1;
 }

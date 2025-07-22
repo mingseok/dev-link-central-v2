@@ -24,17 +24,6 @@ public class ArticleRankingService {
     private final ArticleRepository articleRepository;
     private final ArticleViewService articleViewService;
 
-    public void addViewAndRank(Long articleId, Long memberId) {
-        boolean isFirstVisit = articleViewService.addView(articleId, memberId);
-        if (isFirstVisit) {
-            redisTemplate.opsForZSet().incrementScore(
-                    RedisKey.articleRanking(),
-                    articleId.toString(),
-                    RedisConstants.SCORE
-            );
-        }
-    }
-
     @Transactional(readOnly = true)
     public List<ArticleListResponse> findTopRankedArticles() {
         List<Long> topArticleIds = getTopFiveArticleIds();

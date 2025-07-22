@@ -1,5 +1,6 @@
 package dev.devlink.article.service;
 
+import dev.devlink.article.constant.ArticleConstants;
 import dev.devlink.article.entity.Article;
 import dev.devlink.article.exception.ArticleError;
 import dev.devlink.article.exception.ArticleException;
@@ -39,9 +40,8 @@ public class ArticleService {
         Article article = articleRepository.findDetailById(articleId)
                 .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
 
-        articleRankingService.addViewAndRank(articleId, memberId);
-        Long dbViewCount = article.getViewCount();
-        Long totalViewCount = articleViewService.getTotalViewCount(articleId, dbViewCount);
+        Long totalViewCount = articleViewService.addViewAndCount(
+                articleId, memberId, article.getViewCount());
 
         boolean isWriter = article.isAuthor(memberId);
         return ArticleDetailResponse.from(article, isWriter, totalViewCount);
@@ -52,7 +52,7 @@ public class ArticleService {
         Pageable sortedPageable = PageRequest.of(
                 pageable.getPageNumber(),
                 pageable.getPageSize(),
-                Sort.by(Sort.Direction.DESC, "id")
+                Sort.by(Sort.Direction.DESC, ArticleConstants.SORT_BY_ID)
         );
 
         Page<Article> articlePage = articleRepository.findAllWithMember(sortedPageable);

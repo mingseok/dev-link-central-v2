@@ -25,11 +25,19 @@ public class ArticleViewService {
     private final StringRedisTemplate redisTemplate;
     private final ArticleRepository articleRepository;
 
-    public boolean addView(Long articleId, Long memberId) {
-        return addViewIfFirstVisit(articleId, memberId);
+    public Long addViewAndCount(Long articleId, Long memberId, Long dbViewCount) {
+        boolean isFirstVisit = addUniqueViewCount(articleId, memberId);
+        if (isFirstVisit) {
+            redisTemplate.opsForZSet().incrementScore(
+                    RedisKey.articleRanking(),
+                    articleId.toString(),
+                    RedisConstants.SCORE
+            );
+        }
+        return getTotalViewCount(articleId, dbViewCount);
     }
 
-    private boolean addViewIfFirstVisit(Long articleId, Long memberId) {
+    public boolean addUniqueViewCount(Long articleId, Long memberId) {
         String memberViewKey = RedisKey.articleMemberViewKey(articleId, memberId);
         Boolean isFirstVisit = redisTemplate.opsForValue()
                 .setIfAbsent(
@@ -78,13 +86,12 @@ public class ArticleViewService {
 
     public Optional<String> consumeViewCount(String key) {
         Object result = redisTemplate.execute(
-                (RedisCallback<Object>) connection ->
-                        connection.eval(
-                                RedisScripts.VIEW_COUNT_POP_SCRIPT.getBytes(),
-                                ReturnType.VALUE,
-                                1,
-                                key.getBytes()
-                        )
+                (RedisCallback<Object>) connection -> connection.eval(
+                        RedisScripts.VIEW_COUNT_POP_SCRIPT.getBytes(),
+                        ReturnType.VALUE,
+                        RedisConstants.SINGLE_KEY,
+                        key.getBytes()
+                )
         );
         return Optional.ofNullable(result).map(Object::toString);
     }

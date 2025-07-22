@@ -25,8 +25,8 @@ public class ArticleLikeService {
 
     private final ArticleLikeRepository articleLikeRepository;
     private final ArticleRepository articleRepository;
-    private final MemberService memberService;
     private final RedissonClient redissonClient;
+    private final MemberService memberService;
 
     private static final long LOCK_WAIT_TIME = 3L;
     private static final long LOCK_LEASE_TIME = 1L;
@@ -43,11 +43,9 @@ public class ArticleLikeService {
                 throw new ArticleException(ArticleError.CONCURRENT_LIKE_REQUEST);
             }
             return addOrRemoveLike(articleId, memberId);
-
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             throw new ArticleException(ArticleError.LOCK_INTERRUPTED);
-
         } finally {
             if (lockAcquired && lock.isHeldByCurrentThread()) {
                 lock.unlock();
@@ -61,7 +59,6 @@ public class ArticleLikeService {
                 .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
 
         Optional<ArticleLike> likeOptional = articleLikeRepository.findByArticleAndMember(article, member);
-
         if (likeOptional.isPresent()) {
             articleLikeRepository.delete(likeOptional.get());
             return LikeStatus.LIKE_REMOVED;
