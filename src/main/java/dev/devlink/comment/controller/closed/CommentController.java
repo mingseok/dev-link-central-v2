@@ -1,7 +1,7 @@
 package dev.devlink.comment.controller.closed;
 
-import dev.devlink.comment.controller.request.CommentCreateRequest;
 import dev.devlink.comment.service.CommentService;
+import dev.devlink.comment.service.dto.request.CommentCreateRequest;
 import dev.devlink.common.dto.ApiResponse;
 import dev.devlink.common.identity.annotation.AuthMemberId;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class CommentController {
             @PathVariable Long articleId,
             @AuthMemberId Long memberId
     ) {
-        commentService.save(request.toServiceDto(articleId, memberId));
+        commentService.save(request, articleId, memberId);
         return ResponseEntity.ok(ApiResponse.successEmpty());
     }
 

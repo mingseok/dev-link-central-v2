@@ -5,8 +5,8 @@ import dev.devlink.article.entity.Article;
 import dev.devlink.article.exception.ArticleError;
 import dev.devlink.article.exception.ArticleException;
 import dev.devlink.article.repository.ArticleRepository;
-import dev.devlink.article.service.dto.ArticleCreateServiceDto;
-import dev.devlink.article.service.dto.ArticleUpdateServiceDto;
+import dev.devlink.article.service.dto.request.ArticleCreateRequest;
+import dev.devlink.article.service.dto.request.ArticleUpdateRequest;
 import dev.devlink.article.service.dto.response.ArticleDetailResponse;
 import dev.devlink.article.service.dto.response.ArticleListResponse;
 import dev.devlink.member.entity.Member;
@@ -28,9 +28,9 @@ public class ArticleService {
     private final ArticleViewService articleViewService;
 
     @Transactional
-    public void save(ArticleCreateServiceDto command) {
-        Member member = memberService.findMemberById(command.getMemberId());
-        Article article = Article.create(member, command.getTitle(), command.getContent());
+    public void save(ArticleCreateRequest createRequest, Long memberId) {
+        Member member = memberService.findMemberById(memberId);
+        Article article = Article.create(member, createRequest.getTitle(), createRequest.getContent());
         articleRepository.save(article);
     }
 
@@ -59,10 +59,10 @@ public class ArticleService {
     }
 
     @Transactional
-    public void update(ArticleUpdateServiceDto command) {
-        Article article = findArticleById(command.getArticleId());
-        article.checkAuthor(command.getMemberId());
-        article.update(command.getTitle(), command.getContent());
+    public void update(ArticleUpdateRequest updateRequest, Long articleId, Long memberId) {
+        Article article = findArticleById(articleId);
+        article.checkAuthor(memberId);
+        article.update(updateRequest.getTitle(), updateRequest.getContent());
     }
 
     @Transactional

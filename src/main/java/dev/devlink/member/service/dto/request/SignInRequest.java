@@ -1,6 +1,5 @@
-package dev.devlink.member.controller.request;
+package dev.devlink.member.service.dto.request;
 
-import dev.devlink.member.service.dto.SignInServiceDto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -23,11 +22,4 @@ public class SignInRequest {
     @Size(min = 4, max = 20, message = "비밀번호는 4~20자리로 입력해 주세요.")
     @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d).+$", message = "비밀번호는 최소 하나의 영문자와 숫자를 포함해야 합니다.")
     private String password;
-
-    public SignInServiceDto toServiceDto() {
-        return SignInServiceDto.builder()
-                .email(this.email)
-                .password(this.password)
-                .build();
-    }
 }

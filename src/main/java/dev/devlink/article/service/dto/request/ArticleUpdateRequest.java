@@ -1,6 +1,5 @@
-package dev.devlink.article.controller.request;
+package dev.devlink.article.service.dto.request;
 
-import dev.devlink.article.service.dto.ArticleUpdateServiceDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -17,13 +16,4 @@ public class ArticleUpdateRequest {
     @NotBlank(message = "게시글 내용은 필수입니다.")
     @Size(min = 3, max = 10000, message = "게시글 내용은 3자 이상 10000자 이하이어야 합니다.")
     private String content;
-
-    public ArticleUpdateServiceDto toServiceDto(Long articleId, Long memberId) {
-        return ArticleUpdateServiceDto.builder()
-                .title(this.title)
-                .content(this.content)
-                .memberId(memberId)
-                .articleId(articleId)
-                .build();
-    }
 }

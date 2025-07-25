@@ -6,8 +6,8 @@ import dev.devlink.member.entity.Member;
 import dev.devlink.member.exception.MemberError;
 import dev.devlink.member.exception.MemberException;
 import dev.devlink.member.repository.MemberRepository;
-import dev.devlink.member.service.dto.SignInServiceDto;
-import dev.devlink.member.service.dto.SignUpServiceDto;
+import dev.devlink.member.service.dto.request.SignInRequest;
+import dev.devlink.member.service.dto.request.SignUpRequest;
 import dev.devlink.member.service.dto.response.JwtTokenResponse;
 import dev.devlink.member.service.dto.response.NicknameResponse;
 import lombok.RequiredArgsConstructor;
@@ -24,20 +24,20 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void signUp(SignUpServiceDto command) {
-        if (memberRepository.existsByEmail(command.getEmail())) {
+    public void signUp(SignUpRequest signUpRequest) {
+        if (memberRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new MemberException(MemberError.EMAIL_DUPLICATED);
         }
 
-        if (memberRepository.existsByNickname(command.getNickname())) {
+        if (memberRepository.existsByNickname(signUpRequest.getNickname())) {
             throw new MemberException(MemberError.NICKNAME_DUPLICATED);
         }
 
-        String encodedPassword = passwordEncoder.encode(command.getPassword());
+        String encodedPassword = passwordEncoder.encode(signUpRequest.getPassword());
         Member member = Member.create(
-                command.getName(),
-                command.getEmail(),
-                command.getNickname(),
+                signUpRequest.getName(),
+                signUpRequest.getEmail(),
+                signUpRequest.getNickname(),
                 encodedPassword
         );
         memberRepository.save(member);
@@ -51,9 +51,9 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public JwtTokenResponse signin(SignInServiceDto command) {
-        Member member = findByEmail(command.getEmail());
-        if (!passwordEncoder.matches(command.getPassword(), member.getPassword())) {
+    public JwtTokenResponse signin(SignInRequest signInRequest) {
+        Member member = findByEmail(signInRequest.getEmail());
+        if (!passwordEncoder.matches(signInRequest.getPassword(), member.getPassword())) {
             throw new MemberException(MemberError.PASSWORD_NOT_MATCHED);
         }
 

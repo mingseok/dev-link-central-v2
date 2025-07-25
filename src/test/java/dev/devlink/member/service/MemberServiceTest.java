@@ -2,8 +2,8 @@ package dev.devlink.member.service;
 
 import dev.devlink.common.jwt.JwtToken;
 import dev.devlink.common.jwt.JwtTokenProvider;
-import dev.devlink.member.controller.request.SignInRequest;
-import dev.devlink.member.controller.request.SignUpRequest;
+import dev.devlink.member.service.dto.request.SignInRequest;
+import dev.devlink.member.service.dto.request.SignUpRequest;
 import dev.devlink.member.entity.Member;
 import dev.devlink.member.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;

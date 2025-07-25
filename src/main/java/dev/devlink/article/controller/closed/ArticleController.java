@@ -1,10 +1,10 @@
 package dev.devlink.article.controller.closed;
 
 import dev.devlink.article.constant.LikeStatus;
-import dev.devlink.article.controller.request.ArticleCreateRequest;
-import dev.devlink.article.controller.request.ArticleUpdateRequest;
 import dev.devlink.article.service.ArticleLikeService;
 import dev.devlink.article.service.ArticleService;
+import dev.devlink.article.service.dto.request.ArticleCreateRequest;
+import dev.devlink.article.service.dto.request.ArticleUpdateRequest;
 import dev.devlink.article.service.dto.response.ArticleDetailResponse;
 import dev.devlink.common.dto.ApiResponse;
 import dev.devlink.common.identity.annotation.AuthMemberId;
@@ -27,7 +27,7 @@ public class ArticleController {
             @Validated @RequestBody ArticleCreateRequest request,
             @AuthMemberId Long memberId
     ) {
-        articleService.save(request.toServiceDto(memberId));
+        articleService.save(request, memberId);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.successEmpty());
     }
@@ -38,7 +38,7 @@ public class ArticleController {
             @PathVariable Long id,
             @AuthMemberId Long memberId
     ) {
-        articleService.update(request.toServiceDto(id, memberId));
+        articleService.update(request, id, memberId);
         return ResponseEntity.ok(ApiResponse.successEmpty());
     }
 
