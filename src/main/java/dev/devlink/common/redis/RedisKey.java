@@ -6,25 +6,38 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RedisKey {
 
-    public static final String ARTICLE_VIEW_KEY_PATTERN = RedisPrefix.ARTICLE_VIEW.getValue() + "*";
+    private static final String ARTICLE_VIEW_PREFIX = "view:article:";
+    private static final String ARTICLE_RANKING_KEY = "ranking:article:";
+    private static final String CACHED_TOP_RANKING_KEY = "ranking:article:top5:cached";
+    private static final String ARTICLE_LIKE_LOCK_PREFIX = "lock:article:like:";
+    private static final String ARTICLE_VIEW_TRACKING_KEY_SET = "view:article:keys";
+    private static final String ARTICLE_MEMBER_VIEW_PATTERN = "viewed:article:%s:member:%s";
 
     public static String articleViewKey(Long articleId) {
-        return RedisPrefix.ARTICLE_VIEW.getValue() + articleId;
+        return ARTICLE_VIEW_PREFIX + articleId;
     }
 
-    public static String articleViewKeyPattern() {
-        return ARTICLE_VIEW_KEY_PATTERN;
+    public static String viewTrackingKeySet() {
+        return ARTICLE_VIEW_TRACKING_KEY_SET;
+    }
+
+    public static String cachedTopRanking() {
+        return CACHED_TOP_RANKING_KEY;
     }
 
     public static String articleRanking() {
-        return RedisPrefix.ARTICLE_RANKING.getValue();
+        return ARTICLE_RANKING_KEY;
     }
 
-    public static Long extractArticleId(String key) {
-        return Long.parseLong(key.replace(RedisPrefix.ARTICLE_VIEW.getValue(), ""));
+    public static Long getArticleIdFromKey(String key) {
+        return Long.parseLong(key.replace(ARTICLE_VIEW_PREFIX, ""));
     }
 
     public static String articleMemberViewKey(Long articleId, Long memberId) {
-        return String.format(RedisPrefix.ARTICLE_MEMBER_VIEW.getValue(), articleId, memberId);
+        return String.format(ARTICLE_MEMBER_VIEW_PATTERN, articleId, memberId);
+    }
+
+    public static String articleLikeLockKey(Long articleId, Long memberId) {
+        return ARTICLE_LIKE_LOCK_PREFIX + articleId + ":" + memberId;
     }
 }
