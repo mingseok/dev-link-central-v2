@@ -23,7 +23,7 @@ public class ArticleDetailResponse {
     @JsonProperty("isAuthor")
     private boolean author;
 
-    public static ArticleDetailResponse from(Article article, boolean author, Long viewsCount) {
+    public static ArticleDetailResponse from(Article article, Long memberId, Long viewsCount) {
         return new ArticleDetailResponse(
                 article.getId(),
                 article.getTitle(),
@@ -33,7 +33,7 @@ public class ArticleDetailResponse {
                 DateUtils.formatLocalDateTime(article.getCreatedAt()),
                 article.getUpdatedAt(),
                 viewsCount,
-                author
+                article.isAuthor(memberId)
         );
     }
 }

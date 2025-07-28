@@ -42,8 +42,7 @@ public class ArticleService {
         Long totalViewCount = articleViewService.addViewAndCount(
                 articleId, memberId, article.getViewCount());
 
-        boolean isWriter = article.isAuthor(memberId);
-        return ArticleDetailResponse.from(article, isWriter, totalViewCount);
+        return ArticleDetailResponse.from(article, memberId, totalViewCount);
     }
 
     @Transactional(readOnly = true)
