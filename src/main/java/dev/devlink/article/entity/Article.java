@@ -70,8 +70,4 @@ public class Article extends BaseEntity {
             throw new ArticleException(ArticleError.NO_PERMISSION);
         }
     }
-
-    public void addViewCount(Long value) {
-        this.viewCount += value;
-    }
 }
