@@ -61,11 +61,11 @@ public class ArticleController {
     }
 
     @PostMapping("/{id}/likes")
-    public ResponseEntity<ApiResponse<LikeStatus>> updateLikeStatus(
+    public ResponseEntity<ApiResponse<LikeStatus>> likeOrCancel(
             @PathVariable Long id,
             @AuthMemberId Long memberId
     ) {
-        LikeStatus status = articleLikeService.updateLikeStatus(id, memberId);
+        LikeStatus status = articleLikeService.likeOrCancel(id, memberId);
         return ResponseEntity.ok(ApiResponse.success(status));
     }
 }
