@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 public class RedisKey {
 
     private static final String ARTICLE_VIEW = "article:view:";
-    private static final String ARTICLE_VIEW_ZSET = "article:views";
+    private static final String ARTICLE_VIEW_ZSET = "article:view:sorted";
     private static final String ARTICLE_VIEW_CONCURRENCY = "article:view:concurrency:";
     private static final String ARTICLE_VIEW_FLUSH_TARGETS = "article:view:flush:targets";
 
