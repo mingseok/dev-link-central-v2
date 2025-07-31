@@ -18,18 +18,18 @@ public class ArticleRankingService {
     private final StringRedisTemplate redisTemplate;
 
     public List<Long> getTopArticleIds() {
-        Set<String> TopArticleIds = redisTemplate.opsForZSet()
+        Set<String> topArticleIds = redisTemplate.opsForZSet()
                 .reverseRange(
                         RedisKey.getArticleViewSortedKey(),
                         RedisConstants.START_INDEX,
                         RedisConstants.TOP_LIMIT - 1
                 );
 
-        if (TopArticleIds.isEmpty()) {
+        if (topArticleIds.isEmpty()) {
             return List.of();
         }
 
-        return TopArticleIds.stream()
+        return topArticleIds.stream()
                 .map(Long::parseLong)
                 .toList();
     }
