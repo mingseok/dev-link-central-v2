@@ -15,24 +15,12 @@ public class RedisKey {
         return ARTICLE_VIEW + articleId;
     }
 
-    public static String getArticleViewKeys() {
-        return ARTICLE_VIEW + "*";
-    }
-
     public static String getArticleViewSortedKey() {
         return ARTICLE_VIEW_ZSET;
     }
 
-    public static Long getArticleId(String key) {
-        return Long.parseLong(key.replace(ARTICLE_VIEW, ""));
-    }
-
     public static String viewConcurrencyKey(Long articleId) {
         return ARTICLE_VIEW_CONCURRENCY + articleId;
-    }
-
-    public static String getViewConcurrencyPrefix() {
-        return ARTICLE_VIEW_CONCURRENCY;
     }
 
     public static String flushTargetArticlesKey() {
