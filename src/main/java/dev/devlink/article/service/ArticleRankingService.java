@@ -51,23 +51,22 @@ public class ArticleRankingService {
 
     @Scheduled(fixedRate = RedisConstants.RANKING_REFRESH_INTERVAL)
     public void updateViewRankingScores() {
-        Set<String> keys = redisTemplate.keys(RedisKey.getArticleViewKeys());
-        if (keys.isEmpty()) return;
+        Set<String> articleIds = redisTemplate.opsForSet()
+                .members(RedisKey.flushTargetArticlesKey());
 
-        for (String key : keys) {
-            if (key.startsWith(RedisKey.getViewConcurrencyPrefix())) continue;
+        if (articleIds == null) return;
 
-            Long articleId = RedisKey.getArticleId(key);
-            String redisCountValue = redisTemplate.opsForValue().get(key);
+        for (String articleIdStr : articleIds) {
+            Long articleId = Long.parseLong(articleIdStr);
+            String redisCountValue = redisTemplate.opsForValue()
+                    .get(RedisKey.getArticleViewKey(articleId));
 
-            long redisCount = 0L;
-            if (redisCountValue != null) {
-                redisCount = Long.parseLong(redisCountValue);
-            }
+            if (redisCountValue == null) continue;
 
+            long redisCount = Long.parseLong(redisCountValue);
             redisTemplate.opsForZSet().add(
                     RedisKey.getArticleViewSortedKey(),
-                    String.valueOf(articleId),
+                    articleIdStr,
                     (double) redisCount
             );
         }
