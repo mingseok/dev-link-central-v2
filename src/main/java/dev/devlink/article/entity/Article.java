@@ -60,16 +60,14 @@ public class Article extends BaseEntity {
         if (memberId == null) {
             return false;
         }
-        return member.getId().equals(memberId);
+
+        Long writerId = member.getId();
+        return writerId.equals(memberId);
     }
 
     public void checkAuthor(Long memberId) {
         if (!isAuthor(memberId)) {
             throw new ArticleException(ArticleError.NO_PERMISSION);
         }
-    }
-
-    public void addViewCount(Long value) {
-        this.viewCount += value;
     }
 }
