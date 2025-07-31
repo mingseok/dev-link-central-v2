@@ -5,7 +5,6 @@ import dev.devlink.common.redis.RedisConstants;
 import dev.devlink.common.redis.RedisKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,7 +58,6 @@ public class ArticleViewService {
     }
 
     @Transactional
-    @Scheduled(fixedRate = RedisConstants.SYNC_INTERVAL_MILLIS)
     public void bulkUpdateViewCounts() {
         Set<String> articleIds = redisTemplate.opsForSet()
                 .members(RedisKey.flushTargetArticlesKey());

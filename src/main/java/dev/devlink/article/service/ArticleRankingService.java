@@ -6,7 +6,6 @@ import dev.devlink.common.redis.RedisConstants;
 import dev.devlink.common.redis.RedisKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,8 +48,7 @@ public class ArticleRankingService {
         return ArticleListResponse.from(article, totalViewCount);
     }
 
-    @Scheduled(fixedRate = RedisConstants.RANKING_REFRESH_INTERVAL)
-    public void updateViewRankingScores() {
+    public void updateRankingScores() {
         Set<String> articleIds = redisTemplate.opsForSet()
                 .members(RedisKey.flushTargetArticlesKey());
 
