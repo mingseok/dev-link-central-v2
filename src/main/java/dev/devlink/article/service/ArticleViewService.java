@@ -8,10 +8,10 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.concurrent.TimeUnit;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -21,69 +21,55 @@ public class ArticleViewService {
     private final ArticleRepository articleRepository;
 
     public void increaseViewCount(Long articleId, Long memberId) {
-        String memberViewSetKey = RedisKey.viewConcurrencyKey(articleId);
-        String memberIdString = String.valueOf(memberId);
+        String key = RedisKey.getViewedMembersKey(articleId);
+        Long added = redisTemplate.opsForSet().add(key, String.valueOf(memberId));
 
-        Long addedCount = redisTemplate.opsForSet()
-                .add(memberViewSetKey, memberIdString);
-
-        boolean isVisit = false;
-        if (addedCount == RedisConstants.ADD_SUCCESS) {
-            isVisit = true;
+        if (added != RedisConstants.REDIS_SET_ADD_SUCCESS) {
+            return;
         }
-
-        if (isVisit) {
-            redisTemplate.opsForValue()
-                    .increment(RedisKey.getArticleViewKey(articleId));
-
-            redisTemplate.opsForSet()
-                    .add(RedisKey.flushTargetArticlesKey(), articleId.toString());
-
-            redisTemplate.expire(
-                    memberViewSetKey,
-                    RedisConstants.DUPLICATE_PREVENTION_TTL,
-                    TimeUnit.SECONDS
-            );
-        }
+        redisTemplate.expire(key, RedisConstants.DUPLICATE_PREVENTION_TTL, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().increment(RedisKey.getArticleViewKey(articleId));
+        redisTemplate.opsForSet().add(RedisKey.articlesSaveDbKey(), articleId.toString());
     }
 
     public Long getTotalViewCount(Long articleId, Long dbViewCount) {
-        String redisViewCount = redisTemplate.opsForValue()
-                .get(RedisKey.getArticleViewKey(articleId));
+        String redisValue = redisTemplate.opsForValue().get(RedisKey.getArticleViewKey(articleId));
 
-        if (redisViewCount == null) {
-            return dbViewCount;
+        long redisCount = 0L;
+        if (redisValue != null) {
+            redisCount = Long.parseLong(redisValue);
         }
-        return dbViewCount + Long.parseLong(redisViewCount);
+        return dbViewCount + redisCount;
     }
 
     @Transactional
     public void bulkUpdateViewCounts() {
-        Set<String> articleIds = redisTemplate.opsForSet()
-                .members(RedisKey.flushTargetArticlesKey());
-
+        Set<String> articleIds = redisTemplate.opsForSet().members(RedisKey.articlesSaveDbKey());
         if (articleIds == null) return;
 
-        Map<Long, Long> redisViewCounts = new HashMap<>();
-
-        for (String articleIdStr : articleIds) {
-            Long articleId = Long.parseLong(articleIdStr);
-            String viewCountStr = redisTemplate.opsForValue()
-                    .get(RedisKey.getArticleViewKey(articleId));
-
-            if (viewCountStr == null) continue;
-
-            Long viewCount = Long.parseLong(viewCountStr);
-            redisViewCounts.put(articleId, viewCount);
-        }
+        Map<Long, Long> redisViewCounts = getViewCountsFromRedis(articleIds);
+        if (redisViewCounts.isEmpty()) return;
 
         redisViewCounts.forEach(articleRepository::bulkAddViewCount);
+        articleRepository.flush();
 
         for (Long articleId : redisViewCounts.keySet()) {
             redisTemplate.delete(RedisKey.getArticleViewKey(articleId));
-
-            redisTemplate.opsForSet()
-                    .remove(RedisKey.flushTargetArticlesKey(), articleId.toString());
+            redisTemplate.opsForSet().remove(RedisKey.articlesSaveDbKey(), articleId.toString());
         }
+    }
+
+    private Map<Long, Long> getViewCountsFromRedis(Set<String> articleIds) {
+        Map<Long, Long> result = new HashMap<>();
+
+        for (String articleIdStr : articleIds) {
+            String viewCountValue = redisTemplate.opsForValue()
+                    .get(RedisKey.getArticleViewKey(Long.parseLong(articleIdStr)));
+
+            if (viewCountValue != null) {
+                result.put(Long.parseLong(articleIdStr), Long.parseLong(viewCountValue));
+            }
+        }
+        return result;
     }
 }
