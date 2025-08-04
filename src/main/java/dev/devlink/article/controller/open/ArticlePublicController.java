@@ -1,6 +1,7 @@
 package dev.devlink.article.controller.open;
 
 import dev.devlink.article.service.ArticleLikeService;
+import dev.devlink.article.service.ArticleRankingService;
 import dev.devlink.article.service.ArticleService;
 import dev.devlink.article.service.dto.response.ArticleListResponse;
 import dev.devlink.common.dto.ApiResponse;
@@ -24,6 +25,7 @@ public class ArticlePublicController {
 
     private final ArticleService articleService;
     private final ArticleLikeService articleLikeService;
+    private final ArticleRankingService articleRankingService;
 
     @GetMapping
     public ResponseEntity<ApiResponse<Page<ArticleListResponse>>> getPagedArticles(
@@ -43,7 +45,7 @@ public class ArticlePublicController {
 
     @GetMapping("/best")
     public ResponseEntity<ApiResponse<List<ArticleListResponse>>> findTopRankedArticles() {
-        List<ArticleListResponse> response = articleService.findTopRankedArticles();
+        List<ArticleListResponse> response = articleRankingService.getTopRankedArticles();
         return ResponseEntity.ok(ApiResponse.success(response));
     }
 }

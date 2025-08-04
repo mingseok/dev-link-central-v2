@@ -19,12 +19,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 public class ArticleService {
@@ -32,7 +26,6 @@ public class ArticleService {
     private final MemberService memberService;
     private final ArticleRepository articleRepository;
     private final ArticleViewService articleViewService;
-    private final ArticleRankingService articleRankingService;
 
     @Transactional
     public void save(ArticleCreateRequest createRequest, Long memberId) {
@@ -77,27 +70,8 @@ public class ArticleService {
         articleRepository.delete(article);
     }
 
-    @Transactional(readOnly = true)
-    public List<ArticleListResponse> findTopRankedArticles() {
-        List<Long> topArticleIds = articleRankingService.getTopArticleIds();
-        Map<Long, Article> articleMap = findArticlesByIds(topArticleIds);
-
-        return topArticleIds.stream()
-                .map(id -> articleRankingService.buildArticleResponse(
-                        id, articleMap.get(id))
-                )
-                .filter(Objects::nonNull)
-                .toList();
-    }
-
     public Article findArticleById(Long id) {
         return articleRepository.findById(id)
                 .orElseThrow(() -> new ArticleException(ArticleError.ARTICLE_NOT_FOUND));
-    }
-
-    private Map<Long, Article> findArticlesByIds(List<Long> topArticleIds) {
-        return articleRepository.findAllById(topArticleIds)
-                .stream()
-                .collect(Collectors.toMap(Article::getId, Function.identity()));
     }
 }

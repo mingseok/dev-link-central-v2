@@ -20,7 +20,7 @@ public class ArticleScheduler {
     }
 
     @Scheduled(fixedRate = RedisConstants.RANKING_REFRESH_INTERVAL)
-    public void refreshArticleRankings() {
-        articleRankingService.updateRankingScores();
+    public void syncTopArticlesToRedis() {
+        articleRankingService.updateRedisTopArticles();
     }
 }

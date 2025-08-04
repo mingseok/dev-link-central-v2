@@ -47,6 +47,10 @@ public class Article extends BaseEntity {
         return member.getId();
     }
 
+    public String getIdAsString() {
+        return getId().toString();
+    }
+
     public String getWriterNickname() {
         return member.getNickname();
     }
