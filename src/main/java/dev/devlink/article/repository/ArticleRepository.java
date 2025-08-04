@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
@@ -21,4 +22,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Modifying
     @Query("UPDATE Article a SET a.viewCount = a.viewCount + :increment WHERE a.id = :articleId")
     void bulkAddViewCount(@Param("articleId") Long articleId, @Param("increment") Long increment);
+
+    @Query("SELECT a FROM Article a ORDER BY a.viewCount DESC")
+    List<Article> findTopByViews(Pageable pageable);
 }
