@@ -33,7 +33,7 @@
 
     <!-- Top 5 인기글 영역: 여기 추가 -->
     <div class="top-articles mb-4">
-        <h4 style="margin-bottom: 16px;">🔥인기 스터디 TOP 5</h4>
+        <h4 style="margin-bottom: 16px;">🔥인기 글 TOP 5</h4>
         <ul id="topArticlesList" class="list-group">
             <!-- JS에서 동적으로 인기글 삽입 -->
         </ul>
@@ -115,7 +115,7 @@
             const row =
                 '<tr>' +
                 '<td>' + article.id + '</td>' +
-                '<td><a href="/view/profile/view?memberId=' + article.writerId + '">' + article.writer + '</a></td>' +
+                '<td><a href="/view/profile/' + article.writerId + '">' + article.writer + '</a></td>' +
                 '<td><a class="article-link" href="/view/articles/' + article.id + '">' + article.title + '</a></td>' +
                 '<td>' + article.formattedCreatedAt + '</td>' +
                 '</tr>';
