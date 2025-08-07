@@ -31,10 +31,6 @@
             window.location.href = "/view/member/edit-form";
         }
 
-        function deletePage() {
-            window.location.href = "/view/member/delete-page";
-        }
-
         // 게시판 링크
         function Article() {
             window.location.href = "/view/articles/paging";
@@ -98,17 +94,52 @@
             });
         }
 
+        // 프로필 링크를 현재 사용자의 프로필로 동적 설정
+        $(document).ready(function() {
+            const jwt = localStorage.getItem('jwt');
+            if (jwt) {
+                try {
+                    const tokenPayload = JSON.parse(atob(jwt.split('.')[1]));
+                    const currentUserId = tokenPayload.sub;
+                    $('#profile-link').attr('href', `/view/profile/${currentUserId}`);
+                } catch (e) {
+                    console.error("JWT 디코딩 오류:", e);
+                }
+            }
+        });
+
+        // 팔로워 리스트 페이지로 이동
+        function followersView() {
+            window.location.href = "/view/follow/followers";
+        }
+
+        // 내 프로필 페이지로 이동
+        function profileView() {
+            const jwt = localStorage.getItem('jwt');
+            if (jwt) {
+                try {
+                    const tokenPayload = JSON.parse(atob(jwt.split('.')[1]));
+                    const currentUserId = tokenPayload.sub;
+                    window.location.href = "/view/profile/" + currentUserId;
+                } catch (e) {
+                    console.error("JWT 디코딩 오류:", e);
+                    alert("프로필 페이지로 이동할 수 없습니다.");
+                }
+            } else {
+                alert("로그인이 필요합니다.");
+                window.location.href = "/view/members/signin";
+            }
+        }
     </script>
 </head>
 <body>
 <div class="note">
     <div class="menu-title">메뉴</div>
     <button onclick="logout()">로그아웃</button>
-    <button onclick="deletePage()">회원탈퇴</button>
-    <button onclick="editProfile()">회원수정</button>
-    <button onclick="profileView()">프로필 & 친구 목록</button>
+    <button onclick="followersView()">팔로워 리스트</button>
+    <button onclick="profileView()">프로필</button>
     <button onclick="Article()">스터디 모집 게시판</button>
-    <button onclick="StudyGroupView()">그룹 관리</button>
+    <button onclick="StudyGroupView()">피드</button>
     <button onclick="groupFeedView()">그룹 피드 (메인)</button>
     <button onclick="myFeed()">나의 피드</button>
 </div>
