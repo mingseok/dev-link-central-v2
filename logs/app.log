@@ -1,0 +1,1504 @@
+2025-08-01 03:06:20 INFO  dev.devlink.DevlinkApplication - Starting DevlinkApplication using Java 21.0.6 with PID 10970 (/Users/kimminseok/IdeaProjects/dev-link-central-v2/build/classes/java/main started by kimminseok in /Users/kimminseok/IdeaProjects/dev-link-central-v2)
+2025-08-01 03:06:20 INFO  dev.devlink.DevlinkApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-01 03:06:21 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-01 03:06:21 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-01 03:06:21 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 84 ms. Found 4 JPA repository interfaces.
+2025-08-01 03:06:21 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-01 03:06:21 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-01 03:06:21 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.article.repository.ArticleLikeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 03:06:21 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.article.repository.ArticleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 03:06:21 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.comment.repository.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 03:06:21 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.member.repository.MemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 03:06:21 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2025-08-01 03:06:21 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-08-01 03:06:21 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-01 03:06:21 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-01 03:06:21 INFO  o.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-08-01 03:06:21 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-01 03:06:21 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 979 ms
+2025-08-01 03:06:21 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-01 03:06:21 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-01 03:06:21 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-08-01 03:06:21 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-01 03:06:21 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-01 03:06:22 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3f6d36eb
+2025-08-01 03:06:22 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-01 03:06:22 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-01 03:06:22 WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-01 03:06:22 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-01 03:06:22 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2a19c36b) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@38856d6e)
+2025-08-01 03:06:22 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@299ea986) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1dd9a3ae)
+2025-08-01 03:06:22 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@79bf39e5) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@6ac2c5a1)
+2025-08-01 03:06:22 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@364c93e6) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@66589252)
+2025-08-01 03:06:22 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@66a8ff6d) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@1abbc1d4)
+2025-08-01 03:06:22 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@48bab2c6) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@6ad26381)
+2025-08-01 03:06:22 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@4b20aa21) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@f5167f0)
+2025-08-01 03:06:22 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1260c85e) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@6b576ff8)
+2025-08-01 03:06:22 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@25e8a111) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@21022cbb)
+2025-08-01 03:06:22 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-01 03:06:22 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-01 03:06:22 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-01 03:06:23 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-08-01 03:06:23 INFO  dev.devlink.DevlinkApplication - Started DevlinkApplication in 3.436 seconds (process running for 3.877)
+2025-08-01 03:06:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:24 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:28 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:28 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:33 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:33 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:38 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:38 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:43 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:43 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:48 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:53 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:58 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:06:58 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:03 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:03 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:08 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:08 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:13 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 1ms
+2025-08-01 03:07:13 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:18 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:23 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:23 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:28 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:28 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:33 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:33 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:38 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:38 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:43 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:43 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:48 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:53 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:07:57 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-01 03:07:57 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-01 03:07:57 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-01 03:07:57 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-01 03:07:57 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-08-01 03:17:15 INFO  dev.devlink.DevlinkApplication - Starting DevlinkApplication using Java 21.0.6 with PID 11382 (/Users/kimminseok/IdeaProjects/dev-link-central-v2/build/classes/java/main started by kimminseok in /Users/kimminseok/IdeaProjects/dev-link-central-v2)
+2025-08-01 03:17:15 INFO  dev.devlink.DevlinkApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-01 03:17:15 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-01 03:17:15 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-01 03:17:15 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 66 ms. Found 4 JPA repository interfaces.
+2025-08-01 03:17:15 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-01 03:17:15 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-01 03:17:15 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.article.repository.ArticleLikeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 03:17:15 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.article.repository.ArticleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 03:17:15 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.comment.repository.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 03:17:15 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.member.repository.MemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 03:17:15 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2025-08-01 03:17:15 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-08-01 03:17:15 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-01 03:17:15 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-01 03:17:15 INFO  o.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-08-01 03:17:15 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-01 03:17:15 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 887 ms
+2025-08-01 03:17:16 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-01 03:17:16 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-01 03:17:16 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-08-01 03:17:16 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-01 03:17:16 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-01 03:17:16 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3ef396c9
+2025-08-01 03:17:16 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-01 03:17:16 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-01 03:17:16 WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-01 03:17:16 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-01 03:17:16 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@7430ed93) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2346f77a)
+2025-08-01 03:17:16 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5bcfdaf3) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@38347345)
+2025-08-01 03:17:16 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@4b9b5da5) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5ff29e8b)
+2025-08-01 03:17:16 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@7acfcfc4) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@61fa3583)
+2025-08-01 03:17:16 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@709d2a6c) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3b50f432)
+2025-08-01 03:17:16 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3fe5ad73) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@f83d121)
+2025-08-01 03:17:16 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@165454f7) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2a19c36b)
+2025-08-01 03:17:16 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@38856d6e) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@299ea986)
+2025-08-01 03:17:16 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1dd9a3ae) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@79bf39e5)
+2025-08-01 03:17:16 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-01 03:17:17 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-01 03:17:17 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-01 03:17:18 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-08-01 03:17:18 INFO  dev.devlink.DevlinkApplication - Started DevlinkApplication in 3.159 seconds (process running for 3.45)
+2025-08-01 03:17:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:18 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:24 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:29 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:29 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:30 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-01 03:17:30 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-01 03:17:30 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-08-01 03:17:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:34 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:39 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:39 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:44 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 7ms, 결과 수: 0
+2025-08-01 03:17:44 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2025-08-01 03:17:44 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:44 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 4ms, 결과 수: 0
+2025-08-01 03:17:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:49 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:50 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 4ms, 결과 수: 0
+2025-08-01 03:17:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 0
+2025-08-01 03:17:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 0
+2025-08-01 03:17:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 5ms, 결과 수: 0
+2025-08-01 03:17:53 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 0
+2025-08-01 03:17:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:54 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:17:55 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=1 -> 조회수 증가 처리됨
+2025-08-01 03:17:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 0
+2025-08-01 03:17:59 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 5ms, 결과 수: 0
+2025-08-01 03:18:00 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 03:18:00 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 1, 소요 시간: 38ms
+2025-08-01 03:18:00 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 1, 소요 시간: 23ms
+2025-08-01 03:18:00 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 03:18:01 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 03:18:01 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 03:18:02 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 1
+2025-08-01 03:18:02 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 9ms, 결과 수: 1
+2025-08-01 03:18:03 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 1
+2025-08-01 03:18:03 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 03:18:04 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 03:18:04 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 03:18:04 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:18:04 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:18:05 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 1
+2025-08-01 03:18:05 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 1
+2025-08-01 03:18:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 1
+2025-08-01 03:18:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 03:18:07 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 03:18:08 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 1
+2025-08-01 03:18:08 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 1
+2025-08-01 03:18:09 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 1
+2025-08-01 03:18:09 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 03:18:09 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 03:18:09 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:18:09 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:18:10 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 1
+2025-08-01 03:18:13 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 03:18:14 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:18:14 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 03:18:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 03:18:16 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 03:18:19 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-01 03:18:19 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-01 03:18:19 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-01 03:18:19 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-01 03:18:19 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-08-01 22:01:13 INFO  dev.devlink.DevlinkApplication - Starting DevlinkApplication using Java 21.0.6 with PID 37715 (/Users/kimminseok/IdeaProjects/dev-link-central-v2/build/classes/java/main started by kimminseok in /Users/kimminseok/IdeaProjects/dev-link-central-v2)
+2025-08-01 22:01:13 INFO  dev.devlink.DevlinkApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-01 22:01:14 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-01 22:01:14 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-01 22:01:14 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 77 ms. Found 4 JPA repository interfaces.
+2025-08-01 22:01:14 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-01 22:01:14 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-01 22:01:14 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.article.repository.ArticleLikeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 22:01:14 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.article.repository.ArticleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 22:01:14 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.comment.repository.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 22:01:14 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.member.repository.MemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 22:01:14 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2025-08-01 22:01:14 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-08-01 22:01:14 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-01 22:01:14 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-01 22:01:14 INFO  o.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-08-01 22:01:14 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-01 22:01:14 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 980 ms
+2025-08-01 22:01:14 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-01 22:01:14 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-01 22:01:14 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-08-01 22:01:15 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-01 22:01:15 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-01 22:01:15 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@44ae6b66
+2025-08-01 22:01:15 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-01 22:01:15 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-01 22:01:15 WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-01 22:01:15 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-01 22:01:15 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@74cd8c55) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5870fc05)
+2025-08-01 22:01:15 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@45e35a0d) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@21d15932)
+2025-08-01 22:01:15 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@3966c679) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@66a99584)
+2025-08-01 22:01:15 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3945886e) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@12765ebd)
+2025-08-01 22:01:15 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@1dac0784) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3703a400)
+2025-08-01 22:01:15 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@22105c76) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2336d3f)
+2025-08-01 22:01:15 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@7f5ecada) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@55574295)
+2025-08-01 22:01:15 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@750457a5) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@6c4786af)
+2025-08-01 22:01:15 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@65c689e7) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@a6a2c20)
+2025-08-01 22:01:15 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-01 22:01:15 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-01 22:01:16 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-01 22:01:16 INFO  d.d.a.service.ArticleViewService - [TEST] Redis에 테스트 키 저장 완료 - key=test:view:1, value=1
+2025-08-01 22:01:17 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-08-01 22:01:17 INFO  dev.devlink.DevlinkApplication - Started DevlinkApplication in 3.548 seconds (process running for 3.873)
+2025-08-01 22:01:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:01:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:01:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:01:55 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-01 22:01:55 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-01 22:01:55 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-08-01 22:02:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:02:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:02:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 4ms, 결과 수: 0
+2025-08-01 22:02:15 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2025-08-01 22:02:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:02:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:02:44 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:02:44 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:02:44 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 0
+2025-08-01 22:02:46 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 22:02:46 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 22:02:46 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:02:46 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 22:02:46 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:02:46 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:02:46 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:02:46 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=1 -> 조회수 증가 처리됨
+2025-08-01 22:02:46 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=0
+2025-08-01 22:02:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 22:02:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 1, 소요 시간: 53ms
+2025-08-01 22:02:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 22:02:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 1, 소요 시간: 6ms
+2025-08-01 22:02:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:02:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 22:03:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 1, 소요 시간: 27ms
+2025-08-01 22:03:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:03:26 WARN  d.d.c.e.GlobalExceptionHandler - ServiceException 발생: 이미 등록된 이메일입니다.
+2025-08-01 22:03:29 WARN  d.d.c.e.GlobalExceptionHandler - ServiceException 발생: 이미 등록된 이메일입니다.
+2025-08-01 22:03:36 WARN  d.d.c.e.GlobalExceptionHandler - ServiceException 발생: 이미 등록된 이메일입니다.
+2025-08-01 22:03:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:04:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:04:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:04:20 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:04:20 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:04:20 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 1
+2025-08-01 22:04:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:04:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:04:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 1
+2025-08-01 22:04:28 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:2, addedCount=1
+2025-08-01 22:04:28 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 2
+2025-08-01 22:04:28 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:04:28 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:2
+2025-08-01 22:04:28 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:04:28 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:04:28 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:04:28 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=2 memberId=2 -> 조회수 증가 처리됨
+2025-08-01 22:04:28 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=2, dbViewCount=0
+2025-08-01 22:04:30 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:04:30 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 1, 소요 시간: 2ms
+2025-08-01 22:04:30 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:04:30 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 2
+2025-08-01 22:04:31 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 22:04:31 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 22:04:31 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:04:31 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 22:04:31 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:04:31 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:04:31 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:04:31 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=2 -> 조회수 증가 처리됨
+2025-08-01 22:04:31 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=1
+2025-08-01 22:04:32 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:04:32 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:04:32 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 2, 소요 시간: 4ms
+2025-08-01 22:04:32 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:04:32 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 2
+2025-08-01 22:04:40 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:04:40 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:04:40 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 2, 소요 시간: 18ms
+2025-08-01 22:04:40 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:04:40 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 2
+2025-08-01 22:04:46 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:04:46 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:04:46 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 2, 소요 시간: 6ms
+2025-08-01 22:04:46 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:04:46 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 2
+2025-08-01 22:04:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:04:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:04:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 2, 소요 시간: 20ms
+2025-08-01 22:04:48 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:3, addedCount=1
+2025-08-01 22:04:48 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 3
+2025-08-01 22:04:48 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:04:48 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:3
+2025-08-01 22:04:48 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:04:48 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:04:48 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:04:48 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=3 memberId=3 -> 조회수 증가 처리됨
+2025-08-01 22:04:48 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=3, dbViewCount=0
+2025-08-01 22:04:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:04:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:04:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:04:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 28ms
+2025-08-01 22:04:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:04:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 3
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:2, addedCount=1
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 2
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:2
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=2 memberId=3 -> 조회수 증가 처리됨
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=2, dbViewCount=0
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 16ms
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:04:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 3
+2025-08-01 22:04:53 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 22:04:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 22:04:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:04:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 22:04:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 22:04:53 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:04:53 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:04:53 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=3 -> 조회수 증가 처리됨
+2025-08-01 22:04:53 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=1
+2025-08-01 22:04:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:04:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:04:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:04:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 13ms
+2025-08-01 22:04:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:04:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 7ms, 결과 수: 3
+2025-08-01 22:04:59 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=0
+2025-08-01 22:04:59 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 22:04:59 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=1
+2025-08-01 22:05:00 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:05:00 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:05:00 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:05:00 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 11ms
+2025-08-01 22:05:00 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:05:00 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 3
+2025-08-01 22:05:07 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:05:07 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:05:07 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:05:07 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 24ms
+2025-08-01 22:05:07 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:05:07 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 3
+2025-08-01 22:05:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 3, 소요 시간: 12ms
+2025-08-01 22:05:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:05:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:05:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:05:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 3
+2025-08-01 22:05:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:06:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:06:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:06:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:07:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:07:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:07:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:08:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:08:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:08:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:09:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:09:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:09:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:10:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:10:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:10:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:11:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:11:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:11:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:12:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:12:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:12:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:13:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:13:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:13:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:14:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:14:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:14:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:15:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:15:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:15:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:16:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:16:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:16:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:17:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:17:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:17:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:18:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:18:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:18:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:19:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:19:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:19:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:20:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:20:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:20:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:21:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:21:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:21:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:22:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:22:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:22:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:23:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:23:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:23:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:24:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:24:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:24:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:25:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:25:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:25:28 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-01 22:25:28 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-01 22:25:28 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-01 22:25:28 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-01 22:25:28 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-08-01 22:26:39 INFO  dev.devlink.DevlinkApplication - Starting DevlinkApplication using Java 21.0.6 with PID 38700 (/Users/kimminseok/IdeaProjects/dev-link-central-v2/build/classes/java/main started by kimminseok in /Users/kimminseok/IdeaProjects/dev-link-central-v2)
+2025-08-01 22:26:39 INFO  dev.devlink.DevlinkApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-01 22:26:40 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-01 22:26:40 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-01 22:26:40 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 68 ms. Found 4 JPA repository interfaces.
+2025-08-01 22:26:40 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-01 22:26:40 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-01 22:26:40 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.article.repository.ArticleLikeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 22:26:40 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.article.repository.ArticleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 22:26:40 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.comment.repository.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 22:26:40 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.member.repository.MemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 22:26:40 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2025-08-01 22:26:40 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-08-01 22:26:40 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-01 22:26:40 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-01 22:26:40 INFO  o.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-08-01 22:26:40 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-01 22:26:40 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 843 ms
+2025-08-01 22:26:40 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-01 22:26:40 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-01 22:26:40 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-08-01 22:26:40 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-01 22:26:40 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-01 22:26:41 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4e933cf1
+2025-08-01 22:26:41 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-01 22:26:41 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-01 22:26:41 WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-01 22:26:41 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-01 22:26:41 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@47666b39) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2dbcee03)
+2025-08-01 22:26:41 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@6c8672b9) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@dd77e0d)
+2025-08-01 22:26:41 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@799cf32d) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@331ad6eb)
+2025-08-01 22:26:41 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@6cd6698b) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@5ac7550a)
+2025-08-01 22:26:41 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@44dcc0e4) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2114eb1a)
+2025-08-01 22:26:41 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@7e514482) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@1e5e3147)
+2025-08-01 22:26:41 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@3c271988) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3aed692d)
+2025-08-01 22:26:41 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@4eec5fa6) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@21579b35)
+2025-08-01 22:26:41 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@25b83dce) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@74cd8c55)
+2025-08-01 22:26:41 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-01 22:26:41 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-01 22:26:41 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-01 22:26:42 INFO  d.d.a.service.ArticleViewService - [TEST] Redis에 테스트 키 저장 완료 - key=test:view:1, value=1
+2025-08-01 22:26:42 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-08-01 22:26:42 INFO  dev.devlink.DevlinkApplication - Started DevlinkApplication in 3.183 seconds (process running for 3.433)
+2025-08-01 22:26:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:26:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 3ms
+2025-08-01 22:27:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:27:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:27:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:28:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:28:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:28:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:29:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:29:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:29:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 1ms
+2025-08-01 22:29:58 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-01 22:29:58 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-01 22:29:58 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-08-01 22:30:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:30:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:30:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 1ms
+2025-08-01 22:30:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:30:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:30:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 0
+2025-08-01 22:30:48 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2025-08-01 22:30:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:30:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:30:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 0
+2025-08-01 22:30:56 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 22:30:56 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 22:30:56 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:30:56 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 22:30:56 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:30:56 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:30:56 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:30:56 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=1 -> 조회수 증가 처리됨
+2025-08-01 22:30:56 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=0
+2025-08-01 22:30:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 22:30:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 1, 소요 시간: 18ms
+2025-08-01 22:30:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:30:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 22:31:03 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 22:31:03 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 1, 소요 시간: 19ms
+2025-08-01 22:31:03 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:03 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 22:31:04 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:2, addedCount=1
+2025-08-01 22:31:04 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 2
+2025-08-01 22:31:04 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:31:04 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:2
+2025-08-01 22:31:04 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:31:04 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:31:04 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:31:04 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=2 memberId=1 -> 조회수 증가 처리됨
+2025-08-01 22:31:04 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=2, dbViewCount=0
+2025-08-01 22:31:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 22:31:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:31:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 2, 소요 시간: 16ms
+2025-08-01 22:31:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 2
+2025-08-01 22:31:08 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=0
+2025-08-01 22:31:08 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 22:31:08 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=0
+2025-08-01 22:31:09 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 22:31:09 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:31:09 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 2, 소요 시간: 14ms
+2025-08-01 22:31:09 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:09 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 2
+2025-08-01 22:31:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 22:31:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:31:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 2, 소요 시간: 63ms
+2025-08-01 22:31:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 22:31:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:31:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 2, 소요 시간: 13ms
+2025-08-01 22:31:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 2
+2025-08-01 22:31:21 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 22:31:21 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:31:21 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 2, 소요 시간: 18ms
+2025-08-01 22:31:21 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:21 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 2
+2025-08-01 22:31:22 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:3, addedCount=1
+2025-08-01 22:31:22 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 3
+2025-08-01 22:31:22 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:31:22 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:3
+2025-08-01 22:31:22 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:31:22 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:31:22 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:31:22 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=3 memberId=2 -> 조회수 증가 처리됨
+2025-08-01 22:31:22 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=3, dbViewCount=0
+2025-08-01 22:31:23 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 22:31:23 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:31:23 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:31:23 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 23ms
+2025-08-01 22:31:23 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:23 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 3
+2025-08-01 22:31:24 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:2, addedCount=1
+2025-08-01 22:31:24 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 2
+2025-08-01 22:31:24 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:31:24 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:2
+2025-08-01 22:31:24 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 22:31:24 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:31:24 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:31:24 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=2 memberId=2 -> 조회수 증가 처리됨
+2025-08-01 22:31:24 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=2, dbViewCount=0
+2025-08-01 22:31:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 22:31:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:31:25 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:31:25 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 23ms
+2025-08-01 22:31:25 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:25 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 3
+2025-08-01 22:31:25 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 22:31:25 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 22:31:25 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:31:25 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 22:31:25 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 22:31:25 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:31:25 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:31:25 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=2 -> 조회수 증가 처리됨
+2025-08-01 22:31:25 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=0
+2025-08-01 22:31:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:31:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:31:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:31:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 26ms
+2025-08-01 22:31:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 3
+2025-08-01 22:31:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:31:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:31:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:31:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 21ms
+2025-08-01 22:31:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 3
+2025-08-01 22:31:39 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:31:39 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:31:39 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:31:39 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 20ms
+2025-08-01 22:31:39 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:39 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 3
+2025-08-01 22:31:41 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:4, addedCount=1
+2025-08-01 22:31:41 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 4
+2025-08-01 22:31:41 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:31:41 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:4
+2025-08-01 22:31:41 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:31:41 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:31:41 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:31:41 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=4 memberId=3 -> 조회수 증가 처리됨
+2025-08-01 22:31:41 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=4, dbViewCount=0
+2025-08-01 22:31:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:31:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:31:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:31:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=1
+2025-08-01 22:31:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 4, 소요 시간: 23ms
+2025-08-01 22:31:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 4
+2025-08-01 22:31:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:31:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:31:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:31:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=1
+2025-08-01 22:31:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 4, 소요 시간: 20ms
+2025-08-01 22:31:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 4, 소요 시간: 30ms
+2025-08-01 22:31:43 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:3, addedCount=1
+2025-08-01 22:31:43 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 3
+2025-08-01 22:31:43 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:31:43 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:3
+2025-08-01 22:31:43 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:31:43 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:31:43 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:31:43 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=3 memberId=3 -> 조회수 증가 처리됨
+2025-08-01 22:31:43 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=3, dbViewCount=1
+2025-08-01 22:31:44 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=2
+2025-08-01 22:31:44 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 1, 소요 시간: 4ms
+2025-08-01 22:31:44 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:44 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 4
+2025-08-01 22:31:45 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:2, addedCount=1
+2025-08-01 22:31:45 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 2
+2025-08-01 22:31:45 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:31:45 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:2
+2025-08-01 22:31:45 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:31:45 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:31:45 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:31:45 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=2 memberId=3 -> 조회수 증가 처리됨
+2025-08-01 22:31:45 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=2, dbViewCount=2
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=3
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=2
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 2, 소요 시간: 11ms
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 4
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=3 -> 조회수 증가 처리됨
+2025-08-01 22:31:46 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=2
+2025-08-01 22:31:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:31:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=3
+2025-08-01 22:31:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=2
+2025-08-01 22:31:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 18ms
+2025-08-01 22:31:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 4
+2025-08-01 22:31:52 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:4, addedCount=0
+2025-08-01 22:31:52 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 4
+2025-08-01 22:31:52 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=4, dbViewCount=1
+2025-08-01 22:31:53 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:31:53 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=3
+2025-08-01 22:31:53 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=2
+2025-08-01 22:31:53 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=1
+2025-08-01 22:31:53 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 4, 소요 시간: 24ms
+2025-08-01 22:31:53 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:31:53 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 4
+2025-08-01 22:32:07 WARN  d.d.c.e.GlobalExceptionHandler - ServiceException 발생: 이미 등록된 이메일입니다.
+2025-08-01 22:32:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:32:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=3
+2025-08-01 22:32:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=2
+2025-08-01 22:32:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=1
+2025-08-01 22:32:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 4, 소요 시간: 18ms
+2025-08-01 22:32:13 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:32:13 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=3
+2025-08-01 22:32:13 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=2
+2025-08-01 22:32:13 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=1
+2025-08-01 22:32:13 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 4, 소요 시간: 17ms
+2025-08-01 22:32:13 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:32:13 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 4
+2025-08-01 22:32:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:32:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=3
+2025-08-01 22:32:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=2
+2025-08-01 22:32:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=1
+2025-08-01 22:32:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 4, 소요 시간: 20ms
+2025-08-01 22:32:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:32:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 4
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:5, addedCount=1
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 5
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:5
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=5 memberId=4 -> 조회수 증가 처리됨
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=5, dbViewCount=0
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=3
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=2
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=1
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=5, 점수=1
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 5, 소요 시간: 25ms
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:32:20 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 5
+2025-08-01 22:32:21 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:4, addedCount=1
+2025-08-01 22:32:21 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 4
+2025-08-01 22:32:21 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:32:21 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:4
+2025-08-01 22:32:21 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:32:21 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:32:21 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:32:21 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=4 memberId=4 -> 조회수 증가 처리됨
+2025-08-01 22:32:21 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=4, dbViewCount=1
+2025-08-01 22:32:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:32:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=3
+2025-08-01 22:32:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=2
+2025-08-01 22:32:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=2
+2025-08-01 22:32:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=5, 점수=1
+2025-08-01 22:32:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 5, 소요 시간: 29ms
+2025-08-01 22:32:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:32:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 5
+2025-08-01 22:32:23 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:3, addedCount=1
+2025-08-01 22:32:23 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 3
+2025-08-01 22:32:23 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:32:23 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:3
+2025-08-01 22:32:23 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 22:32:23 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:32:23 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:32:23 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=3 memberId=4 -> 조회수 증가 처리됨
+2025-08-01 22:32:23 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=3, dbViewCount=1
+2025-08-01 22:32:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:32:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=3
+2025-08-01 22:32:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=3
+2025-08-01 22:32:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=2
+2025-08-01 22:32:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=5, 점수=1
+2025-08-01 22:32:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 5, 소요 시간: 22ms
+2025-08-01 22:32:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:32:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 5
+2025-08-01 22:32:25 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:2, addedCount=1
+2025-08-01 22:32:25 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 2
+2025-08-01 22:32:25 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:32:25 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:2
+2025-08-01 22:32:25 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 22:32:25 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:32:25 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:32:25 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=2 memberId=4 -> 조회수 증가 처리됨
+2025-08-01 22:32:25 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=2, dbViewCount=2
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=4
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=3
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=2
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=5, 점수=1
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 5, 소요 시간: 27ms
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 5
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=4 -> 조회수 증가 처리됨
+2025-08-01 22:32:26 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=2
+2025-08-01 22:32:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=4
+2025-08-01 22:32:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=4
+2025-08-01 22:32:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=3
+2025-08-01 22:32:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=2
+2025-08-01 22:32:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=5, 점수=1
+2025-08-01 22:32:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 5, 소요 시간: 16ms
+2025-08-01 22:32:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:32:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 5
+2025-08-01 22:32:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=4
+2025-08-01 22:32:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=4
+2025-08-01 22:32:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=3
+2025-08-01 22:32:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=2
+2025-08-01 22:32:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=5, 점수=1
+2025-08-01 22:32:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 5, 소요 시간: 25ms
+2025-08-01 22:32:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 5, 소요 시간: 20ms
+2025-08-01 22:32:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:32:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:32:47 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 5
+2025-08-01 22:32:57 WARN  d.d.c.e.GlobalExceptionHandler - 요청한 정적 리소스를 찾을 수 없습니다: No static resource .well-known/appspecific/com.chrome.devtools.json.
+2025-08-01 22:33:02 WARN  d.d.c.e.GlobalExceptionHandler - 요청한 정적 리소스를 찾을 수 없습니다: No static resource .well-known/appspecific/com.chrome.devtools.json.
+2025-08-01 22:33:02 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:33:02 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:33:02 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 5
+2025-08-01 22:33:06 WARN  d.d.c.e.GlobalExceptionHandler - 요청한 정적 리소스를 찾을 수 없습니다: No static resource .well-known/appspecific/com.chrome.devtools.json.
+2025-08-01 22:33:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:33:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:33:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 5
+2025-08-01 22:33:10 WARN  d.d.c.e.GlobalExceptionHandler - 요청한 정적 리소스를 찾을 수 없습니다: No static resource .well-known/appspecific/com.chrome.devtools.json.
+2025-08-01 22:33:10 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:33:10 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:33:10 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 5
+2025-08-01 22:33:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:33:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:33:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:34:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:34:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:34:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 1ms
+2025-08-01 22:35:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:35:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:35:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:36:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:36:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:36:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:37:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:37:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:37:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 1ms
+2025-08-01 22:38:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:38:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:38:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:39:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:39:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:39:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:40:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:40:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:40:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 1ms
+2025-08-01 22:41:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:41:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:41:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 1ms
+2025-08-01 22:42:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:42:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:42:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:43:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:43:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:43:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 1ms
+2025-08-01 22:44:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:44:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:44:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 1ms
+2025-08-01 22:45:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:45:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:45:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:46:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:46:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:46:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 1ms
+2025-08-01 22:47:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:47:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:47:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:48:12 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:48:42 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:48:42 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:49:02 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-01 22:49:02 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-01 22:49:02 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-01 22:49:02 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-01 22:49:02 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-08-01 22:50:03 INFO  dev.devlink.DevlinkApplication - Starting DevlinkApplication using Java 21.0.6 with PID 39614 (/Users/kimminseok/IdeaProjects/dev-link-central-v2/build/classes/java/main started by kimminseok in /Users/kimminseok/IdeaProjects/dev-link-central-v2)
+2025-08-01 22:50:03 INFO  dev.devlink.DevlinkApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-01 22:50:03 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-01 22:50:03 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-01 22:50:03 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 65 ms. Found 4 JPA repository interfaces.
+2025-08-01 22:50:03 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-01 22:50:03 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-01 22:50:03 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.article.repository.ArticleLikeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 22:50:03 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.article.repository.ArticleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 22:50:03 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.comment.repository.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 22:50:03 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.member.repository.MemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 22:50:03 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2025-08-01 22:50:04 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-08-01 22:50:04 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-01 22:50:04 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-01 22:50:04 INFO  o.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-08-01 22:50:04 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-01 22:50:04 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 836 ms
+2025-08-01 22:50:04 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-01 22:50:04 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-01 22:50:04 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-08-01 22:50:04 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-01 22:50:04 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-01 22:50:04 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@d70dbeb
+2025-08-01 22:50:04 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-01 22:50:04 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-01 22:50:04 WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-01 22:50:04 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-01 22:50:04 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@21022cbb) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@353422fd)
+2025-08-01 22:50:04 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@654cb30c) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5cc669d)
+2025-08-01 22:50:04 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@351be56b) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@212c0aff)
+2025-08-01 22:50:04 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@21780905) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@47666b39)
+2025-08-01 22:50:04 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2dbcee03) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@6c8672b9)
+2025-08-01 22:50:04 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@dd77e0d) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@799cf32d)
+2025-08-01 22:50:04 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@331ad6eb) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@6cd6698b)
+2025-08-01 22:50:04 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5ac7550a) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@44dcc0e4)
+2025-08-01 22:50:04 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2114eb1a) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@7e514482)
+2025-08-01 22:50:04 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-01 22:50:05 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-01 22:50:05 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-01 22:50:05 INFO  d.d.a.service.ArticleViewService - [TEST] Redis에 테스트 키 저장 완료 - key=test:view:1, value=1
+2025-08-01 22:50:06 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-08-01 22:50:06 INFO  dev.devlink.DevlinkApplication - Started DevlinkApplication in 3.144 seconds (process running for 3.44)
+2025-08-01 22:50:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:50:19 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-01 22:50:19 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-01 22:50:19 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2025-08-01 22:50:36 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:51:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:51:33 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:51:33 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:51:33 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 0
+2025-08-01 22:51:33 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2025-08-01 22:51:36 WARN  d.d.c.e.GlobalExceptionHandler - 요청한 정적 리소스를 찾을 수 없습니다: No static resource .well-known/appspecific/com.chrome.devtools.json.
+2025-08-01 22:51:36 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:51:39 WARN  d.d.c.e.GlobalExceptionHandler - 요청한 정적 리소스를 찾을 수 없습니다: No static resource .well-known/appspecific/com.chrome.devtools.json.
+2025-08-01 22:51:39 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:51:39 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:51:39 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 13ms, 결과 수: 0
+2025-08-01 22:51:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:51:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:51:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 0
+2025-08-01 22:51:53 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 22:51:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 22:51:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:51:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 22:51:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:51:53 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:51:53 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:51:53 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=1 -> 조회수 증가 처리됨
+2025-08-01 22:51:53 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=0
+2025-08-01 22:51:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 22:51:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 1, 소요 시간: 17ms
+2025-08-01 22:51:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:51:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 1
+2025-08-01 22:52:01 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=1
+2025-08-01 22:52:01 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 1, 소요 시간: 10ms
+2025-08-01 22:52:01 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:01 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 1
+2025-08-01 22:52:06 INFO  d.d.a.service.ArticleViewService - [VIEW] ZSET 점수 갱신 - articleId=1, DB=1, Redis=1, total=2
+2025-08-01 22:52:06 INFO  d.d.a.service.ArticleViewService - [VIEW] 전체 조회수 동기화 완료 - 대상 수: 1, 소요 시간: 33ms
+2025-08-01 22:52:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:52:08 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:52:08 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:08 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 1
+2025-08-01 22:52:12 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:2, addedCount=1
+2025-08-01 22:52:12 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 2
+2025-08-01 22:52:12 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:52:12 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:2
+2025-08-01 22:52:12 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:52:12 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:52:12 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:52:12 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=2 memberId=2 -> 조회수 증가 처리됨
+2025-08-01 22:52:12 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=2, dbViewCount=0
+2025-08-01 22:52:13 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:52:13 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 1, 소요 시간: 7ms
+2025-08-01 22:52:13 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:13 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 2
+2025-08-01 22:52:14 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 22:52:14 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 22:52:14 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:52:14 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 22:52:14 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:52:14 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:52:14 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:52:14 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=2 -> 조회수 증가 처리됨
+2025-08-01 22:52:14 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=1
+2025-08-01 22:52:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:52:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:52:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 2, 소요 시간: 4ms
+2025-08-01 22:52:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 2
+2025-08-01 22:52:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:52:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:52:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 2, 소요 시간: 16ms
+2025-08-01 22:52:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 2
+2025-08-01 22:52:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:52:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:52:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 2, 소요 시간: 14ms
+2025-08-01 22:52:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:27 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 2
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:3, addedCount=1
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 3
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:3
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=3 memberId=3 -> 조회수 증가 처리됨
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=3, dbViewCount=0
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=1
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 15ms
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:29 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 3
+2025-08-01 22:52:30 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:2, addedCount=1
+2025-08-01 22:52:30 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 2
+2025-08-01 22:52:30 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:52:30 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:2
+2025-08-01 22:52:30 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 22:52:30 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:52:30 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:52:30 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=2 memberId=3 -> 조회수 증가 처리됨
+2025-08-01 22:52:30 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=2, dbViewCount=0
+2025-08-01 22:52:31 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=2
+2025-08-01 22:52:31 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:52:31 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:52:31 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 22ms
+2025-08-01 22:52:31 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:31 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 3
+2025-08-01 22:52:32 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 22:52:32 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 22:52:32 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:52:32 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 22:52:32 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 22:52:32 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:52:32 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:52:32 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=3 -> 조회수 증가 처리됨
+2025-08-01 22:52:32 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=1
+2025-08-01 22:52:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:52:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:52:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:52:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 12ms
+2025-08-01 22:52:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 3
+2025-08-01 22:52:36 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:52:36 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:52:36 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:52:36 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 44ms
+2025-08-01 22:52:43 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:52:43 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:52:43 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:52:43 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 28ms
+2025-08-01 22:52:43 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:43 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 3
+2025-08-01 22:52:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:52:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:52:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:52:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 3, 소요 시간: 19ms
+2025-08-01 22:52:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 3
+2025-08-01 22:52:50 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:4, addedCount=1
+2025-08-01 22:52:50 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 4
+2025-08-01 22:52:50 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:52:50 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:4
+2025-08-01 22:52:50 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 22:52:50 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:52:50 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:52:50 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=4 memberId=4 -> 조회수 증가 처리됨
+2025-08-01 22:52:50 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=4, dbViewCount=0
+2025-08-01 22:52:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=3
+2025-08-01 22:52:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:52:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:52:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=1
+2025-08-01 22:52:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 4, 소요 시간: 10ms
+2025-08-01 22:52:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 4
+2025-08-01 22:52:53 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 22:52:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 22:52:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:52:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 22:52:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 3
+2025-08-01 22:52:53 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:52:53 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:52:53 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=4 -> 조회수 증가 처리됨
+2025-08-01 22:52:53 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=1
+2025-08-01 22:52:55 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=4
+2025-08-01 22:52:55 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=2
+2025-08-01 22:52:55 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:52:55 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=1
+2025-08-01 22:52:55 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 4, 소요 시간: 18ms
+2025-08-01 22:52:55 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:55 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 22:52:56 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:2, addedCount=1
+2025-08-01 22:52:56 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 2
+2025-08-01 22:52:56 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:52:56 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:2
+2025-08-01 22:52:56 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 3
+2025-08-01 22:52:56 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:52:56 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:52:56 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=2 memberId=4 -> 조회수 증가 처리됨
+2025-08-01 22:52:56 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=2, dbViewCount=0
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=4
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=3
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=1
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=1
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 4, 소요 시간: 12ms
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 4
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:3, addedCount=1
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 3
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:3
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 설정 결과: true
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=3 memberId=4 -> 조회수 증가 처리됨
+2025-08-01 22:52:57 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=3, dbViewCount=0
+2025-08-01 22:52:58 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=1, 점수=4
+2025-08-01 22:52:58 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=2, 점수=3
+2025-08-01 22:52:58 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=3, 점수=2
+2025-08-01 22:52:58 INFO  d.d.a.service.ArticleRankingService - [RANKING] 갱신 - articleId=4, 점수=1
+2025-08-01 22:52:58 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 4, 소요 시간: 25ms
+2025-08-01 22:52:58 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:52:58 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 0ms, 결과 수: 4
+2025-08-01 22:53:06 INFO  d.d.a.service.ArticleViewService - [VIEW] ZSET 점수 갱신 - articleId=1, DB=4, Redis=3, total=7
+2025-08-01 22:53:06 INFO  d.d.a.service.ArticleViewService - [VIEW] ZSET 점수 갱신 - articleId=2, DB=3, Redis=3, total=6
+2025-08-01 22:53:06 INFO  d.d.a.service.ArticleViewService - [VIEW] ZSET 점수 갱신 - articleId=3, DB=2, Redis=2, total=4
+2025-08-01 22:53:06 INFO  d.d.a.service.ArticleViewService - [VIEW] ZSET 점수 갱신 - articleId=4, DB=1, Redis=1, total=2
+2025-08-01 22:53:06 INFO  d.d.a.service.ArticleViewService - [VIEW] 전체 조회수 동기화 완료 - 대상 수: 4, 소요 시간: 38ms
+2025-08-01 22:53:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:53:07 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:53:07 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:53:07 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 4
+2025-08-01 22:53:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:53:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:53:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 5ms, 결과 수: 4
+2025-08-01 22:53:16 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:53:16 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 22:53:16 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 4
+2025-08-01 22:53:36 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:54:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:54:36 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 1ms
+2025-08-01 22:55:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:55:36 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:56:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:56:36 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:57:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:57:36 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:58:06 INFO  d.d.a.service.ArticleRankingService - [RANKING] 전체 랭킹 갱신 완료 - 대상 개수: 0, 소요 시간: 0ms
+2025-08-01 22:58:34 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-01 22:58:34 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-01 22:58:34 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-01 22:58:34 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-01 22:58:34 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-08-01 23:21:19 INFO  dev.devlink.DevlinkApplication - Starting DevlinkApplication using Java 21.0.6 with PID 40835 (/Users/kimminseok/IdeaProjects/dev-link-central-v2/build/classes/java/main started by kimminseok in /Users/kimminseok/IdeaProjects/dev-link-central-v2)
+2025-08-01 23:21:19 INFO  dev.devlink.DevlinkApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-01 23:21:20 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-01 23:21:20 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-01 23:21:20 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 65 ms. Found 4 JPA repository interfaces.
+2025-08-01 23:21:20 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-01 23:21:20 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-01 23:21:20 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.article.repository.ArticleLikeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 23:21:20 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.article.repository.ArticleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 23:21:20 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.comment.repository.CommentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 23:21:20 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface dev.devlink.member.repository.MemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-01 23:21:20 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2025-08-01 23:21:20 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-08-01 23:21:20 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-01 23:21:20 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-01 23:21:20 INFO  o.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-08-01 23:21:20 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-01 23:21:20 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 832 ms
+2025-08-01 23:21:20 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-01 23:21:20 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-01 23:21:20 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-08-01 23:21:20 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-01 23:21:20 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-01 23:21:21 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6fad5ace
+2025-08-01 23:21:21 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-01 23:21:21 WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-01 23:21:21 WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-01 23:21:21 INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-01 23:21:21 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@79bf39e5) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@6ac2c5a1)
+2025-08-01 23:21:21 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@364c93e6) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@66589252)
+2025-08-01 23:21:21 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@66a8ff6d) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1abbc1d4)
+2025-08-01 23:21:21 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@48bab2c6) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@6ad26381)
+2025-08-01 23:21:21 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@4b20aa21) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@f5167f0)
+2025-08-01 23:21:21 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@1260c85e) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@6b576ff8)
+2025-08-01 23:21:21 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@25e8a111) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@21022cbb)
+2025-08-01 23:21:21 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@353422fd) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@654cb30c)
+2025-08-01 23:21:21 DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5cc669d) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@351be56b)
+2025-08-01 23:21:21 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-01 23:21:21 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-01 23:21:21 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-01 23:21:22 INFO  d.d.a.service.ArticleViewService - [TEST] Redis에 테스트 키 저장 완료 - key=test:view:1, value=1
+2025-08-01 23:21:22 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-08-01 23:21:22 INFO  dev.devlink.DevlinkApplication - Started DevlinkApplication in 3.094 seconds (process running for 3.398)
+2025-08-01 23:21:56 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-01 23:21:56 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-01 23:21:56 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-08-01 23:21:56 WARN  d.d.c.interceptor.JwtAuthInterceptor - 유효하지 않은 JWT 토큰
+2025-08-01 23:22:56 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:22:56 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 0
+2025-08-01 23:22:56 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2025-08-01 23:23:02 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:02 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 5ms, 결과 수: 0
+2025-08-01 23:23:02 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 23:23:02 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 23:23:02 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 23:23:02 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 23:23:02 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 23:23:02 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 23:23:02 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=1 -> 조회수 증가 처리됨
+2025-08-01 23:23:02 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=0
+2025-08-01 23:23:04 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:04 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 5ms, 결과 수: 0
+2025-08-01 23:23:10 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:10 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 0
+2025-08-01 23:23:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 0
+2025-08-01 23:23:17 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:2, addedCount=1
+2025-08-01 23:23:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 2
+2025-08-01 23:23:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 23:23:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:2
+2025-08-01 23:23:17 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 23:23:17 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 23:23:17 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=2 memberId=2 -> 조회수 증가 처리됨
+2025-08-01 23:23:17 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=2, dbViewCount=0
+2025-08-01 23:23:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 0
+2025-08-01 23:23:18 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 23:23:18 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 23:23:18 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 23:23:18 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 23:23:18 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 23:23:18 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 23:23:18 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=2 -> 조회수 증가 처리됨
+2025-08-01 23:23:18 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=0
+2025-08-01 23:23:19 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:19 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 0
+2025-08-01 23:23:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=1, viewCount=0
+2025-08-01 23:23:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=2, viewCount=0
+2025-08-01 23:23:22 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상: 2
+2025-08-01 23:23:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 2
+2025-08-01 23:23:32 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:32 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 2
+2025-08-01 23:23:33 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:3, addedCount=1
+2025-08-01 23:23:33 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 3
+2025-08-01 23:23:33 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 23:23:33 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:3
+2025-08-01 23:23:33 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 23:23:33 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 23:23:33 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=3 memberId=3 -> 조회수 증가 처리됨
+2025-08-01 23:23:33 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=3, dbViewCount=0
+2025-08-01 23:23:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:34 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 2
+2025-08-01 23:23:35 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:2, addedCount=1
+2025-08-01 23:23:35 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 2
+2025-08-01 23:23:35 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 23:23:35 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:2
+2025-08-01 23:23:35 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 23:23:35 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 23:23:35 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=2 memberId=3 -> 조회수 증가 처리됨
+2025-08-01 23:23:35 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=2, dbViewCount=1
+2025-08-01 23:23:36 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:36 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 15ms, 결과 수: 2
+2025-08-01 23:23:37 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 23:23:37 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 23:23:37 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 23:23:37 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 23:23:37 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 23:23:37 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 23:23:37 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=3 -> 조회수 증가 처리됨
+2025-08-01 23:23:37 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=2
+2025-08-01 23:23:38 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:38 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 2
+2025-08-01 23:23:45 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:45 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 5ms, 결과 수: 2
+2025-08-01 23:23:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:49 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 2
+2025-08-01 23:23:51 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:4, addedCount=1
+2025-08-01 23:23:51 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 4
+2025-08-01 23:23:51 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 23:23:51 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:4
+2025-08-01 23:23:51 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 1
+2025-08-01 23:23:51 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 23:23:51 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=4 memberId=4 -> 조회수 증가 처리됨
+2025-08-01 23:23:51 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=4, dbViewCount=0
+2025-08-01 23:23:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 2
+2025-08-01 23:23:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=1, viewCount=2
+2025-08-01 23:23:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=2, viewCount=1
+2025-08-01 23:23:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=3, viewCount=0
+2025-08-01 23:23:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=4, viewCount=0
+2025-08-01 23:23:53 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:3, addedCount=1
+2025-08-01 23:23:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 3
+2025-08-01 23:23:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 23:23:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:3
+2025-08-01 23:23:53 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 23:23:53 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 23:23:53 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=3 memberId=4 -> 조회수 증가 처리됨
+2025-08-01 23:23:53 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=3, dbViewCount=0
+2025-08-01 23:23:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:54 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:23:55 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:2, addedCount=1
+2025-08-01 23:23:55 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 2
+2025-08-01 23:23:55 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 23:23:55 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:2
+2025-08-01 23:23:55 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 23:23:55 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 23:23:55 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=2 memberId=4 -> 조회수 증가 처리됨
+2025-08-01 23:23:55 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=2, dbViewCount=1
+2025-08-01 23:23:56 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:56 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:23:57 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=1
+2025-08-01 23:23:57 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 23:23:57 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 Redis에 조회수 저장 시도 시작
+2025-08-01 23:23:57 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔑 실제 Redis key: article:view:1
+2025-08-01 23:23:57 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔥 increment 결과: 2
+2025-08-01 23:23:57 INFO  d.d.a.service.ArticleViewService - [VIEW] ⏳ TTL 값 설정됨: 300000초
+2025-08-01 23:23:57 INFO  d.d.a.service.ArticleViewService - [VIEW] articleId=1 memberId=4 -> 조회수 증가 처리됨
+2025-08-01 23:23:57 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=2
+2025-08-01 23:23:58 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:23:58 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:24:00 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:24:00 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 4
+2025-08-01 23:24:01 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:24:01 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:24:02 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:24:02 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:24:02 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:24:02 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:24:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:24:15 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 4ms, 결과 수: 4
+2025-08-01 23:24:19 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:24:19 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 6ms, 결과 수: 4
+2025-08-01 23:24:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=1, viewCount=2
+2025-08-01 23:24:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=2, viewCount=1
+2025-08-01 23:24:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=3, viewCount=0
+2025-08-01 23:24:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=4, viewCount=0
+2025-08-01 23:24:22 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상: 4
+2025-08-01 23:24:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:24:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 7ms, 결과 수: 4
+2025-08-01 23:24:30 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:24:30 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:24:31 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:24:31 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:24:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=1, viewCount=4
+2025-08-01 23:24:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=2, viewCount=3
+2025-08-01 23:24:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=3, viewCount=2
+2025-08-01 23:24:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=4, viewCount=1
+2025-08-01 23:24:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:24:57 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 4
+2025-08-01 23:24:58 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:24:58 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:25:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=1, viewCount=4
+2025-08-01 23:25:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=2, viewCount=3
+2025-08-01 23:25:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=3, viewCount=2
+2025-08-01 23:25:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=4, viewCount=1
+2025-08-01 23:25:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:25:48 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:25:50 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:4, addedCount=0
+2025-08-01 23:25:50 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 4
+2025-08-01 23:25:50 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=4, dbViewCount=1
+2025-08-01 23:25:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:25:51 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:25:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=1, viewCount=4
+2025-08-01 23:25:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=2, viewCount=3
+2025-08-01 23:25:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=3, viewCount=2
+2025-08-01 23:25:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=4, viewCount=1
+2025-08-01 23:26:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=1, viewCount=4
+2025-08-01 23:26:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=2, viewCount=3
+2025-08-01 23:26:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=3, viewCount=2
+2025-08-01 23:26:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=4, viewCount=1
+2025-08-01 23:26:22 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상: 0
+2025-08-01 23:26:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=1, viewCount=4
+2025-08-01 23:26:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=2, viewCount=3
+2025-08-01 23:26:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=3, viewCount=2
+2025-08-01 23:26:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=4, viewCount=1
+2025-08-01 23:27:01 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:27:01 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:27:02 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:4, addedCount=0
+2025-08-01 23:27:02 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 4
+2025-08-01 23:27:02 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=4, dbViewCount=1
+2025-08-01 23:27:05 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:27:05 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:27:11 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:27:11 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 6ms, 결과 수: 4
+2025-08-01 23:27:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=1, viewCount=4
+2025-08-01 23:27:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=2, viewCount=3
+2025-08-01 23:27:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=3, viewCount=2
+2025-08-01 23:27:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=4, viewCount=1
+2025-08-01 23:27:22 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상: 0
+2025-08-01 23:27:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=1, viewCount=4
+2025-08-01 23:27:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=2, viewCount=3
+2025-08-01 23:27:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=3, viewCount=2
+2025-08-01 23:27:52 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=4, viewCount=1
+2025-08-01 23:28:14 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:14 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 4
+2025-08-01 23:28:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 3ms, 결과 수: 4
+2025-08-01 23:28:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:28:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 4
+2025-08-01 23:28:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:17 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 4
+2025-08-01 23:28:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 4ms, 결과 수: 4
+2025-08-01 23:28:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 4
+2025-08-01 23:28:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 4
+2025-08-01 23:28:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 4
+2025-08-01 23:28:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 4
+2025-08-01 23:28:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:18 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:28:20 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=0
+2025-08-01 23:28:20 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 23:28:20 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=4
+2025-08-01 23:28:21 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:21 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 4
+2025-08-01 23:28:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=1, viewCount=4
+2025-08-01 23:28:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=2, viewCount=3
+2025-08-01 23:28:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=3, viewCount=2
+2025-08-01 23:28:22 INFO  d.d.a.service.ArticleRankingService - [RANKING] 스냅샷 갱신 - articleId=4, viewCount=1
+2025-08-01 23:28:22 INFO  d.d.a.service.ArticleViewService - [VIEW] 조회수 동기화 완료 - 대상: 0
+2025-08-01 23:28:23 INFO  d.d.a.service.ArticleViewService - [ㅋㅋㅋVIEWㅋㅋㅋ] memberViewSetKey=article:view:concurrency:1, addedCount=0
+2025-08-01 23:28:23 INFO  d.d.a.service.ArticleViewService - [VIEW] 🔄 flush 대상에 추가 시도: 1
+2025-08-01 23:28:23 INFO  d.d.a.service.ArticleViewService - [ㅁㅁㅁVIEWㅁㅁㅁ] articleId=1, dbViewCount=4
+2025-08-01 23:28:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:24 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 2ms, 결과 수: 4
+2025-08-01 23:28:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] 🔍 Top5 랭킹 조회 시작
+2025-08-01 23:28:26 INFO  d.d.a.service.ArticleRankingService - [RANKING] Top5 조회 소요 시간: 1ms, 결과 수: 4
+2025-08-01 23:28:31 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-01 23:28:31 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-01 23:28:31 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-01 23:28:31 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-01 23:28:31 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
