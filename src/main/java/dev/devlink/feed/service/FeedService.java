@@ -1,5 +1,6 @@
 package dev.devlink.feed.service;
 
+import dev.devlink.comment.repository.FeedCommentRepository;
 import dev.devlink.feed.entity.Feed;
 import dev.devlink.feed.exception.FeedError;
 import dev.devlink.feed.exception.FeedException;
@@ -22,6 +23,7 @@ public class FeedService {
 
     private final FeedRepository feedRepository;
     private final FeedLikeRepository feedLikeRepository;
+    private final FeedCommentRepository commentRepository;
     private final MemberService memberService;
 
     @Transactional
@@ -40,7 +42,8 @@ public class FeedService {
         for (Feed feed : feeds) {
             boolean isLiked = feedLikeRepository.existsByFeedAndMember(feed, member);
             long likeCount = feedLikeRepository.countByFeed(feed);
-            FeedResponse response = FeedResponse.from(feed, memberId, isLiked, likeCount);
+            long commentCount = commentRepository.countByFeedId(feed.getId());
+            FeedResponse response = FeedResponse.from(feed, memberId, isLiked, likeCount, commentCount);
             result.add(response);
         }
         
@@ -49,12 +52,16 @@ public class FeedService {
 
     @Transactional
     public void deleteFeed(Long memberId, Long feedId) {
-        Feed feed = feedRepository.findById(feedId)
-                .orElseThrow(() -> new FeedException(FeedError.NOT_FOUND));
-        
+        Feed feed = findFeedById(feedId);
+
         if (!feed.isAuthor(memberId)) {
             throw new FeedException(FeedError.NO_PERMISSION);
         }
         feedRepository.delete(feed);
+    }
+
+    public Feed findFeedById(Long feedId) {
+        return feedRepository.findById(feedId)
+                .orElseThrow(() -> new FeedException(FeedError.NOT_FOUND));
     }
 }

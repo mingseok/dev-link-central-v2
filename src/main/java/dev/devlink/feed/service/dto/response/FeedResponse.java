@@ -20,12 +20,14 @@ public class FeedResponse {
     private boolean isMyFeed;
     private boolean isLiked;
     private long likeCount;
+    private long commentCount;
 
     public static FeedResponse from(
             Feed feed,
             Long currentUserId,
             boolean isLiked,
-            long likeCount
+            long likeCount,
+            long commentCount
     ) {
         return new FeedResponse(
                 feed.getId(),
@@ -35,7 +37,8 @@ public class FeedResponse {
                 DateUtils.formatFeedDateTime(feed.getCreatedAt()),
                 feed.isAuthor(currentUserId),
                 isLiked,
-                likeCount
+                likeCount,
+                commentCount
         );
     }
 }

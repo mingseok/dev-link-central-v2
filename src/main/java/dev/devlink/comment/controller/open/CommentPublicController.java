@@ -1,6 +1,6 @@
 package dev.devlink.comment.controller.open;
 
-import dev.devlink.comment.service.CommentService;
+import dev.devlink.comment.service.ArticleCommentService;
 import dev.devlink.comment.service.dto.response.CommentResponse;
 import dev.devlink.common.dto.ApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +17,11 @@ import java.util.List;
 @RequestMapping("/api/public/articles/{articleId}/comments")
 public class CommentPublicController {
 
-    private final CommentService commentService;
+    private final ArticleCommentService articleCommentService;
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<CommentResponse>>> getComments(@PathVariable Long articleId) {
-        List<CommentResponse> responses = commentService.getCommentTreeByArticleId(articleId);
+        List<CommentResponse> responses = articleCommentService.getComments(articleId);
         return ResponseEntity.ok(ApiResponse.success(responses));
     }
 }
