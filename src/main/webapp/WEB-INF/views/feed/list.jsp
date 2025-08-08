@@ -72,18 +72,23 @@
               console.log("피드 작성자 ID:", feed.writerId, "타입:", typeof feed.writerId);
               console.log("현재 유저 ID:", currentUserId, "타입:", typeof currentUserId);
               console.log("isMyFeed:", feed.isMyFeed);
-              console.log("ID 비교 결과:", String(feed.writerId) === String(currentUserId));
+              console.log("isLiked:", feed.isLiked);
+              console.log("likeCount:", feed.likeCount);
               
               // 현재 로그인한 유저가 작성한 피드인지 확인
               const isMyFeed = String(feed.writerId) === String(currentUserId);
               
               let deleteButtonHtml = '';
               if (isMyFeed) {
-                deleteButtonHtml = '<button class="btn btn-outline-danger btn-sm" onclick="deleteFeed(' + feed.feedId + ')">🗑️ 삭제</button>';
+                deleteButtonHtml = '<button class="btn btn-outline-danger btn-sm ml-2" onclick="deleteFeed(' + feed.feedId + ')">🗑️ 삭제</button>';
                 console.log("삭제 버튼 추가됨 - 피드 ID:", feed.feedId);
               } else {
                 console.log("삭제 버튼 숨김 - 다른 유저의 피드");
               }
+
+              // 좋아요 버튼
+              const likeButtonClass = feed.isLiked ? 'btn-danger' : 'btn-outline-danger';
+              const likeButtonText = feed.isLiked ? '❤️' : '🤍';
               
               feedsHtml += '' +
                 '<div class="feed-card" data-feed-id="' + feed.feedId + '">' +
@@ -98,6 +103,14 @@
                   '</div>' +
                   '<div class="feed-content">' +
                     '<p>' + feed.content + '</p>' +
+                  '</div>' +
+                  '<div class="feed-footer">' +
+                    '<div class="like-section">' +
+                      '<button class="btn ' + likeButtonClass + ' btn-sm like-btn" onclick="likeFeed(' + feed.feedId + ')">' +
+                        likeButtonText +
+                      '</button>' +
+                      '<span class="like-count" id="like-count-' + feed.feedId + '">' + feed.likeCount + '</span>' +
+                    '</div>' +
                   '</div>' +
                 '</div>';
             });
@@ -117,17 +130,70 @@
     }
 
     function deleteFeed(feedId) {
+      Swal.fire({
+        title: '피드를 삭제하시겠습니까?',
+        text: "삭제된 피드는 복구할 수 없습니다.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: '삭제',
+        cancelButtonText: '취소'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            url: "/api/v1/feeds/" + feedId,
+            type: "DELETE",
+            headers: { 'Authorization': 'Bearer ' + jwt },
+            success: function () {
+              Swal.fire({
+                title: "피드 삭제 완료",
+                icon: "success",
+                timer: 1500,
+                showConfirmButton: false
+              }).then(() => {
+                location.reload();
+              });
+            },
+            error: function (xhr) {
+              console.error("피드 삭제 실패:", xhr);
+              Swal.fire("오류", "피드 삭제에 실패했습니다.", "error");
+            }
+          });
+        }
+      });
+    }
+
+    function likeFeed(feedId) {
       $.ajax({
-        url: "/api/v1/feeds/" + feedId,
-        type: "DELETE",
+        url: "/api/v1/feeds/" + feedId + "/like",
+        type: "POST",
         headers: { 'Authorization': 'Bearer ' + jwt },
-        success: function () {
-          alert('피드 삭제 완료!');
-          location.reload();
+        success: function (response) {
+          console.log("좋아요 처리 성공:", response);
+          
+          const data = response.data;
+          const isLiked = data.isLiked;
+          const likeCount = data.likeCount;
+          
+          // 서버 응답을 기반으로 UI 업데이트
+          const likeBtn = $(`.feed-card[data-feed-id="${feedId}"] .like-btn`);
+          const likeCountSpan = $("#like-count-" + feedId);
+          
+          if (isLiked) {
+            // 좋아요 상태
+            likeBtn.removeClass('btn-outline-danger').addClass('btn-danger').text('❤️');
+          } else {
+            // 좋아요 취소 상태
+            likeBtn.removeClass('btn-danger').addClass('btn-outline-danger').text('🤍');
+          }
+          
+          // 실제 서버에서 받은 카운트로 업데이트
+          likeCountSpan.text(likeCount);
         },
         error: function (xhr) {
-          console.error("피드 삭제 실패:", xhr);
-          Swal.fire("오류", "피드 삭제에 실패했습니다.", "error");
+          console.error("좋아요 처리 실패:", xhr);
+          Swal.fire("오류", "좋아요 처리에 실패했습니다.", "error");
         }
       });
     }

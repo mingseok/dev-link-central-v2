@@ -2,8 +2,10 @@ package dev.devlink.feed.controller.closed;
 
 import dev.devlink.common.dto.ApiResponse;
 import dev.devlink.common.identity.annotation.AuthMemberId;
+import dev.devlink.feed.service.FeedLikeService;
 import dev.devlink.feed.service.FeedService;
 import dev.devlink.feed.service.dto.request.FeedCreateRequest;
+import dev.devlink.feed.service.dto.response.FeedLikeResponse;
 import dev.devlink.feed.service.dto.response.FeedResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.List;
 public class FeedController {
 
     private final FeedService feedService;
+    private final FeedLikeService feedLikeService;
 
     @PostMapping
     public ResponseEntity<ApiResponse<Void>> createFeed(
@@ -36,12 +39,21 @@ public class FeedController {
         return ResponseEntity.ok(ApiResponse.success(responses));
     }
 
-    @DeleteMapping("/{feedId}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteFeed(
-            @PathVariable Long feedId,
+            @PathVariable Long id,
             @AuthMemberId Long memberId
     ) {
-        feedService.deleteFeed(memberId, feedId);
+        feedService.deleteFeed(memberId, id);
         return ResponseEntity.ok(ApiResponse.successEmpty());
+    }
+
+    @PostMapping("/{id}/like")
+    public ResponseEntity<ApiResponse<FeedLikeResponse>> likeOrCancel(
+            @PathVariable Long id,
+            @AuthMemberId Long memberId
+    ) {
+        FeedLikeResponse response = feedLikeService.likeOrCancel(memberId, id);
+        return ResponseEntity.ok(ApiResponse.success(response));
     }
 }

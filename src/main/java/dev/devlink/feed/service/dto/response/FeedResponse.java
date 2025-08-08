@@ -8,8 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class FeedResponse {
 
     private Long feedId;
@@ -18,15 +18,24 @@ public class FeedResponse {
     private String content;
     private String createdAt;
     private boolean isMyFeed;
+    private boolean isLiked;
+    private long likeCount;
 
-    public static FeedResponse from(Feed feed, Long currentUserId) {
+    public static FeedResponse from(
+            Feed feed,
+            Long currentUserId,
+            boolean isLiked,
+            long likeCount
+    ) {
         return new FeedResponse(
                 feed.getId(),
                 feed.getWriterId(),
                 feed.getWriterNickname(),
                 feed.getContent(),
                 DateUtils.formatFeedDateTime(feed.getCreatedAt()),
-                feed.isAuthor(currentUserId)
+                feed.isAuthor(currentUserId),
+                isLiked,
+                likeCount
         );
     }
 }

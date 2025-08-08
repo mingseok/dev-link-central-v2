@@ -3,6 +3,7 @@ package dev.devlink.feed.service;
 import dev.devlink.feed.entity.Feed;
 import dev.devlink.feed.exception.FeedError;
 import dev.devlink.feed.exception.FeedException;
+import dev.devlink.feed.repository.FeedLikeRepository;
 import dev.devlink.feed.repository.FeedRepository;
 import dev.devlink.feed.service.dto.request.FeedCreateRequest;
 import dev.devlink.feed.service.dto.response.FeedResponse;
@@ -20,6 +21,7 @@ import java.util.List;
 public class FeedService {
 
     private final FeedRepository feedRepository;
+    private final FeedLikeRepository feedLikeRepository;
     private final MemberService memberService;
 
     @Transactional
@@ -36,7 +38,9 @@ public class FeedService {
         
         List<FeedResponse> result = new ArrayList<>();
         for (Feed feed : feeds) {
-            FeedResponse response = FeedResponse.from(feed, memberId);
+            boolean isLiked = feedLikeRepository.existsByFeedAndMember(feed, member);
+            long likeCount = feedLikeRepository.countByFeed(feed);
+            FeedResponse response = FeedResponse.from(feed, memberId, isLiked, likeCount);
             result.add(response);
         }
         

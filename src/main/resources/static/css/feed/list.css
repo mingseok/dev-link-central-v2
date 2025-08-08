@@ -139,6 +139,39 @@ body {
     white-space: pre-wrap;
 }
 
+/* 피드 푸터 */
+.feed-footer {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.like-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.like-btn {
+    border-radius: 20px;
+    font-size: 16px;
+    width: 40px;
+    height: 35px;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.like-btn:hover {
+    transform: scale(1.1);
+}
+
+.like-count {
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
+    min-width: 20px;
+}
+
 /* 로딩 상태 */
 .loading-state {
     text-align: center;
