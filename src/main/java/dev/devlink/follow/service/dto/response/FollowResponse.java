@@ -1,10 +1,8 @@
 package dev.devlink.follow.service.dto.response;
 
-import dev.devlink.follow.constant.FollowConstants;
+import dev.devlink.common.utils.DateUtils;
 import dev.devlink.member.entity.Member;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 public class FollowResponse {
@@ -14,7 +12,12 @@ public class FollowResponse {
     private final String joinedAt;
     private final Boolean isFollowing;
 
-    public FollowResponse(Long memberId, String nickname, String joinedAt, Boolean isFollowing) {
+    public FollowResponse(
+            Long memberId,
+            String nickname,
+            String joinedAt,
+            Boolean isFollowing
+    ) {
         this.memberId = memberId;
         this.nickname = nickname;
         this.joinedAt = joinedAt;
@@ -25,7 +28,7 @@ public class FollowResponse {
         return new FollowResponse(
                 member.getId(),
                 member.getNickname(),
-                formatDateTime(member.getCreatedAt()),
+                DateUtils.formatDate(member.getCreatedAt()),
                 false
         );
     }
@@ -34,15 +37,8 @@ public class FollowResponse {
         return new FollowResponse(
                 member.getId(),
                 member.getNickname(),
-                formatDateTime(member.getCreatedAt()),
+                DateUtils.formatDate(member.getCreatedAt()),
                 isFollowing
         );
-    }
-
-    private static String formatDateTime(LocalDateTime dateTime) {
-        if (dateTime == null) {
-            return FollowConstants.NO_DATE_INFO;
-        }
-        return dateTime.format(FollowConstants.DATE_FORMATTER);
     }
 }

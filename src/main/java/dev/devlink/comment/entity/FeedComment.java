@@ -2,8 +2,8 @@ package dev.devlink.comment.entity;
 
 import dev.devlink.comment.exception.CommentError;
 import dev.devlink.comment.exception.CommentException;
-import dev.devlink.article.entity.Article;
 import dev.devlink.common.BaseEntity;
+import dev.devlink.feed.entity.Feed;
 import dev.devlink.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Comment extends BaseEntity {
+public class FeedComment extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "article_id", nullable = false)
-    private Article article;
+    @JoinColumn(name = "feed_id")
+    private Feed feed;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
@@ -31,26 +31,26 @@ public class Comment extends BaseEntity {
     private Long parentId;
 
     @Builder
-    public Comment(
-            Article article,
+    public FeedComment(
+            Feed feed,
             Member member,
             String content,
             Long parentId
     ) {
-        this.article = article;
+        this.feed = feed;
         this.member = member;
         this.content = content;
         this.parentId = parentId;
     }
 
-    public static Comment create(
-            Article article,
+    public static FeedComment create(
+            Feed feed,
             Member member,
             Long parentId,
             String content
     ) {
-        return Comment.builder()
-                .article(article)
+        return FeedComment.builder()
+                .feed(feed)
                 .member(member)
                 .parentId(parentId)
                 .content(content)
@@ -59,6 +59,10 @@ public class Comment extends BaseEntity {
 
     public String getWriterNickname() {
         return member.getNickname();
+    }
+
+    public Member getWriter() {
+        return this.member;
     }
 
     public void checkAuthor(Long memberId) {

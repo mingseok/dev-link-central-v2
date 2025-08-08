@@ -1,20 +1,24 @@
 package dev.devlink.profile.service.dto.response;
 
+import dev.devlink.common.utils.DateUtils;
 import dev.devlink.member.entity.Member;
-import lombok.Builder;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Builder
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class ProfileResponse {
 
     private Long memberId;
     private String nickname;
     private String joinedAt;
     private String bio;
-    private boolean isFollowing;
-    private long followersCount;
-    private long followingsCount;
+    private Boolean isFollowing;
+    private Long followersCount;
+    private Long followingsCount;
 
     public static ProfileResponse from(
             Member member,
@@ -23,14 +27,14 @@ public class ProfileResponse {
             long followers,
             long followings
     ) {
-        return ProfileResponse.builder()
-                .memberId(member.getId())
-                .nickname(member.getNickname())
-                .joinedAt(member.getCreatedAt().toLocalDate().toString())
-                .bio(bio)
-                .isFollowing(isFollowing)
-                .followersCount(followers)
-                .followingsCount(followings)
-                .build();
+        return new ProfileResponse(
+                member.getId(),
+                member.getNickname(),
+                DateUtils.formatDate(member.getCreatedAt()),
+                bio,
+                isFollowing,
+                followers,
+                followings
+        );
     }
 }

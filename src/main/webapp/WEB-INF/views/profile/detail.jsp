@@ -55,20 +55,33 @@
           $("#followersCount").text(data.followersCount);
           $("#followingsCount").text(data.followingsCount);
           $("#bio-text").text(data.bio || '');
-
-          console.log("Profile Data:", data);
-          console.log("Profile Owner ID from server:", data.memberId);
           
-          // 현재 로그인한 사용자와 프로필 주인이 같은지 비교
-          isMe = (currentUserId == data.memberId);
-          console.log("Is this my profile?", isMe);
+          const isFollowingBoolean = Boolean(data.isFollowing);
+          isMe = (String(currentUserId) === String(data.memberId));
 
           if (!isMe) {
             // 다른 사람의 프로필이면 팔로우/언팔로우 버튼 표시
-            $("#follow-btn").show().text(data.isFollowing ? "언팔로우" : "팔로우")
-                    .off("click").on("click", function () {
-              data.isFollowing ? unfollow() : follow();
-            });
+            const buttonText = isFollowingBoolean ? "언팔로우" : "팔로우";
+            const buttonClass = isFollowingBoolean ? "btn-danger" : "btn-primary";
+            console.log("Setting button text to:", buttonText);
+            console.log("Setting button class to:", buttonClass);
+            
+            $("#follow-btn")
+              .show()
+              .text(buttonText)
+              .removeClass("btn-primary btn-danger")
+              .addClass(buttonClass)
+              .off("click")
+              .on("click", function () {
+                const currentIsFollowing = $("#follow-btn").text() === "언팔로우";
+                console.log("Button clicked - current state:", currentIsFollowing ? "following" : "not following");
+                
+                if (currentIsFollowing) {
+                  unfollow();
+                } else {
+                  follow();
+                }
+              });
             $("#edit-bio-btn, #save-bio-btn").hide();
           } else {
             // 자신의 프로필이면 소개글 수정 버튼 표시
@@ -111,35 +124,81 @@
     });
 
     function follow() {
+      console.log("팔로우 요청 시작 - targetId:", profileOwnerId);
+      
+      // 중복 요청 방지
+      $("#follow-btn").prop('disabled', true);
+      
       $.ajax({
         url: "/api/v1/follows",
         type: "POST",
         contentType: "application/json",
-        data: JSON.stringify({ followeeId: profileOwnerId }),
+        data: JSON.stringify({ followeeId: parseInt(profileOwnerId) }),
         headers: { 'Authorization': 'Bearer ' + jwt },
-        success: function () {
-          $("#follow-btn").text("언팔로우").off("click").on("click", unfollow);
-          $("#followersCount").text(parseInt($("#followersCount").text()) + 1); // 팔로워 수 +1
-          // Swal.fire("팔로우 완료", "", "success");
+        success: function (response) {
+          console.log("팔로우 성공:", response);
+          $("#follow-btn")
+            .text("언팔로우")
+            .removeClass("btn-primary")
+            .addClass("btn-danger")
+            .prop('disabled', false);
+          
+          const currentCount = parseInt($("#followersCount").text()) || 0;
+          $("#followersCount").text(currentCount + 1);
         },
-        error: function () {
-          Swal.fire("오류", "팔로우 요청 실패", "error");
+        error: function (xhr, status, error) {
+          console.error("팔로우 실패:", xhr);
+          console.error("Status:", status);
+          console.error("Error:", error);
+          console.error("Response Text:", xhr.responseText);
+          
+          $("#follow-btn").prop('disabled', false);
+          
+          let errorMessage = "팔로우 요청에 실패했습니다.";
+          if (xhr.responseJSON && xhr.responseJSON.message) {
+            errorMessage = xhr.responseJSON.message;
+          }
+          
+          Swal.fire("오류", errorMessage, "error");
         }
       });
     }
 
     function unfollow() {
+      console.log("언팔로우 요청 시작 - targetId:", profileOwnerId);
+      
+      // 중복 요청 방지
+      $("#follow-btn").prop('disabled', true);
+      
       $.ajax({
-        url: "/api/v1/follows/" + profileOwnerId, // URL의 프로필 주인 ID 사용
+        url: "/api/v1/follows/" + profileOwnerId,
         type: "DELETE",
         headers: { 'Authorization': 'Bearer ' + jwt },
-        success: function () {
-          $("#follow-btn").text("팔로우").off("click").on("click", follow);
-          $("#followersCount").text(parseInt($("#followersCount").text()) - 1); // 팔로워 수 -1
-          // Swal.fire("언팔로우 완료", "", "success");
+        success: function (response) {
+          console.log("언팔로우 성공:", response);
+          $("#follow-btn")
+            .text("팔로우")
+            .removeClass("btn-danger")
+            .addClass("btn-primary")
+            .prop('disabled', false);
+          
+          const currentCount = parseInt($("#followersCount").text()) || 0;
+          $("#followersCount").text(Math.max(0, currentCount - 1));
         },
-        error: function () {
-          Swal.fire("오류", "언팔로우 요청 실패", "error");
+        error: function (xhr, status, error) {
+          console.error("언팔로우 실패:", xhr);
+          console.error("Status:", status);
+          console.error("Error:", error);
+          console.error("Response Text:", xhr.responseText);
+          
+          $("#follow-btn").prop('disabled', false);
+          
+          let errorMessage = "언팔로우 요청에 실패했습니다.";
+          if (xhr.responseJSON && xhr.responseJSON.message) {
+            errorMessage = xhr.responseJSON.message;
+          }
+          
+          Swal.fire("오류", errorMessage, "error");
         }
       });
     }
@@ -150,7 +209,7 @@
 <div class="profile-container">
   <div class="profile-header">
     <h2 id="nickname">닉네임</h2>
-    <button id="follow-btn" style="display: none;">팔로우</button>
+    <button id="follow-btn" class="btn btn-primary" style="display: none;">팔로우</button>
   </div>
 
   <p> 가입일: <span id="joinedAt"></span></p>

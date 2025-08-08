@@ -113,6 +113,11 @@
             window.location.href = "/view/follow/followers";
         }
 
+        // 피드 페이지로 이동
+        function feedView() {
+            window.location.href = "/view/feeds";
+        }
+
         // 내 프로필 페이지로 이동
         function profileView() {
             const jwt = localStorage.getItem('jwt');
@@ -138,8 +143,8 @@
     <button onclick="logout()">로그아웃</button>
     <button onclick="followersView()">팔로워 리스트</button>
     <button onclick="profileView()">프로필</button>
-    <button onclick="Article()">스터디 모집 게시판</button>
-    <button onclick="StudyGroupView()">피드</button>
+    <button onclick="Article()">정보 게시판</button>
+    <button onclick="feedView()">피드</button>
     <button onclick="groupFeedView()">그룹 피드 (메인)</button>
     <button onclick="myFeed()">나의 피드</button>
 </div>

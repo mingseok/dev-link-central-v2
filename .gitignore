@@ -9,3 +9,4 @@ out/
 /out/
 /target/
 *.probe
+secrets.txt
