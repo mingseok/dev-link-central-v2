@@ -25,7 +25,8 @@ public class ProfileService {
         Member viewer = memberService.findMemberById(viewerId);
         Member target = memberService.findMemberById(targetId);
 
-        boolean isFollowing = followRepository.existsByFollowerAndFollowee(viewer, target);
+        boolean isFollowingExists = followRepository.existsByFollowerAndFollowee(viewer, target);
+
         long followers = followRepository.countByFollowee(target);
         long followings = followRepository.countByFollower(target);
 
@@ -33,7 +34,7 @@ public class ProfileService {
                 .map(Profile::getBio)
                 .orElse("");
 
-        return ProfileResponse.from(target, bio, isFollowing, followers, followings);
+        return ProfileResponse.from(target, bio, isFollowingExists, followers, followings);
     }
 
     @Transactional
