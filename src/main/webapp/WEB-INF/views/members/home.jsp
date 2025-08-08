@@ -145,8 +145,6 @@
     <button onclick="profileView()">프로필</button>
     <button onclick="Article()">정보 게시판</button>
     <button onclick="feedView()">피드</button>
-    <button onclick="groupFeedView()">그룹 피드 (메인)</button>
-    <button onclick="myFeed()">나의 피드</button>
 </div>
 </body>
 </html>
