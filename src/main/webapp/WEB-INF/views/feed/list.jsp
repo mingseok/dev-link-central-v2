@@ -74,10 +74,10 @@
               console.log("isMyFeed:", feed.isMyFeed);
               console.log("isLiked:", feed.isLiked);
               console.log("likeCount:", feed.likeCount);
-              
+
               // 현재 로그인한 유저가 작성한 피드인지 확인
               const isMyFeed = String(feed.writerId) === String(currentUserId);
-              
+
               let deleteButtonHtml = '';
               if (isMyFeed) {
                 deleteButtonHtml = '<button class="btn btn-outline-danger btn-sm ml-2" onclick="deleteFeed(' + feed.feedId + ')">🗑️ 삭제</button>';
@@ -89,7 +89,7 @@
               // 좋아요 버튼
               const likeButtonClass = feed.isLiked ? 'btn-danger' : 'btn-outline-danger';
               const likeButtonText = feed.isLiked ? '❤️' : '🤍';
-              
+
               feedsHtml += '' +
                 '<div class="feed-card" data-feed-id="' + feed.feedId + '">' +
                   '<div class="feed-header">' +
@@ -107,9 +107,28 @@
                   '<div class="feed-footer">' +
                     '<div class="like-section">' +
                       '<button class="btn ' + likeButtonClass + ' btn-sm like-btn" onclick="likeFeed(' + feed.feedId + ')">' +
-                        likeButtonText +
-                      '</button>' +
-                      '<span class="like-count" id="like-count-' + feed.feedId + '">' + feed.likeCount + '</span>' +
+                          likeButtonText +
+                        '</button>' +
+                        '<span class="like-count" id="like-count-' + feed.feedId + '">' + feed.likeCount + '</span>' +
+                      '</div>' +
+                      '<div class="comment-section">' +
+                        '<button class="btn btn-outline-secondary btn-sm comment-btn show-comments-btn" data-feed-id="' + feed.feedId + '">' +
+                          '💬 댓글 ' + feed.commentCount +
+                        '</button>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="feed-comments" id="comments-' + feed.feedId + '" style="display: none;">' +
+                    '<div class="comment-form">' +
+                      '<form id="commentForm-' + feed.feedId + '">' +
+                        '<textarea name="content" placeholder="댓글을 입력하세요..." rows="3" required></textarea>' +
+                        '<div class="comment-form-actions">' +
+                          '<button type="submit" class="comment-submit-btn">댓글 작성</button>' +
+                        '</div>' +
+                      '</form>' +
+                    '</div>' +
+                    '<div class="comments-container" id="commentsContainer-' + feed.feedId + '">' +
+                      '<div class="comments-loading">댓글을 불러오는 중...</div>' +
                     '</div>' +
                   '</div>' +
                 '</div>';
@@ -171,15 +190,15 @@
         headers: { 'Authorization': 'Bearer ' + jwt },
         success: function (response) {
           console.log("좋아요 처리 성공:", response);
-          
+
           const data = response.data;
           const isLiked = data.isLiked;
           const likeCount = data.likeCount;
-          
+
           // 서버 응답을 기반으로 UI 업데이트
           const likeBtn = $(`.feed-card[data-feed-id="${feedId}"] .like-btn`);
           const likeCountSpan = $("#like-count-" + feedId);
-          
+
           if (isLiked) {
             // 좋아요 상태
             likeBtn.removeClass('btn-outline-danger').addClass('btn-danger').text('❤️');
@@ -187,7 +206,7 @@
             // 좋아요 취소 상태
             likeBtn.removeClass('btn-danger').addClass('btn-outline-danger').text('🤍');
           }
-          
+
           // 실제 서버에서 받은 카운트로 업데이트
           likeCountSpan.text(likeCount);
         },
@@ -228,5 +247,9 @@
     </div>
   </div>
 </div>
+
+<!-- 댓글 기능 스크립트 -->
+<script src="/js/auth.js"></script>
+<script src="/js/feed-comment.js"></script>
 </body>
 </html>

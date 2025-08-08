@@ -146,6 +146,12 @@ body {
     border-top: 1px solid rgba(102, 126, 234, 0.1);
 }
 
+.feed-stats {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 .like-section {
     display: flex;
     align-items: center;
@@ -170,6 +176,28 @@ body {
     font-weight: 600;
     color: #495057;
     min-width: 20px;
+}
+
+.comment-section {
+    display: flex;
+    align-items: center;
+}
+
+.comment-btn {
+    border-radius: 20px;
+    font-size: 14px;
+    padding: 6px 12px;
+    transition: all 0.3s ease;
+    border: 1px solid #dee2e6;
+    background: white;
+    color: #6c757d;
+}
+
+.comment-btn:hover {
+    background: #f8f9fa;
+    border-color: #667eea;
+    color: #667eea;
+    transform: translateY(-1px);
 }
 
 /* 로딩 상태 */

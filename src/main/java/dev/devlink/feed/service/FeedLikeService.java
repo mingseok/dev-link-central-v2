@@ -24,14 +24,17 @@ public class FeedLikeService {
     @Transactional
     public FeedLikeResponse likeOrCancel(Long memberId, Long feedId) {
         Member member = memberService.findMemberById(memberId);
-        Feed feed = feedRepository.findById(feedId)
-                .orElseThrow(() -> new FeedException(FeedError.NOT_FOUND));
-
-        boolean isLiked = feedLikeRepository.existsByFeedAndMember(feed, member);
-        if (isLiked) {
+        Feed feed = findFeedById(feedId);
+        
+        if (feedLikeRepository.existsByFeedAndMember(feed, member)) {
             return cancelLike(feed, member);
         }
         return addLike(feed, member);
+    }
+
+    private Feed findFeedById(Long feedId) {
+        return feedRepository.findById(feedId)
+                .orElseThrow(() -> new FeedException(FeedError.NOT_FOUND));
     }
 
     private FeedLikeResponse cancelLike(Feed feed, Member member) {
