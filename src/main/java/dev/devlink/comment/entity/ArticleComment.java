@@ -1,8 +1,8 @@
 package dev.devlink.comment.entity;
 
+import dev.devlink.article.entity.Article;
 import dev.devlink.comment.exception.CommentError;
 import dev.devlink.comment.exception.CommentException;
-import dev.devlink.article.entity.Article;
 import dev.devlink.common.BaseEntity;
 import dev.devlink.member.entity.Member;
 import jakarta.persistence.*;
@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Comment extends BaseEntity {
+public class ArticleComment extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "article_id", nullable = false)
+    @JoinColumn(name = "article_id")
     private Article article;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -31,7 +31,7 @@ public class Comment extends BaseEntity {
     private Long parentId;
 
     @Builder
-    public Comment(
+    public ArticleComment(
             Article article,
             Member member,
             String content,
@@ -43,13 +43,13 @@ public class Comment extends BaseEntity {
         this.parentId = parentId;
     }
 
-    public static Comment create(
+    public static ArticleComment create(
             Article article,
             Member member,
             Long parentId,
             String content
     ) {
-        return Comment.builder()
+        return ArticleComment.builder()
                 .article(article)
                 .member(member)
                 .parentId(parentId)
@@ -59,6 +59,10 @@ public class Comment extends BaseEntity {
 
     public String getWriterNickname() {
         return member.getNickname();
+    }
+
+    public Member getWriter() {
+        return this.member;
     }
 
     public void checkAuthor(Long memberId) {
