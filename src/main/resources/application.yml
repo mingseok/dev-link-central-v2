@@ -25,6 +25,10 @@ spring:
   web:
     resources:
       static-locations: classpath:/static/
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
   data:
     redis:
       host: localhost
@@ -32,6 +36,14 @@ spring:
 
 jwt:
   secret: ${JWT_SECRET}
+
+aws:
+  s3:
+    access-key: ${AWS_ACCESS_KEY}
+    secret-key: ${AWS_SECRET_KEY}
+    region: ${AWS_REGION:ap-northeast-2}
+    bucket: ${AWS_S3_BUCKET}
+    url: ${AWS_S3_URL}
 
 logging:
   level:

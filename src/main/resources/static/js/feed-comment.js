@@ -267,7 +267,7 @@ class FeedCommentManager {
             <div class="comment-content">${this.escapeHtml(comment.content)}</div>
             <div class="comment-actions">`;
                 
-        // 답글이 아닌 경우에만 답글 버튼 표시
+        // 답글이 아닌 경우에만 답글 버튼 표시 (1뎁스 제한)
         if (!isReply) {
             html += `<button type="button" class="reply-btn" data-comment-id="${comment.id}">💬 답글</button>`;
         }
@@ -278,7 +278,7 @@ class FeedCommentManager {
         
         html += `</div>`;
 
-        // 답글이 아닌 경우에만 답글 작성 폼 표시
+        // 답글이 아닌 경우에만 답글 작성 폼 표시 (1뎁스 제한)
         if (!isReply) {
             html += `
             <div class="reply-form-container" id="replyForm-${comment.id}" style="display: none;">
@@ -293,7 +293,8 @@ class FeedCommentManager {
             </div>`;
         }
         
-        if (comment.children && comment.children.length > 0) {
+        // 1뎁스 답글만 표시 (답글의 답글은 표시하지 않음)
+        if (comment.children && comment.children.length > 0 && !isReply) {
             html += '<div class="replies">';
             comment.children.forEach(child => {
                 html += this.renderComment(child, true);
@@ -324,9 +325,9 @@ class FeedCommentManager {
     countTotalComments(comments) {
         let count = 0;
         comments.forEach(comment => {
-            count++;
+            count++; // 원댓글 카운트
             if (comment.children) {
-                count += comment.children.length;
+                count += comment.children.length; // 1뎁스 답글만 카운트
             }
         });
         return count;

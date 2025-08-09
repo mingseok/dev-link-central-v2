@@ -72,4 +72,23 @@ public class FollowService {
                 .map(follow -> FollowResponse.from(follow.getFollowee()))
                 .toList();
     }
+
+    @Transactional(readOnly = true)
+    public boolean isFollowing(Long followerId, Long followeeId) {
+        Member follower = memberService.findMemberById(followerId);
+        Member followee = memberService.findMemberById(followeeId);
+        return followRepository.existsByFollowerAndFollowee(follower, followee);
+    }
+
+    @Transactional(readOnly = true)
+    public long getFollowerCount(Long memberId) {
+        Member member = memberService.findMemberById(memberId);
+        return followRepository.countByFollowee(member);
+    }
+
+    @Transactional(readOnly = true)
+    public long getFollowingCount(Long memberId) {
+        Member member = memberService.findMemberById(memberId);
+        return followRepository.countByFollower(member);
+    }
 }

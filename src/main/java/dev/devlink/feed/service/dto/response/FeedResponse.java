@@ -15,7 +15,9 @@ public class FeedResponse {
     private Long feedId;
     private Long writerId;
     private String writerNickname;
+    private String writerProfileImageUrl;
     private String content;
+    private String imageUrl;
     private String createdAt;
     private boolean isMyFeed;
     private boolean isLiked;
@@ -25,6 +27,7 @@ public class FeedResponse {
     public static FeedResponse from(
             Feed feed,
             Long currentUserId,
+            String writerProfileImageUrl,
             boolean isLiked,
             long likeCount,
             long commentCount
@@ -33,7 +36,9 @@ public class FeedResponse {
                 feed.getId(),
                 feed.getWriterId(),
                 feed.getWriterNickname(),
+                writerProfileImageUrl,
                 feed.getContent(),
+                feed.getImageUrl(),
                 DateUtils.formatFeedDateTime(feed.getCreatedAt()),
                 feed.isAuthor(currentUserId),
                 isLiked,

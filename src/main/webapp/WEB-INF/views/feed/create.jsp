@@ -33,6 +33,7 @@
 
     function submitFeed() {
       const content = $("#feed-content").val().trim();
+      const imageFile = $("#feed-image")[0].files[0];
       
       if (!content) {
         Swal.fire("알림", "피드 내용을 입력해주세요.", "warning");
@@ -44,25 +45,53 @@
         return;
       }
 
-      $.ajax({
-        url: "/api/v1/feeds",
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify({ content: content }),
-        headers: { 'Authorization': 'Bearer ' + jwt },
-        success: function (response) {
-          alert('피드 작성 완료!');
-          window.location.href = "/view/feeds";
-        },
-        error: function (xhr, status, error) {
-          let errorMessage = "피드 작성에 실패했습니다.";
-          if (xhr.responseJSON && xhr.responseJSON.message) {
-            errorMessage = xhr.responseJSON.message;
+      // 이미지가 있는 경우 FormData 사용, 없는 경우 JSON 사용
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append('content', content);
+        formData.append('image', imageFile);
+
+        $.ajax({
+          url: "/api/v1/feeds",
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          headers: { 'Authorization': 'Bearer ' + jwt },
+          success: function (response) {
+            alert('피드 작성 완료!');
+            window.location.href = "/view/feeds";
+          },
+          error: function (xhr, status, error) {
+            let errorMessage = "피드 작성에 실패했습니다.";
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+              errorMessage = xhr.responseJSON.message;
+            }
+            
+            Swal.fire("오류", errorMessage, "error");
           }
-          
-          Swal.fire("오류", errorMessage, "error");
-        }
-      });
+        });
+      } else {
+        $.ajax({
+          url: "/api/v1/feeds",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({ content: content }),
+          headers: { 'Authorization': 'Bearer ' + jwt },
+          success: function (response) {
+            alert('피드 작성 완료!');
+            window.location.href = "/view/feeds";
+          },
+          error: function (xhr, status, error) {
+            let errorMessage = "피드 작성에 실패했습니다.";
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+              errorMessage = xhr.responseJSON.message;
+            }
+            
+            Swal.fire("오류", errorMessage, "error");
+          }
+        });
+      }
     }
 
     function goBack() {
@@ -84,6 +113,33 @@
         } else {
           $("#char-count").removeClass("text-danger");
         }
+      });
+
+      // 이미지 파일 선택 이벤트
+      $("#feed-image").on('change', function() {
+        const file = this.files[0];
+        if (file) {
+          // 파일 크기 체크 (5MB 제한)
+          if (file.size > 5 * 1024 * 1024) {
+            Swal.fire("알림", "이미지 파일은 5MB를 초과할 수 없습니다.", "warning");
+            $(this).val('');
+            return;
+          }
+
+          // 이미지 미리보기
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            $("#preview-img").attr('src', e.target.result);
+            $("#image-preview").show();
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // 이미지 제거
+      $("#remove-image").on('click', function() {
+        $("#feed-image").val('');
+        $("#image-preview").hide();
       });
     });
   </script>
@@ -116,6 +172,15 @@
         maxlength="1000"></textarea>
       <div class="char-counter">
         <small id="char-count" class="text-muted">0/1000</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="feed-image" class="form-label">이미지 추가 (선택사항)</label>
+      <input type="file" id="feed-image" class="form-control" accept="image/*">
+      <div id="image-preview" class="mt-3" style="display: none;">
+        <img id="preview-img" src="" alt="미리보기" style="max-width: 300px; max-height: 200px; border-radius: 8px;">
+        <button type="button" id="remove-image" class="btn btn-sm btn-outline-danger mt-2">이미지 제거</button>
       </div>
     </div>
     
