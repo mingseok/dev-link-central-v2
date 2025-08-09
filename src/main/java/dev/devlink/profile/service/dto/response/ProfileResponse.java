@@ -16,6 +16,7 @@ public class ProfileResponse {
     private String nickname;
     private String joinedAt;
     private String bio;
+    private String imageUrl;
     private Boolean isFollowing;
     private Long followersCount;
     private Long followingsCount;
@@ -23,6 +24,7 @@ public class ProfileResponse {
     public static ProfileResponse from(
             Member member,
             String bio,
+            String imageUrl,
             boolean isFollowing,
             long followers,
             long followings
@@ -32,6 +34,7 @@ public class ProfileResponse {
                 member.getNickname(),
                 DateUtils.formatDate(member.getCreatedAt()),
                 bio,
+                imageUrl,
                 isFollowing,
                 followers,
                 followings
