@@ -245,7 +245,73 @@
         }
 
         function toggleFollow() {
-            console.log('팔로우 토글');
+            const memberId = getCurrentMemberId();
+            const token = getAuthToken();
+            const isCurrentlyFollowing = currentProfile.isFollowing;
+            
+            console.log('팔로우 토글 - 현재 상태:', isCurrentlyFollowing ? '팔로잉 중' : '팔로우 안함');
+            
+            if (isCurrentlyFollowing) {
+                // 언팔로우
+                fetch("/api/v1/follows/" + memberId, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'SUCCESS') {
+                        currentProfile.isFollowing = false;
+                        currentProfile.followersCount--;
+                        updateProfileDisplay();
+                        console.log('언팔로우 성공');
+                    } else {
+                        alert('언팔로우에 실패했습니다.');
+                    }
+                })
+                .catch(error => {
+                    console.error('언팔로우 실패:', error);
+                    alert('언팔로우에 실패했습니다: ' + error.message);
+                });
+            } else {
+                // 팔로우
+                fetch('/api/v1/follows', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({
+                        followeeId: parseInt(memberId)
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'SUCCESS') {
+                        currentProfile.isFollowing = true;
+                        currentProfile.followersCount++;
+                        updateProfileDisplay();
+                        console.log('팔로우 성공');
+                    } else {
+                        alert('팔로우에 실패했습니다.');
+                    }
+                })
+                .catch(error => {
+                    console.error('팔로우 실패:', error);
+                    alert('팔로우에 실패했습니다: ' + error.message);
+                });
+            }
         }
 
         function getCurrentMemberId() {
