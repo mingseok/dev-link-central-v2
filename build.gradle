@@ -45,6 +45,7 @@ dependencies {
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 	implementation("org.apache.commons:commons-pool2")
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.735'
 }
 
 tasks.named('test') {

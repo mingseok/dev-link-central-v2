@@ -1,8 +1,8 @@
 package dev.devlink.feed.service;
 
 import dev.devlink.comment.repository.FeedCommentRepository;
-import dev.devlink.file.service.FileUploadService;
-import dev.devlink.file.constant.FileConstants;
+import dev.devlink.common.file.FileUploadService;
+import dev.devlink.common.file.FileConstants;
 import dev.devlink.feed.entity.Feed;
 import dev.devlink.feed.exception.FeedError;
 import dev.devlink.feed.exception.FeedException;

@@ -1,239 +1,263 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Bootstrap CSS -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <!-- Popper.js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/umd/popper.min.js"></script>
-  <!-- Bootstrap JS -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <!-- SweetAlert2 CSS and JS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="/css/profile/detail.css">
-
-  <script>
-    const pathSegments = window.location.pathname.split("/");
-    const memberIndex = pathSegments.indexOf("profile");
-    const profileOwnerId = pathSegments[memberIndex + 1]; // 프로필 주인의 ID
-    const jwt = localStorage.getItem('jwt');
-    let currentUserId = null; // 현재 로그인한 사용자 ID
-    let isMe = false;
-
-    if (jwt) {
-      try {
-        const tokenPayload = JSON.parse(atob(jwt.split('.')[1]));
-        currentUserId = tokenPayload.sub; // JWT 표준의 sub 클레임 사용
-        console.log("Current User ID (JWT):", currentUserId);
-      } catch (e) {
-        console.error("JWT 디코딩 오류:", e);
-      }
-    } else {
-      console.warn("JWT 없음: 로그인되지 않은 상태입니다.");
-    }
-
-    $(document).ready(function () {
-      $.ajax({
-        url: "/api/v1/profile/" + profileOwnerId,
-        type: 'GET',
-        headers: { 'Authorization': 'Bearer ' + jwt },
-        success: function (response) {
-          const data = response.data;
-          
-          // 서버에서 받은 프로필 데이터를 화면에 표시
-          $("#nickname").text(data.nickname);
-          $("#joinedAt").text(data.joinedAt);
-          $("#followersCount").text(data.followersCount);
-          $("#followingsCount").text(data.followingsCount);
-          $("#bio-text").text(data.bio || '');
-          
-          const isFollowingBoolean = Boolean(data.isFollowing);
-          isMe = (String(currentUserId) === String(data.memberId));
-
-          if (!isMe) {
-            // 다른 사람의 프로필이면 팔로우/언팔로우 버튼 표시
-            const buttonText = isFollowingBoolean ? "언팔로우" : "팔로우";
-            const buttonClass = isFollowingBoolean ? "btn-danger" : "btn-primary";
-            console.log("Setting button text to:", buttonText);
-            console.log("Setting button class to:", buttonClass);
-            
-            $("#follow-btn")
-              .show()
-              .text(buttonText)
-              .removeClass("btn-primary btn-danger")
-              .addClass(buttonClass)
-              .off("click")
-              .on("click", function () {
-                const currentIsFollowing = $("#follow-btn").text() === "언팔로우";
-                console.log("Button clicked - current state:", currentIsFollowing ? "following" : "not following");
-                
-                if (currentIsFollowing) {
-                  unfollow();
-                } else {
-                  follow();
-                }
-              });
-            $("#edit-bio-btn, #save-bio-btn").hide();
-          } else {
-            // 자신의 프로필이면 소개글 수정 버튼 표시
-            $("#edit-bio-btn").show();
-            $("#follow-btn").hide();
-          }
-        },
-        error: function () {
-          Swal.fire("오류", "프로필 정보를 불러올 수 없습니다.", "error");
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e9ecef;
         }
-      });
-
-      $("#edit-bio-btn").on("click", function () {
-        const currentText = $("#bio-text").text();
-        $("#bio-text").hide();
-        $("#bio-input").val(currentText).show();
-        $("#save-bio-btn").show();
-        $(this).hide();
-      });
-
-      $("#save-bio-btn").on("click", function () {
-        const newBio = $("#bio-input").val();
-        $.ajax({
-          url: "/api/v1/profile",
-          type: "PUT",
-          contentType: "application/json",
-          data: JSON.stringify({ bio: newBio }),
-          headers: { 'Authorization': 'Bearer ' + jwt },
-          success: function () {
-            $("#bio-text").text(newBio).show();
-            $("#bio-input").hide();
-            $("#save-bio-btn").hide();
-            $("#edit-bio-btn").show();
-          },
-          error: function (xhr) {
-            Swal.fire("오류", "소개글 저장 실패: " + (xhr.responseJSON?.message || xhr.responseText), "error");
-          }
-        });
-      });
-    });
-
-    function follow() {
-      console.log("팔로우 요청 시작 - targetId:", profileOwnerId);
-      
-      // 중복 요청 방지
-      $("#follow-btn").prop('disabled', true);
-      
-      $.ajax({
-        url: "/api/v1/follows",
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify({ followeeId: parseInt(profileOwnerId) }),
-        headers: { 'Authorization': 'Bearer ' + jwt },
-        success: function (response) {
-          console.log("팔로우 성공:", response);
-          $("#follow-btn")
-            .text("언팔로우")
-            .removeClass("btn-primary")
-            .addClass("btn-danger")
-            .prop('disabled', false);
-          
-          const currentCount = parseInt($("#followersCount").text()) || 0;
-          $("#followersCount").text(currentCount + 1);
-        },
-        error: function (xhr, status, error) {
-          console.error("팔로우 실패:", xhr);
-          console.error("Status:", status);
-          console.error("Error:", error);
-          console.error("Response Text:", xhr.responseText);
-          
-          $("#follow-btn").prop('disabled', false);
-          
-          let errorMessage = "팔로우 요청에 실패했습니다.";
-          if (xhr.responseJSON && xhr.responseJSON.message) {
-            errorMessage = xhr.responseJSON.message;
-          }
-          
-          Swal.fire("오류", errorMessage, "error");
-        }
-      });
-    }
-
-    function unfollow() {
-      console.log("언팔로우 요청 시작 - targetId:", profileOwnerId);
-      
-      // 중복 요청 방지
-      $("#follow-btn").prop('disabled', true);
-      
-      $.ajax({
-        url: "/api/v1/follows/" + profileOwnerId,
-        type: "DELETE",
-        headers: { 'Authorization': 'Bearer ' + jwt },
-        success: function (response) {
-          console.log("언팔로우 성공:", response);
-          $("#follow-btn")
-            .text("팔로우")
-            .removeClass("btn-danger")
-            .addClass("btn-primary")
-            .prop('disabled', false);
-          
-          const currentCount = parseInt($("#followersCount").text()) || 0;
-          $("#followersCount").text(Math.max(0, currentCount - 1));
-        },
-        error: function (xhr, status, error) {
-          console.error("언팔로우 실패:", xhr);
-          console.error("Status:", status);
-          console.error("Error:", error);
-          console.error("Response Text:", xhr.responseText);
-          
-          $("#follow-btn").prop('disabled', false);
-          
-          let errorMessage = "언팔로우 요청에 실패했습니다.";
-          if (xhr.responseJSON && xhr.responseJSON.message) {
-            errorMessage = xhr.responseJSON.message;
-          }
-          
-          Swal.fire("오류", errorMessage, "error");
-        }
-      });
-    }
-  </script>
+    </style>
 </head>
-
 <body>
-<div class="profile-container">
-  <div class="profile-header">
-    <h2 id="nickname">닉네임</h2>
-    <button id="follow-btn" class="btn btn-primary" style="display: none;">팔로우</button>
-  </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <div class="position-relative d-inline-block">
+                                <img id="profileImage" 
+                                     src="/images/default.png" 
+                                     alt="프로필 이미지" 
+                                     class="profile-image">
+                                <button type="button" 
+                                        class="btn btn-sm btn-primary position-absolute bottom-0 end-0 rounded-circle"
+                                        onclick="document.getElementById('profileImageInput').click()">
+                                    📷
+                                </button>
+                            </div>
+                            <input type="file" 
+                                   id="profileImageInput" 
+                                   accept="image/*" 
+                                   style="display: none;"
+                                   onchange="uploadProfileImage(this)">
+                        </div>
 
-  <p> 가입일: <span id="joinedAt"></span></p>
+                        <div class="text-center mb-3">
+                            <h4 id="nickname" class="mb-1">닉네임</h4>
+                            <p id="joinedAt" class="text-muted">가입일: </p>
+                        </div>
 
-  <!-- 팔로워/팔로잉 수 -->
-  <div class="stats">
-    <span>👥 팔로워: <span id="followersCount">0</span></span>
-    <span>🤝 팔로잉: <span id="followingsCount">0</span></span>
-  </div>
+                        <div class="row text-center mb-4">
+                            <div class="col-4">
+                                <h5 id="followersCount" class="mb-0">0</h5>
+                                <small class="text-muted">팔로워</small>
+                            </div>
+                            <div class="col-4">
+                                <h5 id="followingsCount" class="mb-0">0</h5>
+                                <small class="text-muted">팔로잉</small>
+                            </div>
+                            <div class="col-4">
+                                <button id="followBtn" class="btn btn-primary btn-sm" onclick="toggleFollow()">
+                                    팔로우
+                                </button>
+                            </div>
+                        </div>
 
-  <!-- 소개글 영역 -->
-  <div class="bio-box">
-    <label for="bio">💭 소개글</label>
-    <p id="bio-text"></p>
-    <textarea id="bio-input" rows="4" class="form-control" style="display:none;" placeholder="자신을 소개해보세요..."></textarea>
-    <button id="save-bio-btn" class="btn btn-primary" style="display:none;">저장</button>
-    <button id="edit-bio-btn" class="btn btn-secondary" style="display:none;">소개글 수정</button>
-  </div>
+                        <div class="mb-3">
+                            <label for="bio" class="form-label">자기소개</label>
+                            <textarea id="bio" 
+                                      class="form-control" 
+                                      rows="3" 
+                                      placeholder="자기소개를 입력하세요..."></textarea>
+                        </div>
 
-  <div class="back-button-container">
-    <button onclick="history.back()" class="btn btn-secondary back-btn">
-      ← 뒤로가기
-    </button>
-  </div>
-</div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-success" onclick="updateProfile()">
+                                프로필 수정
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentProfile = {};
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // JWT 토큰 확인
+            const token = getAuthToken();
+            console.log('JWT Token:', token ? 'exists' : 'missing');
+            
+            if (!token) {
+                alert('로그인이 필요합니다.');
+                window.location.href = '/view/members/signin';
+                return;
+            }
+            
+            loadProfile();
+        });
+
+        function loadProfile() {
+            const memberId = getCurrentMemberId();
+            const token = getAuthToken();
+            
+            console.log('Loading profile for member ID:', memberId);
+            console.log('API URL:', '/api/v1/profile/' + memberId);
+            
+            fetch('/api/v1/profile/' + memberId, {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Profile data received:', data);
+                if (data.status === 'SUCCESS' && data.data) {
+                    currentProfile = data.data;
+                    updateProfileDisplay();
+                } else {
+                    console.error('API returned error or no data:', data);
+                    alert('프로필 데이터가 없습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('프로필 로드 실패:', error);
+                alert('프로필을 불러오는데 실패했습니다: ' + error.message);
+            });
+        }
+
+        function updateProfileDisplay() {
+            console.log('Updating profile display with:', currentProfile);
+            console.log('Profile data keys:', Object.keys(currentProfile));
+            
+            // 안전하게 데이터 접근
+            const nickname = currentProfile.nickname || '닉네임';
+            const joinedAt = currentProfile.joinedAt || '';
+            const followersCount = currentProfile.followersCount || 0;
+            const followingsCount = currentProfile.followingsCount || 0;
+            const bio = currentProfile.bio || '';
+            const imageUrl = currentProfile.imageUrl;
+            
+            console.log('Setting values:', {nickname, joinedAt, followersCount, followingsCount, bio, imageUrl});
+            
+            document.getElementById('nickname').textContent = nickname;
+            document.getElementById('joinedAt').textContent = '가입일: ' + joinedAt;
+            document.getElementById('followersCount').textContent = followersCount;
+            document.getElementById('followingsCount').textContent = followingsCount;
+            document.getElementById('bio').value = bio;
+            
+            if (imageUrl && imageUrl !== '/images/default.png') {
+                document.getElementById('profileImage').src = imageUrl;
+            }
+            
+            const followBtn = document.getElementById('followBtn');
+            if (currentProfile.isFollowing) {
+                followBtn.textContent = '언팔로우';
+                followBtn.className = 'btn btn-outline-primary btn-sm';
+            } else {
+                followBtn.textContent = '팔로우';
+                followBtn.className = 'btn btn-primary btn-sm';
+            }
+        }
+
+        function uploadProfileImage(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('파일 크기는 10MB를 초과할 수 없습니다.');
+                    return;
+                }
+                
+                const formData = new FormData();
+                formData.append('file', file);
+                const token = getAuthToken();
+                
+                fetch('/api/v1/profile/image', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'SUCCESS') {
+                        document.getElementById('profileImage').src = data.data.imageUrl;
+                        alert('프로필 이미지가 업데이트되었습니다.');
+                    } else {
+                        alert('이미지 업로드에 실패했습니다.');
+                    }
+                })
+                .catch(error => {
+                    console.error('이미지 업로드 실패:', error);
+                    alert('이미지 업로드에 실패했습니다.');
+                });
+            }
+        }
+
+        function updateProfile() {
+            const bio = document.getElementById('bio').value;
+            const token = getAuthToken();
+            
+            console.log('Updating profile with bio:', bio);
+            
+            fetch('/api/v1/profile', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify({
+                    bio: bio
+                })
+            })
+            .then(response => {
+                console.log('Update response status:', response.status);
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Update response data:', data);
+                if (data.status === 'SUCCESS') {
+                    alert('프로필이 수정되었습니다.');
+                    loadProfile();
+                } else {
+                    console.error('Update failed:', data);
+                    alert('프로필 수정에 실패했습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('프로필 수정 실패:', error);
+                alert('프로필 수정에 실패했습니다: ' + error.message);
+            });
+        }
+
+        function toggleFollow() {
+            console.log('팔로우 토글');
+        }
+
+        function getCurrentMemberId() {
+            const pathParts = window.location.pathname.split('/');
+            const memberId = pathParts[pathParts.length - 1];
+            console.log('Current member ID:', memberId);
+            return memberId;
+        }
+
+        function getAuthToken() {
+            return localStorage.getItem('jwt') || '';
+        }
+    </script>
 </body>
 </html>
