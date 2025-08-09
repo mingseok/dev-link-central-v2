@@ -57,6 +57,10 @@ public class FeedComment extends BaseEntity {
                 .build();
     }
 
+    public Long getFeedId() {
+        return feed.getId();
+    }
+
     public String getWriterNickname() {
         return member.getNickname();
     }
