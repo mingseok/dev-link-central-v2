@@ -20,16 +20,25 @@ public class Feed extends BaseEntity {
     @Column(name = "content", columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Builder
-    public Feed(Member member, String content) {
+    public Feed(Member member, String content, String imageUrl) {
         this.member = member;
         this.content = content;
+        this.imageUrl = imageUrl;
     }
 
-    public static Feed create(Member member, String content) {
+    public static Feed create(
+            Member member,
+            String content,
+            String imageUrl
+    ) {
         return Feed.builder()
                 .member(member)
                 .content(content)
+                .imageUrl(imageUrl)
                 .build();
     }
 
