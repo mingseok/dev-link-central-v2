@@ -1,37 +1,342 @@
+/* 전역 스타일 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
     margin: 0;
+    overflow-x: hidden;
+}
+
+/* 메인 컨테이너 */
+.signin-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 600px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    margin: 20px;
+}
+
+/* 왼쪽 섹션 */
+.signin-left {
+    flex: 1;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    position: relative;
+}
+
+.signin-left::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.3;
+}
+
+.brand-section {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.brand-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.brand-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+
+.brand-subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.feature-list {
+    position: relative;
+    z-index: 1;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.feature-item i {
+    font-size: 20px;
+    margin-right: 15px;
+    width: 30px;
+    text-align: center;
+    opacity: 0.9;
+}
+
+/* 오른쪽 섹션 */
+.signin-right {
+    flex: 1;
+    padding: 60px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .form-container {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     width: 100%;
     max-width: 400px;
 }
 
-.btn-primary {
-    background-color: #007bff;
-    border: none;
+.form-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 8px;
+}
+
+.form-subtitle {
+    color: #718096;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* 폼 스타일 */
+.signin-form {
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    color: #a0aec0;
+    font-size: 16px;
+    z-index: 2;
+    transition: color 0.3s ease;
 }
 
 .form-control {
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    width: 100%;
+    padding: 16px 16px 16px 48px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    outline: none;
 }
 
-.form-label {
-    font-weight: bold;
+.form-control:focus {
+    border-color: #4facfe;
+    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+}
+
+.form-control:focus + .floating-label,
+.input-wrapper.focused .floating-label {
+    transform: translateY(-28px) scale(0.85);
+    color: #4facfe;
+}
+
+.form-control:focus ~ .input-icon,
+.input-wrapper.focused .input-icon {
+    color: #4facfe;
+}
+
+.floating-label {
+    position: absolute;
+    left: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    font-size: 16px;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    background: white;
+    padding: 0 4px;
+}
+
+/* 로그인 버튼 */
+.btn-signin {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+}
+
+.btn-signin:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+}
+
+.btn-signin:active {
+    transform: translateY(0);
+}
+
+.btn-signin.loading {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+/* 폼 푸터 */
+.form-footer {
+    text-align: center;
+}
+
+.signup-link {
+    color: #718096;
+    font-size: 14px;
 }
 
 .link-button {
+    color: #4facfe;
     text-decoration: none;
-    color: #007bff;
-    cursor: pointer;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.link-button:hover {
+    color: #2b6cb0;
+    text-decoration: none;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .signin-container {
+        flex-direction: column;
+        margin: 10px;
+        border-radius: 15px;
+    }
+    
+    .signin-left {
+        padding: 40px 30px;
+        min-height: 300px;
+    }
+    
+    .brand-title {
+        font-size: 24px;
+    }
+    
+    .brand-icon {
+        font-size: 36px;
+    }
+    
+    .signin-right {
+        padding: 40px 30px;
+    }
+    
+    .form-title {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .signin-container {
+        margin: 5px;
+    }
+    
+    .signin-left {
+        padding: 30px 20px;
+    }
+    
+    .signin-right {
+        padding: 30px 20px;
+    }
+    
+    .form-control {
+        padding: 14px 14px 14px 44px;
+        font-size: 14px;
+    }
+    
+    .floating-label {
+        left: 44px;
+        font-size: 14px;
+    }
+    
+    .input-icon {
+        left: 14px;
+        font-size: 14px;
+    }
+}
+
+/* 애니메이션 효과 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-container {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.feature-item {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.feature-item:nth-child(1) { animation-delay: 0.1s; }
+.feature-item:nth-child(2) { animation-delay: 0.2s; }
+.feature-item:nth-child(3) { animation-delay: 0.3s; }
+
+/* 로딩 스피너 애니메이션 */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.fa-spinner {
+    animation: spin 1s linear infinite;
 }

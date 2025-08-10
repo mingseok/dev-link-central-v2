@@ -1,310 +1,612 @@
-/* 피드 댓글 스타일 */
-.feed-comments {
-    border-top: 1px solid #e1e8ed;
-    margin-top: 15px;
-    padding-top: 15px;
+/* 댓글 공통 스타일 */
+.comments-section {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(160, 174, 192, 0.2);
+    position: relative;
 }
 
-.comments-header {
+.comments-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(160, 174, 192, 0.3), transparent);
+}
+
+.comment-form {
+    margin-bottom: 25px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(79, 172, 254, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.comment-form .input-group {
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.comment-form textarea {
+    flex: 1;
+    resize: vertical;
+    min-height: 80px;
+    border-radius: 16px;
+    border: 2px solid #e2e8f0;
+    padding: 16px 20px;
+    font-family: inherit;
+    background: #ffffff;
+    outline: none;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.comment-form textarea:focus {
+    border-color: #4facfe;
+    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+}
+
+.comment-form textarea::placeholder {
+    color: #a0aec0;
+}
+
+.comment-form button {
+    padding: 16px 24px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    height: fit-content;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+}
+
+.comment-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.comments-list {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.comments-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.comments-list::-webkit-scrollbar-track {
+    background: rgba(79, 172, 254, 0.1);
+    border-radius: 3px;
+}
+
+.comments-list::-webkit-scrollbar-thumb {
+    background: rgba(79, 172, 254, 0.3);
+    border-radius: 3px;
+}
+
+.comments-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(79, 172, 254, 0.5);
+}
+
+.comment-item {
+    padding: 20px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(79, 172, 254, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.comment-item:last-child {
+    margin-bottom: 0;
+}
+
+.comment-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
 }
 
-.comments-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #14171a;
-}
-
-.show-comments-btn {
-    background: none;
-    border: none;
-    color: #1da1f2;
-    cursor: pointer;
-    font-size: 14px;
-    padding: 5px 10px;
-    border-radius: 20px;
-    transition: background-color 0.2s ease;
-}
-
-.show-comments-btn:hover {
-    background-color: #f7f9fa;
-}
-
-.comments-container {
-    margin-top: 15px;
-}
-
-/* 댓글 작성 폼 */
-.comment-form {
-    background-color: #f7f9fa;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 20px;
-}
-
-.comment-form textarea {
-    width: 100%;
-    min-height: 80px;
-    border: 1px solid #e1e8ed;
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 14px;
-    resize: vertical;
-    font-family: inherit;
-}
-
-.comment-form textarea:focus {
-    outline: none;
-    border-color: #1da1f2;
-    box-shadow: 0 0 0 2px rgba(29, 161, 242, 0.1);
-}
-
-.comment-form-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
-}
-
-.comment-submit-btn {
-    background-color: #1da1f2;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.comment-submit-btn:hover:not(:disabled) {
-    background-color: #1991db;
-}
-
-.comment-submit-btn:disabled {
-    background-color: #aab8c2;
-    cursor: not-allowed;
-}
-
-/* 댓글 목록 */
-.comment {
-    padding: 15px;
-    border-bottom: 1px solid #f1f3f4;
-    background-color: #ffffff;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    position: relative;
-}
-
-.comment:last-child {
-    border-bottom: none;
-}
-
-/* 답글 스타일 - 들여쓰기로 명확한 구분 (1뎁스만) */
-.comment.reply {
-    margin-left: 60px;  /* 답글 들여쓰기 */
-    margin-top: 10px;
-    border-left: 4px solid #1da1f2;  /* 왼쪽 파란색 바 */
-    padding-left: 25px;
-    background-color: #f8fafe;  /* 연한 파란색 배경 */
-    border-radius: 0 8px 8px 0;
-    position: relative;
-}
-
-/* 답글 표시 화살표 (1뎁스만) */
-.comment.reply::before {
-    content: "└─";
-    position: absolute;
-    left: -30px;
-    top: 15px;
-    color: #1da1f2;
-    font-weight: bold;
-    font-size: 14px;
-    font-family: monospace;
-}
-
-.comment-header {
+.comment-author {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 12px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 12px;
 }
 
-.comment-author {
+.comment-author-image {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comment-author-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-author-name {
     font-weight: 600;
-    color: #14171a;
+    color: #2d3748;
     font-size: 14px;
+    margin: 0;
 }
 
-/* 답글 작성자 스타일링 */
-.comment.reply .comment-author {
-    font-size: 13px;
-    color: #1da1f2;
-}
-
-.comment.reply .comment-author::before {
-    content: "답글 · ";
-    font-weight: normal;
-    color: #657786;
-}
-
-.comment-time {
-    color: #657786;
-    font-size: 13px;
-}
-
-.comment-content {
-    color: #14171a;
-    font-size: 14px;
-    line-height: 1.4;
-    margin-bottom: 8px;
-    word-wrap: break-word;
+.comment-date {
+    font-size: 11px;
+    color: #a0aec0;
+    font-weight: 500;
+    background: rgba(160, 174, 192, 0.1);
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 2px;
 }
 
 .comment-actions {
     display: flex;
-    gap: 15px;
+    gap: 8px;
+    align-items: center;
 }
 
-.comment-actions button {
+.comment-like-btn {
     background: none;
-    border: none;
-    color: #657786;
-    font-size: 13px;
+    border: 2px solid #e2e8f0;
     cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #718096;
+}
+
+.comment-like-btn.liked {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+}
+
+.comment-delete-btn {
+    background: rgba(255, 107, 107, 0.1);
+    color: #ff6b6b;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.comment-content {
+    color: #4a5568;
+    line-height: 1.6;
+    font-size: 14px;
+    margin: 0;
+    word-break: break-word;
+}
+
+.comment-like-count {
+    font-size: 11px;
+    color: #718096;
+    font-weight: 500;
+}
+
+.no-comments {
+    text-align: center;
+    padding: 40px 20px;
+    color: #718096;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px dashed rgba(79, 172, 254, 0.2);
+    position: relative;
+}
+
+.no-comments::before {
+    content: '💬';
+    display: block;
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.no-comments::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    border-radius: 20px 20px 0 0;
+}
+
+.loading-comments {
+    text-align: center;
+    padding: 30px;
+    color: #718096;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(79, 172, 254, 0.1);
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 50%;
+    border-top-color: #4facfe;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.comment-error {
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 82, 82, 0.1) 100%);
+    color: #ff6b6b;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    font-weight: 600;
+    margin: 15px 0;
+    border: 2px solid rgba(255, 107, 107, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+/* 답글(대댓글) 스타일 */
+.replies {
+    margin-top: 15px;
+    padding-left: 40px;
+    border-left: 3px solid rgba(79, 172, 254, 0.2);
+    position: relative;
+}
+
+.replies::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+    border-radius: 2px;
+}
+
+.comment.reply {
+    background: rgba(79, 172, 254, 0.03);
+    border: 1px solid rgba(79, 172, 254, 0.08);
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 16px;
+    position: relative;
+}
+
+.comment.reply::before {
+    content: '↳';
+    position: absolute;
+    left: -25px;
+    top: 15px;
+    color: #4facfe;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.comment.reply .comment-header {
+    margin-bottom: 10px;
+}
+
+.comment.reply .comment-author-image {
+    width: 30px;
+    height: 30px;
+}
+
+.comment.reply .comment-author-name {
+    font-size: 13px;
+}
+
+.comment.reply .comment-date {
+    font-size: 10px;
+}
+
+.comment.reply .comment-content {
+    font-size: 13px;
+    color: #5a5a5a;
+}
+
+.comment.reply .comment-actions {
+    gap: 6px;
+}
+
+.comment.reply .comment-like-btn,
+.comment.reply .comment-delete-btn {
     padding: 4px 8px;
-    border-radius: 4px;
-    transition: all 0.2s ease;
+    font-size: 11px;
 }
 
-.comment-actions button:hover {
-    color: #1da1f2;
-    background-color: rgba(29, 161, 242, 0.1);
-}
-
-.delete-comment-btn:hover {
-    color: #e0245e !important;
-    background-color: rgba(224, 36, 94, 0.1) !important;
-}
-
-/* 답글 폼 */
+/* 답글 작성 폼 스타일 */
 .reply-form-container {
-    margin-top: 10px;
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(79, 172, 254, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(79, 172, 254, 0.1);
 }
 
 .reply-form {
-    background-color: #f7f9fa;
-    border-radius: 8px;
-    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .reply-form textarea {
-    width: 100%;
     min-height: 60px;
-    border: 1px solid #e1e8ed;
-    border-radius: 6px;
-    padding: 8px 12px;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    padding: 12px 16px;
     font-size: 13px;
     resize: vertical;
+    background: white;
     font-family: inherit;
 }
 
 .reply-form textarea:focus {
     outline: none;
-    border-color: #1da1f2;
-    box-shadow: 0 0 0 2px rgba(29, 161, 242, 0.1);
+    border-color: #4facfe;
+    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+}
+
+.reply-form textarea::placeholder {
+    color: #a0aec0;
 }
 
 .reply-actions {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     justify-content: flex-end;
-    margin-top: 8px;
 }
 
 .reply-actions button {
-    padding: 6px 12px;
-    font-size: 12px;
-    border-radius: 16px;
-    border: none;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
     cursor: pointer;
-    font-weight: 500;
-    transition: all 0.2s ease;
+    border: none;
 }
 
 .reply-actions button[type="submit"] {
-    background-color: #1da1f2;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     color: white;
-}
-
-.reply-actions button[type="submit"]:hover {
-    background-color: #1991db;
+    box-shadow: 0 2px 8px rgba(79, 172, 254, 0.3);
 }
 
 .reply-actions .cancel-reply-btn {
-    background-color: #f7f9fa;
-    color: #657786;
-    border: 1px solid #e1e8ed;
+    background: rgba(113, 128, 150, 0.1);
+    color: #4a5568;
+    border: 1px solid rgba(113, 128, 150, 0.2);
 }
 
-.reply-actions .cancel-reply-btn:hover {
-    background-color: #e1e8ed;
+/* 답글 버튼 스타일 */
+.reply-btn {
+    background: rgba(79, 172, 254, 0.1);
+    color: #4facfe;
+    border: 1px solid rgba(79, 172, 254, 0.2);
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-/* 답글 목록 */
-.replies {
-    margin-top: 15px;
-    padding-top: 10px;
-    border-top: 1px solid #f1f3f4;
+/* 댓글이 없는 경우 스타일 */
+.comments-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #718096;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px dashed rgba(79, 172, 254, 0.2);
+    position: relative;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.comments-empty::before {
+    content: '💭';
+    display: block;
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.comments-empty::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    border-radius: 20px 20px 0 0;
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
-    .comment.reply {
-        margin-left: 40px;  /* 모바일에서는 조금 덜 들여쓰기 */
-        padding-left: 20px;
-    }
-    
-    .comment.reply::before {
-        left: -25px;
-    }
-    
     .comment-form {
-        padding: 12px;
+        padding: 20px;
+    }
+    
+    .comment-form .input-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
     }
     
     .comment-form textarea {
         min-height: 70px;
-        padding: 10px;
+        padding: 14px 16px;
+    }
+    
+    .comment-form button {
+        width: 100%;
+        padding: 14px;
+    }
+    
+    .comment-item {
+        padding: 18px;
+    }
+    
+    .comment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .comment-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    
+    .comment-author-image {
+        width: 34px;
+        height: 34px;
+    }
+    
+    .comment-content {
+        font-size: 13px;
+    }
+    
+    .replies {
+        padding-left: 25px;
+        margin-top: 12px;
+    }
+    
+    .comment.reply {
+        padding: 12px;
+    }
+    
+    .comment.reply::before {
+        left: -20px;
+        top: 12px;
+        font-size: 14px;
+    }
+    
+    .comment.reply .comment-author-image {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .reply-form-container {
+        padding: 12px;
     }
     
     .reply-form textarea {
         min-height: 50px;
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+    
+    .reply-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .reply-actions button {
+        width: 100%;
+        padding: 10px;
+        font-size: 12px;
+    }
+    
+    .comments-empty {
+        padding: 30px 15px;
+        font-size: 13px;
+    }
+    
+    .comments-empty::before {
+        font-size: 40px;
     }
 }
 
-/* 로딩 상태 */
-.comments-loading {
-    text-align: center;
-    color: #657786;
-    padding: 20px;
-    font-size: 14px;
-}
-
-/* 빈 댓글 상태 */
-.comments-empty {
-    text-align: center;
-    color: #657786;
-    padding: 30px 20px;
-    font-size: 14px;
-}
-
-.comments-empty::before {
-    content: "💬";
-    display: block;
-    font-size: 32px;
-    margin-bottom: 10px;
+@media (max-width: 480px) {
+    .comment-form {
+        padding: 16px;
+    }
+    
+    .comment-form textarea {
+        min-height: 60px;
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+    
+    .comment-form button {
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    .comment-item {
+        padding: 15px;
+    }
+    
+    .comment-author {
+        gap: 10px;
+    }
+    
+    .comment-author-image {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .comment-author-name {
+        font-size: 13px;
+    }
+    
+    .comment-date {
+        font-size: 10px;
+    }
+    
+    .comment-content {
+        font-size: 12px;
+    }
+    
+    .comment-like-btn,
+    .comment-delete-btn {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+    
+    .comments-empty {
+        padding: 30px 15px;
+    }
+    
+    .comments-empty::before {
+        font-size: 40px;
+    }
 }

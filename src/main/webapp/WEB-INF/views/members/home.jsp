@@ -6,18 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/umd/popper.min.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- SweetAlert2 CSS and JS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/members/home.css">
-    <title>프로젝트!</title>
+    <title>Dev Link Central - 홈</title>
 
     <script>
         function logout() {
@@ -35,9 +28,6 @@
         function Article() {
             window.location.href = "/view/articles/paging";
         }
-
-
-
 
         function ArticlePaging() {
             const token = localStorage.getItem('jwt');
@@ -102,6 +92,11 @@
                     const tokenPayload = JSON.parse(atob(jwt.split('.')[1]));
                     const currentUserId = tokenPayload.sub;
                     $('#profile-link').attr('href', `/view/profile/${currentUserId}`);
+                    
+                    // 사용자 이름 표시
+                    if (tokenPayload.name) {
+                        $('#userName').text(tokenPayload.name);
+                    }
                 } catch (e) {
                     console.error("JWT 디코딩 오류:", e);
                 }
@@ -111,6 +106,11 @@
         // 팔로워 리스트 페이지로 이동
         function followersView() {
             window.location.href = "/view/follow/followers";
+        }
+
+        // 팔로잉 리스트 페이지로 이동
+        function followingView() {
+            window.location.href = "/view/follow/following";
         }
 
         // 피드 페이지로 이동
@@ -138,13 +138,75 @@
     </script>
 </head>
 <body>
-<div class="note">
-    <div class="menu-title">메뉴</div>
-    <button onclick="logout()">로그아웃</button>
-    <button onclick="followersView()">팔로워 리스트</button>
-    <button onclick="profileView()">프로필</button>
-    <button onclick="Article()">정보 게시판</button>
-    <button onclick="feedView()">피드</button>
-</div>
+    <div class="home-container">
+        <div class="home-left">
+            <div class="welcome-section">
+                <i class="fas fa-home welcome-icon"></i>
+                <h1 class="welcome-title">Welcome Back!</h1>
+                <p class="welcome-subtitle">안녕하세요, <span id="userName">개발자</span>님</p>
+            </div>
+            <div class="stats-section">
+                <div class="stat-item">
+                    <i class="fas fa-code"></i>
+                    <div class="stat-content">
+                        <h3>프로젝트</h3>
+                        <p>개발 여정을 함께해요</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-content">
+                        <h3>커뮤니티</h3>
+                        <p>개발자들과 소통하세요</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="stat-content">
+                        <h3>성장</h3>
+                        <p>지속적인 학습과 발전</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="home-right">
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h2 class="dashboard-title">대시보드</h2>
+                    <p class="dashboard-subtitle">원하는 메뉴를 선택하세요</p>
+                </div>
+                
+                <div class="menu-grid">
+                    <button onclick="profileView()" class="menu-item">
+                        <i class="fas fa-user"></i>
+                        <span>내 프로필</span>
+                    </button>
+
+                    <button onclick="followingView()" class="menu-item">
+                        <i class="fas fa-user-plus"></i>
+                        <span>팔로워 리스트</span>
+                    </button>
+
+                    <button onclick="Article()" class="menu-item">
+                        <i class="fas fa-newspaper"></i>
+                        <span>정보 게시판</span>
+                    </button>
+
+                    <button onclick="feedView()" class="menu-item">
+                        <i class="fas fa-stream"></i>
+                        <span>피드</span>
+                    </button>
+                </div>
+                
+                <div class="dashboard-footer">
+                    <button onclick="logout()" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        로그아웃
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,288 +1,478 @@
-/* 전체 페이지 스타일 */
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: white;
+/* 전역 스타일 리셋 */
+* {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
+    overflow-x: hidden;
+    padding: 20px 0;
 }
 
-/* 메인 프로필 컨테이너 */
+/* 메인 컨테이너 */
 .profile-container {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 40px;
-    max-width: 500px;
+    display: flex;
     width: 100%;
-    box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.1),
-        0 8px 25px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    position: relative;
+    max-width: 1200px;
+    min-height: 600px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
     overflow: hidden;
+    margin: 20px;
 }
 
-/* 글래스모피즘 효과를 위한 배경 */
-.profile-container::before {
+/* 왼쪽 섹션 */
+.profile-left {
+    flex: 1;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    position: relative;
+}
+
+.profile-left::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-    z-index: -1;
-    border-radius: 24px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.3;
 }
 
-/* 뒤로가기 버튼 컨테이너 */
-.back-button-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 40px;
+.profile-info-section {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 40px;
 }
 
-/* 뒤로가기 버튼 */
-.back-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.profile-image-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+}
+
+.image-upload-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.9);
     border: none;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-weight: 600;
+    border-radius: 50%;
+    color: #4facfe;
     font-size: 14px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.back-btn:hover {
+.image-upload-btn:hover {
+    background: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.profile-details h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+}
+
+.join-date {
+    font-size: 14px;
+    opacity: 0.9;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 80px;
+}
+
+.stat-item:hover {
+    background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
-/* 프로필 헤더 */
-.profile-header {
+.stat-number {
+    font-size: 24px;
+    font-weight: 700;
+    display: block;
+    color: white;
+}
+
+.stat-label {
+    font-size: 12px;
+    opacity: 0.9;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+/* 자기소개 섹션 */
+.bio-section {
+    position: relative;
+    z-index: 1;
+}
+
+.bio-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.bio-textarea {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 100px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.bio-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.bio-textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* 오른쪽 섹션 */
+.profile-right {
+    flex: 1;
+    padding: 60px 50px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.content-container {
+    width: 100%;
+    max-width: 100%;
+}
+
+.content-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.profile-header h2 {
-    font-size: 32px;
-    font-weight: 700;
-    margin: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1.2;
-}
-
-/* 팔로우 버튼 */
-#follow-btn {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-    border: none;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-}
-
-#follow-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-}
-
-/* 가입일 정보 */
-.profile-container > p {
-    color: #6c757d;
-    font-size: 16px;
-    margin-bottom: 20px;
-    font-weight: 500;
-}
-
-.profile-container > p span {
-    color: #495057;
-    font-weight: 600;
-}
-
-/* 팔로워/팔로잉 통계 */
-.stats {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-    padding: 20px;
-    border-radius: 16px;
-    margin-bottom: 30px;
-    text-align: center;
-    border: 1px solid rgba(102, 126, 234, 0.1);
-}
-
-.stats span {
-    display: inline-block;
-    margin: 0 15px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #495057;
-}
-
-.stats span span {
+.content-title {
     font-size: 24px;
     font-weight: 700;
-    color: #667eea;
-    margin-left: 5px;
+    color: #2d3748;
 }
 
-/* 소개글 박스 */
-.bio-box {
-    background: rgba(248, 249, 250, 0.8);
-    border-radius: 16px;
-    padding: 24px;
-    border: 1px solid rgba(102, 126, 234, 0.1);
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-left: auto; /* 버튼들을 오른쪽으로 밀어줌 */
+}
+
+/* 버튼 스타일 */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
     transition: all 0.3s ease;
-}
-
-.bio-box:hover {
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.1);
-}
-
-/* 소개글 버튼들을 오른쪽 정렬 */
-.bio-box .btn {
-    float: right;
-    margin-left: 10px;
-}
-
-.bio-box::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.bio-box label {
-    font-weight: 700;
-    font-size: 18px;
-    color: #495057;
-    margin-bottom: 12px;
-    display: block;
-}
-
-#bio-text {
-    color: #6c757d;
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 15px;
-    min-height: 24px;
-    font-weight: 500;
-}
-
-/* 텍스트 영역 */
-#bio-input {
-    width: 100%;
-    border: 2px solid rgba(102, 126, 234, 0.2);
-    border-radius: 12px;
-    padding: 16px;
-    font-size: 16px;
+    text-decoration: none;
     font-family: inherit;
-    resize: vertical;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.9);
-    margin-bottom: 15px;
-}
-
-#bio-input:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    white-space: nowrap;
 }
 
-/* 액션 버튼들 */
-#edit-bio-btn {
-    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-    border: none;
+.btn i {
+    font-size: 12px;
+}
+
+.btn-follow {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     color: white;
-    padding: 12px 20px;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
-    margin-right: 10px;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
 }
 
-#edit-bio-btn:hover {
+.btn-follow:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(116, 185, 255, 0.4);
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
 }
 
-#save-bio-btn {
-    background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
-    border: none;
+.btn-follow.following {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+}
+
+.btn-follow.following:hover {
+    background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+    box-shadow: 0 8px 25px rgba(229, 62, 62, 0.4);
+}
+
+.btn-edit {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
     color: white;
-    padding: 12px 20px;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
+    box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
 }
 
-#save-bio-btn:hover {
+.btn-edit:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 184, 148, 0.4);
+    box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
+}
+
+.btn-back {
+    background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(113, 128, 150, 0.3);
+}
+
+.btn-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(113, 128, 150, 0.4);
+}
+
+/* 정보 카드 */
+.profile-info-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    border-color: #4facfe;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.15);
+}
+
+.info-item i {
+    font-size: 24px;
+    color: #4facfe;
+    margin-top: 4px;
+    min-width: 24px;
+}
+
+.info-content h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 4px;
+}
+
+.info-content p {
+    font-size: 14px;
+    color: #718096;
+    margin: 0;
+    line-height: 1.5;
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-    
     .profile-container {
-        padding: 30px 20px;
-        margin: 10px;
-    }
-    
-    .profile-header {
         flex-direction: column;
+        margin: 10px;
+        border-radius: 15px;
+        min-height: auto;
+    }
+    
+    .profile-left {
+        padding: 40px 30px;
+        min-height: auto;
+    }
+    
+    .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .profile-details h1 {
+        font-size: 24px;
+    }
+    
+    .profile-stats {
         gap: 15px;
+    }
+    
+    .stat-item {
+        padding: 12px 16px;
+        min-width: 70px;
+    }
+    
+    .stat-number {
+        font-size: 20px;
+    }
+    
+    .stat-label {
+        font-size: 11px;
+    }
+    
+    .profile-right {
+        padding: 40px 30px;
+    }
+    
+    .content-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .content-title {
+        font-size: 20px;
         text-align: center;
     }
     
-    .profile-header h2 {
-        font-size: 28px;
-    }
-    
-    .stats span {
-        display: block;
-        margin: 10px 0;
-    }
-    
-    .back-button-container {
-        text-align: center;
-        margin-top: 25px;
+    .action-buttons {
+        justify-content: center;
     }
 }
 
-/* 로딩 애니메이션 */
-@keyframes fadeIn {
+@media (max-width: 480px) {
+    .profile-container {
+        margin: 5px;
+    }
+    
+    .profile-left {
+        padding: 30px 20px;
+    }
+    
+    .profile-image {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .image-upload-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+    
+    .profile-details h1 {
+        font-size: 20px;
+    }
+    
+    .profile-stats {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .stat-item {
+        padding: 10px 12px;
+        min-width: 60px;
+    }
+    
+    .stat-number {
+        font-size: 18px;
+    }
+    
+    .stat-label {
+        font-size: 10px;
+    }
+    
+    .bio-textarea {
+        padding: 12px;
+        min-height: 80px;
+    }
+    
+    .profile-right {
+        padding: 30px 20px;
+    }
+    
+    .content-title {
+        font-size: 18px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        padding: 12px 16px;
+        font-size: 13px;
+        justify-content: center;
+    }
+}
+
+/* 애니메이션 효과 */
+@keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -290,30 +480,33 @@ body {
     }
 }
 
-.profile-container {
-    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-/* 호버 효과를 위한 추가 스타일 */
-.profile-container * {
-    transition: all 0.3s ease;
+.content-container {
+    animation: fadeInUp 0.6s ease-out;
 }
 
-/* 스크롤바 커스터마이징 */
-#bio-input::-webkit-scrollbar {
-    width: 8px;
+.profile-info-section {
+    animation: fadeInLeft 0.6s ease-out;
 }
 
-#bio-input::-webkit-scrollbar-track {
-    background: rgba(102, 126, 234, 0.1);
-    border-radius: 4px;
+.bio-section {
+    animation: fadeInLeft 0.6s ease-out 0.2s both;
 }
 
-#bio-input::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 4px;
+.info-item {
+    animation: fadeInUp 0.6s ease-out;
 }
 
-#bio-input::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
-}
+.info-item:nth-child(1) { animation-delay: 0.1s; }
+.info-item:nth-child(2) { animation-delay: 0.2s; }
+.info-item:nth-child(3) { animation-delay: 0.3s; }

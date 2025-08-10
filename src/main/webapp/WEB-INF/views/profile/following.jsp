@@ -21,9 +21,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="/css/profile/followers.css">
+  <link rel="stylesheet" href="/css/profile/following.css">
 
-  <title>Dev Link Central - 팔로워</title>
+  <title>Dev Link Central - 팔로잉</title>
 
   <script>
     const jwt = localStorage.getItem('jwt');
@@ -61,59 +61,53 @@
     }
 
     $(document).ready(function () {
-      loadFollowers();
+      loadFollowing();
     });
 
-    function loadFollowers() {
+    function loadFollowing() {
       $.ajax({
-        url: "/api/v1/follows/followers",
+        url: "/api/v1/follows/following",
         type: 'GET',
         headers: { 'Authorization': 'Bearer ' + jwt },
         success: function (response) {
-          const followers = response.data || [];
-          console.log("팔로워 목록:", followers);
+          const following = response.data || [];
+          console.log("팔로잉 목록:", following);
 
-          let followersHtml = '';
-          if (followers.length === 0) {
-            followersHtml = '' +
+          let followingHtml = '';
+          if (following.length === 0) {
+            followingHtml = '' +
               '<div class="empty-state">' +
                 '<div class="empty-icon">' +
-                  '<i class="fas fa-users"></i>' +
+                  '<i class="fas fa-user-plus"></i>' +
                 '</div>' +
-                '<h3>아직 팔로워가 없습니다</h3>' +
-                '<p>다른 사용자들과 소통하여 네트워크를 확장해보세요!</p>' +
+                '<h3>아직 팔로잉한 사용자가 없습니다</h3>' +
+                '<p>다른 개발자들을 팔로우하여 네트워크를 확장해보세요!</p>' +
               '</div>';
           } else {
-            followers.forEach(function(follower) {
-              let followBackDisplay = follower.isFollowing ? 'none' : 'inline-block';
-              let unfollowDisplay = follower.isFollowing ? 'inline-block' : 'none';
-              let joinedAtText = follower.joinedAt || '정보 없음';
+            following.forEach(function(user) {
+              let joinedAtText = user.joinedAt || '정보 없음';
               
-              followersHtml += '' +
-                '<div class="follower-card" data-follower-id="' + follower.memberId + '">' +
-                  '<div class="follower-avatar">' +
+              followingHtml += '' +
+                '<div class="following-card" data-following-id="' + user.memberId + '">' +
+                  '<div class="following-avatar">' +
                     '<div class="avatar-circle">' +
                       '<i class="fas fa-user"></i>' +
                     '</div>' +
                     '<div class="status-badge"></div>' +
                   '</div>' +
-                  '<div class="follower-info">' +
-                    '<h4 class="follower-name">' + follower.nickname + '</h4>' +
-                    '<p class="follower-join-date">' +
+                  '<div class="following-info">' +
+                    '<h4 class="following-name">' + user.nickname + '</h4>' +
+                    '<p class="following-join-date">' +
                       '<i class="fas fa-calendar-alt"></i>' +
                       '<span>' + joinedAtText + '</span>' +
                     '</p>' +
                   '</div>' +
-                  '<div class="follower-actions">' +
-                    '<button class="btn btn-view" onclick="viewProfile(' + follower.memberId + ')">' +
+                  '<div class="following-actions">' +
+                    '<button class="btn btn-view" onclick="viewProfile(' + user.memberId + ')">' +
                       '<i class="fas fa-eye"></i>' +
                       '<span>프로필 보기</span>' +
                     '</button>' +
-                    '<button class="btn btn-follow follow-back-btn" onclick="followBack(' + follower.memberId + ')" style="display: ' + followBackDisplay + ';">' +
-                      '<i class="fas fa-user-plus"></i>' +
-                      '<span>팔로우 백</span>' +
-                    '</button>' +
-                    '<button class="btn btn-unfollow unfollow-btn" onclick="unfollow(' + follower.memberId + ')" style="display: ' + unfollowDisplay + ';">' +
+                    '<button class="btn btn-unfollow" onclick="unfollow(' + user.memberId + ')">' +
                       '<i class="fas fa-user-minus"></i>' +
                       '<span>언팔로우</span>' +
                     '</button>' +
@@ -122,18 +116,18 @@
             });
           }
 
-          $("#followers-list").html(followersHtml);
+          $("#following-list").html(followingHtml);
         },
         error: function (xhr) {
-          console.error("팔로워 목록 로딩 실패:", xhr);
-          $("#followers-list").html('' +
+          console.error("팔로잉 목록 로딩 실패:", xhr);
+          $("#following-list").html('' +
             '<div class="error-state">' +
               '<div class="error-icon">' +
                 '<i class="fas fa-exclamation-triangle"></i>' +
               '</div>' +
               '<h3>오류가 발생했습니다</h3>' +
-              '<p>팔로워 목록을 불러오는 중 문제가 발생했습니다.</p>' +
-              '<button class="btn btn-retry" onclick="loadFollowers()">' +
+              '<p>팔로잉 목록을 불러오는 중 문제가 발생했습니다.</p>' +
+              '<button class="btn btn-retry" onclick="loadFollowing()">' +
                 '<i class="fas fa-redo"></i>' +
                 '<span>다시 시도</span>' +
               '</button>' +
@@ -145,50 +139,6 @@
 
     function viewProfile(memberId) {
       window.location.href = "/view/profile/" + memberId;
-    }
-
-    function followBack(followeeId) {
-      console.log("팔로우 요청 - followeeId:", followeeId);
-      
-      // 버튼 로딩 상태
-      const button = $(`[data-follower-id="${followeeId}"] .follow-back-btn`);
-      const originalHtml = button.html();
-      button.html('<i class="fas fa-spinner fa-spin"></i><span>처리 중...</span>').prop('disabled', true);
-      
-      $.ajax({
-        url: "/api/v1/follows",
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify({ followeeId: followeeId }),
-        headers: { 'Authorization': 'Bearer ' + jwt },
-        success: function (response) {
-          Swal.fire({
-            icon: 'success',
-            title: '팔로우 완료',
-            text: '팔로우 요청을 수락했습니다.',
-            confirmButtonColor: '#4facfe'
-          }).then(() => {
-            location.reload();
-          });
-        },
-        error: function (xhr, status, error) {
-          console.error("팔로우 실패:", xhr);
-          
-          let errorMessage = "팔로우 요청에 실패했습니다.";
-          if (xhr.responseJSON && xhr.responseJSON.message) {
-            errorMessage = xhr.responseJSON.message;
-          }
-          
-          Swal.fire({
-            icon: 'error',
-            title: '팔로우 실패',
-            text: errorMessage,
-            confirmButtonColor: '#4facfe'
-          });
-          
-          button.html(originalHtml).prop('disabled', false);
-        }
-      });
     }
 
     function unfollow(followeeId) {
@@ -206,7 +156,7 @@
       }).then((result) => {
         if (result.isConfirmed) {
           // 버튼 로딩 상태
-          const button = $(`[data-follower-id="${followeeId}"] .unfollow-btn`);
+          const button = $(`[data-following-id="${followeeId}"] .btn-unfollow`);
           const originalHtml = button.html();
           button.html('<i class="fas fa-spinner fa-spin"></i><span>처리 중...</span>').prop('disabled', true);
 
@@ -249,15 +199,15 @@
 </head>
 
 <body>
-  <div class="followers-container">
+  <div class="following-container">
     <!-- 헤더 섹션 -->
     <div class="header-section">
       <div class="header-left">
         <div class="brand-info">
-          <i class="fas fa-users brand-icon"></i>
+          <i class="fas fa-user-plus brand-icon"></i>
           <div class="header-text">
-            <h1 class="page-title">팔로워</h1>
-            <p class="page-subtitle">나를 팔로우하는 사용자들</p>
+            <h1 class="page-title">팔로잉</h1>
+            <p class="page-subtitle">내가 팔로우하는 사용자들</p>
           </div>
         </div>
       </div>
@@ -269,15 +219,15 @@
       </div>
     </div>
 
-    <!-- 팔로워 리스트 컨테이너 -->
+    <!-- 팔로잉 리스트 컨테이너 -->
     <div class="content-section">
-      <div id="followers-list" class="followers-list">
+      <div id="following-list" class="following-list">
         <!-- 로딩 상태 -->
         <div class="loading-state">
           <div class="loading-spinner">
             <i class="fas fa-spinner fa-spin"></i>
           </div>
-          <h3>팔로워 목록을 불러오는 중...</h3>
+          <h3>팔로잉 목록을 불러오는 중...</h3>
           <p>잠시만 기다려주세요</p>
         </div>
       </div>

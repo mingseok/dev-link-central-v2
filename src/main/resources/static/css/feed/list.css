@@ -1,100 +1,107 @@
-/* 전체 페이지 스타일 */
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: white;
+/* 전역 스타일 리셋 */
+* {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     min-height: 100vh;
+    margin: 0;
+    position: relative;
+    overflow-x: hidden;
 }
 
-/* 메인 컨테이너 */
-.feed-container {
-    max-width: 800px;
+.container {
+    max-width: 900px;
     margin: 0 auto;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1), 0 8px 25px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 30px;
 }
 
-/* 헤더 */
+/* 헤더 스타일링 */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+    margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 35px 40px;
+    border-radius: 24px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 8px 15px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
 }
 
 .header h1 {
+    margin: 0;
     font-size: 32px;
     font-weight: 700;
-    margin: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    background-clip: text;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -1px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .header-actions {
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
-.create-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.header-actions .btn {
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: 600;
     border: none;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 14px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    border-radius: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.create-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+.btn-primary {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     color: white;
+    box-shadow: 0 6px 20px rgba(79, 172, 254, 0.3);
 }
 
-.home-btn {
-    border: 2px solid #6c757d;
-    color: #6c757d;
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.home-btn:hover {
-    background: #6c757d;
-    color: white;
-    transform: translateY(-2px);
+.btn-secondary {
+    background: rgba(113, 128, 150, 0.1);
+    color: #4a5568;
+    border: 2px solid rgba(113, 128, 150, 0.2);
 }
 
 /* 피드 리스트 */
-.feeds-list {
-    margin-top: 20px;
+#feeds-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 /* 피드 카드 */
 .feed-card {
-    background: rgba(248, 249, 250, 0.8);
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(102, 126, 234, 0.1);
-    transition: all 0.3s ease;
-}
-
-.feed-card:hover {
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
-    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.08),
+        0 8px 15px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
 }
 
 /* 피드 헤더 */
@@ -102,322 +109,377 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+    margin-bottom: 25px;
 }
 
 .author-profile {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 18px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 16px;
 }
 
 .profile-image {
-    width: 40px;
-    height: 40px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid rgba(102, 126, 234, 0.2);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .author-name {
-    margin: 0 0 5px 0;
-    font-size: 16px;
-    font-weight: 600;
-    color: #495057;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #2d3748;
 }
 
 .feed-date {
-    font-size: 12px;
-    color: #6c757d;
+    font-size: 13px;
+    color: #a0aec0;
     font-weight: 500;
+    background: rgba(160, 174, 192, 0.1);
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-top: 4px;
 }
 
-.feed-actions .btn {
-    padding: 6px 12px;
-    font-size: 12px;
-    border-radius: 8px;
+.feed-actions {
+    display: flex;
+    gap: 12px;
 }
 
 /* 피드 콘텐츠 */
 .feed-content {
-    margin-top: 10px;
+    margin-bottom: 25px;
+    position: relative;
 }
 
 .feed-content p {
-    margin: 0 0 15px 0;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #495057;
-    white-space: pre-wrap;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #4a5568;
+    margin-bottom: 20px;
+    word-break: break-word;
 }
 
 .feed-image {
-    margin-top: 15px;
-    border-radius: 12px;
+    margin-top: 20px;
+    border-radius: 20px;
     overflow: hidden;
-    max-width: 100%;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.feed-image:hover {
-    transform: scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    position: relative;
 }
 
 .feed-image img {
     width: 100%;
-    max-width: 400px;
-    height: 250px;
-    object-fit: cover;
+    height: auto;
     display: block;
-    border-radius: 12px;
-    margin: 0 auto;
-    transition: all 0.2s ease;
 }
 
 /* 피드 푸터 */
 .feed-footer {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(102, 126, 234, 0.1);
+    border-top: 1px solid rgba(160, 174, 192, 0.2);
+    padding-top: 25px;
+    position: relative;
+}
+
+.feed-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(160, 174, 192, 0.5), transparent);
 }
 
 .feed-stats {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 15px;
 }
 
-.like-section {
+.like-section, .comment-section {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
 }
 
-.like-btn {
+.like-btn, .comment-btn {
     border-radius: 20px;
-    font-size: 16px;
-    width: 40px;
-    height: 35px;
-    padding: 0;
-    transition: all 0.3s ease;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid;
+    cursor: pointer;
 }
 
-.like-btn:hover {
-    transform: scale(1.1);
+.btn-danger {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.btn-outline-danger {
+    background: transparent;
+    border-color: #ff6b6b;
+    color: #ff6b6b;
+}
+
+.btn-outline-secondary {
+    background: transparent;
+    border-color: #a0aec0;
+    color: #a0aec0;
 }
 
 .like-count {
+    font-weight: 700;
+    color: #4a5568;
     font-size: 14px;
-    font-weight: 600;
-    color: #495057;
-    min-width: 20px;
-}
-
-.comment-section {
-    display: flex;
-    align-items: center;
-}
-
-.comment-btn {
-    border-radius: 20px;
-    font-size: 14px;
+    background: rgba(255, 107, 107, 0.1);
     padding: 6px 12px;
-    transition: all 0.3s ease;
-    border: 1px solid #dee2e6;
-    background: white;
-    color: #6c757d;
-}
-
-.comment-btn:hover {
-    background: #f8f9fa;
-    border-color: #667eea;
-    color: #667eea;
-    transform: translateY(-1px);
-}
-
-/* 로딩 상태 */
-.loading-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: #6c757d;
-}
-
-.spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(102, 126, 234, 0.1);
-    border-left: 4px solid #667eea;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 20px;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* 빈 상태 */
-.empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: #6c757d;
-}
-
-.empty-icon {
-    font-size: 64px;
-    margin-bottom: 20px;
-}
-
-.empty-state h3 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #495057;
-}
-
-.empty-state p {
-    font-size: 16px;
-    margin: 0;
-}
-
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    .feed-container {
-        padding: 20px;
-        margin: 10px;
-    }
-
-    .header {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-
-    .header h1 {
-        font-size: 28px;
-    }
-
-    .header-actions {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .feed-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    
-    /* 모바일에서 피드 이미지 크기 조정 */
-    .feed-image img {
-        max-width: 100%;
-        height: 200px;
-    }
+    border-radius: 15px;
 }
 
 /* 댓글 섹션 */
 .comments-section {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(102, 126, 234, 0.1);
-    background: rgba(248, 249, 250, 0.5);
-    border-radius: 8px;
-    padding: 15px;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(160, 174, 192, 0.2);
+    position: relative;
+}
+
+.comments-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(160, 174, 192, 0.3), transparent);
 }
 
 .comment-form {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .comment-form .input-group {
     display: flex;
-    gap: 8px;
+    gap: 12px;
+    align-items: flex-end;
 }
 
-.comment-form .form-control {
+.comment-form textarea {
     flex: 1;
-    border-radius: 20px;
-    border: 1px solid #dee2e6;
-    padding: 8px 15px;
+    padding: 12px 16px;
+    border: 2px solid rgba(79, 172, 254, 0.2);
+    border-radius: 16px;
     font-size: 14px;
+    resize: vertical;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    font-family: inherit;
 }
 
-.comment-form .btn {
-    border-radius: 20px;
-    padding: 8px 16px;
-    font-size: 14px;
+.comment-form textarea:focus {
+    outline: none;
+    border-color: #4facfe;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.comment-form button {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-weight: 600;
+    cursor: pointer;
     white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
 }
 
 .comments-list {
-    max-height: 300px;
+    max-height: 400px;
     overflow-y: auto;
+    padding: 10px 0;
 }
 
-.comment-item {
-    background: white;
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid rgba(102, 126, 234, 0.1);
+/* 로딩 및 빈 상태 */
+.text-center {
+    text-align: center;
+    padding: 40px 20px;
 }
 
-.comment-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
+.text-muted {
+    color: #718096;
 }
 
-.comment-author {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.empty-state {
+    text-align: center;
+    padding: 80px 30px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.08),
+        0 8px 15px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.comment-author strong {
-    color: #495057;
-    font-size: 14px;
+.empty-state div:first-child {
+    font-size: 80px;
+    margin-bottom: 25px;
 }
 
-.comment-date {
-    color: #6c757d;
-    font-size: 12px;
-    font-weight: normal;
+.empty-state h3 {
+    color: #4a5568;
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-size: 24px;
 }
 
-.comment-actions .btn {
-    padding: 4px 8px;
-    font-size: 12px;
+.empty-state p {
+    color: #718096;
+    font-size: 16px;
+    line-height: 1.6;
 }
 
-.comment-content {
-    font-size: 14px;
-    line-height: 1.4;
-    color: #495057;
-    white-space: pre-wrap;
+/* 로딩 스피너 */
+.spinner-border {
+    color: #4facfe;
+    width: 50px;
+    height: 50px;
+    border-width: 4px;
 }
 
-/* 애니메이션 효과 */
-.feed-container {
-    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+/* 알림 메시지 */
+.alert {
+    padding: 20px;
+    border-radius: 16px;
+    border: none;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 82, 82, 0.1) 100%);
+    color: #ff6b6b;
+    border: 2px solid rgba(255, 107, 107, 0.2);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    
+    .header {
+        flex-direction: column;
+        gap: 25px;
+        padding: 25px;
+        text-align: center;
+        border-radius: 20px;
+    }
+    
+    .header h1 {
+        font-size: 28px;
+    }
+    
+    .header-actions {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .feed-card {
+        padding: 25px;
+        border-radius: 20px;
+    }
+    
+    .feed-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .author-profile {
+        gap: 15px;
+    }
+    
+    .profile-image {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .feed-stats {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    
+    .comment-form .input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .comment-form button {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .header {
+        padding: 20px;
+    }
+    
+    .header h1 {
+        font-size: 24px;
+    }
+    
+    .feed-card {
+        padding: 20px;
+    }
+    
+    .author-name {
+        font-size: 16px;
+    }
+    
+    .feed-content p {
+        font-size: 15px;
+    }
+    
+    .like-btn, .comment-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+    
+    .header-actions .btn {
+        padding: 12px 20px;
+        font-size: 14px;
     }
 }

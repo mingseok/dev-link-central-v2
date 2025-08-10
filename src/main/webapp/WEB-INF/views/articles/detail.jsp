@@ -345,74 +345,95 @@
 <body>
 
 <div class="container">
-  <div class="header">
-    <span class="title">스터디 모집 상세보기</span>
-    <div class="button-group">
-      <button id="listBtn" onclick="listReq()">목록</button>
-      <button id="updateBtn" style="display: none;" onclick="updateReq()">수정</button>
-      <button id="deleteBtn" style="display: none;" onclick="deleteReq()">삭제</button>
+  <!-- 메인 게시글 카드 -->
+  <div class="article-main-card">
+    <!-- 헤더 -->
+    <div class="header">
+      <span class="title">스터디 모집 상세보기</span>
+      <div class="button-group">
+        <button id="listBtn" onclick="listReq()">목록</button>
+        <button id="updateBtn" style="display: none;" onclick="updateReq()">수정</button>
+        <button id="deleteBtn" style="display: none;" onclick="deleteReq()">삭제</button>
+      </div>
+      <button id="requestJoinStudyGroup" style="display:none;">스터디 그룹 가입 요청</button>
     </div>
 
-    <button id="requestJoinStudyGroup" style="display:none;">스터디 그룹 가입 요청</button>
-  </div>
-  <div class="detail-grid">
-    <div>
-      <label for="articleId">글 번호:</label>
-      <div class="detail-box" id="articleId"></div>
+    <!-- 게시글 메타 정보 -->
+    <div class="article-meta-section">
+      <div class="detail-grid">
+        <div>
+          <label for="articleId">글 번호</label>
+          <div class="detail-box" id="articleId"></div>
+        </div>
+        <div>
+          <label for="title">스터디 제목</label>
+          <div class="detail-box" id="title"></div>
+        </div>
+        <div>
+          <label for="author">작성자</label>
+          <div class="detail-box" id="author"></div>
+        </div>
+      </div>
     </div>
-    <div>
-      <label for="title">스터디 제목:</label>
-      <div class="detail-box" id="title"></div>
-    </div>
-    <div>
-      <label for="author">작성자:</label>
-      <div class="detail-box" id="author"></div>
-    </div>
-  </div>
-  <label for="content">스터디 상세 내용:</label>
-  <div class="content-box" id="content"></div>
-  <div class="stats">
-    <div class="like">
-      <button onclick="toggleLike()">좋아요</button>
-      <span id="likesCount">0</span>
-    </div>
-    <div class="views">
-      조회수: <span id="viewsCount">000</span>
-    </div>
-    <div class="date">
-      작성일: <span id="createdAt"></span>
-    </div>
-    <div class="data">
-      <div id="articleData"></div>
-    </div>
-  </div>
 
-  <hr size="10"/>
+    <!-- 게시글 내용 -->
+    <div class="article-content-section">
+      <label for="content" class="content-label">스터디 상세 내용</label>
+      <div id="content"></div>
+    </div>
 
-  <!-- 댓글 제목 -->
-  <div class="comment-title">댓글</div>
-
-  <!-- 댓글 목록 -->
-  <div id="comment-list" class="comment-list">
-    <table>
-      <thead>
-      <tr></tr>
-      </thead>
-      <tbody>
-      <!-- 댓글이 여기 삽입됩니다 -->
-      </tbody>
-    </table>
-  </div>
-
-  <!-- 더 보기 표시 -->
-  <div id="moreCommentsIndicator">
-    더 많은 댓글이 있습니다.
+    <!-- 통계 및 액션 -->
+    <div class="stats-actions-section">
+      <div class="stats">
+        <div class="stats-left">
+          <div class="like">
+            <button onclick="toggleLike()" id="like-button">좋아요</button>
+            <span id="likesCount">0</span>
+          </div>
+        </div>
+        <div class="stats-info">
+          <div class="views">
+            <span id="viewsCount">0</span>
+          </div>
+          <div class="date">
+            <span id="createdAt"></span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- 댓글 작성 부분 -->
-  <div id="comment-write" class="comment-write">
-    <input type="text" id="contents" placeholder="댓글을 입력하세요..." />
-    <button id="comment-write-btn" onclick="commentWrite()">댓글 작성</button>
+  <!-- 댓글 카드 -->
+  <div class="comments-card">
+    <!-- 댓글 헤더 -->
+    <div class="comment-header">
+      <div class="comment-title">댓글</div>
+    </div>
+
+    <!-- 댓글 목록 -->
+    <div id="comment-list" class="comment-list">
+      <table>
+        <thead>
+        <tr></tr>
+        </thead>
+        <tbody>
+        <!-- 댓글이 여기 삽입됩니다 -->
+        </tbody>
+      </table>
+
+      <!-- 더 보기 표시 -->
+      <div id="moreCommentsIndicator" style="display: none;">
+        더 많은 댓글이 있습니다.
+      </div>
+    </div>
+
+    <!-- 댓글 작성 -->
+    <div class="comment-write-section">
+      <div id="comment-write" class="comment-write">
+        <input type="text" id="contents" placeholder="댓글을 입력하세요..." />
+        <button id="comment-write-btn" onclick="commentWrite()">댓글 작성</button>
+      </div>
+    </div>
   </div>
 </div>
 </body>

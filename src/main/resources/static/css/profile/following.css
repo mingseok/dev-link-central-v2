@@ -1,0 +1,530 @@
+/* 전역 스타일 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* 메인 컨테이너 */
+.following-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    min-height: 100vh;
+}
+
+/* 헤더 섹션 */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.brand-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.brand-icon {
+    font-size: 32px;
+    color: #4facfe;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+    font-size: 14px;
+    color: #718096;
+    margin: 5px 0 0 0;
+    font-weight: 400;
+}
+
+.header-right {
+    display: flex;
+    gap: 15px;
+}
+
+/* 버튼 공통 스타일 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover:before {
+    left: 100%;
+}
+
+.btn-back {
+    background: #f7fafc;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+}
+
+.btn-back:hover {
+    background: #edf2f7;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 컨텐츠 섹션 */
+.content-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+/* 팔로잉 리스트 */
+.following-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+/* 팔로잉 카드 */
+.following-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(79, 172, 254, 0.1);
+    border-radius: 16px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.following-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(79, 172, 254, 0.15);
+    border-color: rgba(79, 172, 254, 0.2);
+}
+
+/* 아바타 섹션 */
+.following-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.avatar-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 20px rgba(79, 172, 254, 0.3);
+    transition: all 0.3s ease;
+}
+
+.following-card:hover .avatar-circle {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(79, 172, 254, 0.4);
+}
+
+.status-badge {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 16px;
+    height: 16px;
+    background: #48bb78;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 팔로잉 정보 */
+.following-info {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.following-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.3px;
+}
+
+.following-join-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #718096;
+    margin: 0;
+    background: #f7fafc;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+}
+
+.following-join-date i {
+    color: #4facfe;
+    font-size: 12px;
+}
+
+/* 팔로잉 액션 */
+.following-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-view {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+.btn-view:hover {
+    background: linear-gradient(135deg, #3d8bfe 0%, #00d4fe 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 172, 254, 0.3);
+}
+
+.btn-unfollow {
+    background: #f7fafc;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+}
+
+.btn-unfollow:hover {
+    background: #fed7d7;
+    color: #e53e3e;
+    border-color: #feb2b2;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(229, 62, 62, 0.2);
+}
+
+.btn-retry {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+    color: white;
+}
+
+.btn-retry:hover {
+    background: linear-gradient(135deg, #ff5252 0%, #ff1744 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+}
+
+/* 상태 메시지들 */
+.loading-state,
+.empty-state,
+.error-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px;
+    grid-column: 1 / -1;
+}
+
+.loading-spinner {
+    font-size: 48px;
+    color: #4facfe;
+    margin-bottom: 25px;
+}
+
+.empty-icon,
+.error-icon {
+    font-size: 64px;
+    margin-bottom: 25px;
+    opacity: 0.6;
+}
+
+.empty-icon {
+    color: #4facfe;
+}
+
+.error-icon {
+    color: #ff6b6b;
+}
+
+.loading-state h3,
+.empty-state h3,
+.error-state h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #2d3748;
+}
+
+.loading-state p,
+.empty-state p,
+.error-state p {
+    font-size: 16px;
+    color: #718096;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    max-width: 400px;
+}
+
+/* 애니메이션 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+    .following-list {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+    
+    .content-section {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .following-container {
+        padding: 20px 15px;
+    }
+    
+    .header-section {
+        flex-direction: column;
+        gap: 20px;
+        padding: 25px 20px;
+        text-align: center;
+    }
+    
+    .brand-info {
+        justify-content: center;
+    }
+    
+    .page-title {
+        font-size: 24px;
+    }
+    
+    .content-section {
+        padding: 25px 20px;
+    }
+    
+    .following-list {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .following-card {
+        padding: 20px;
+    }
+    
+    .avatar-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+    
+    .following-name {
+        font-size: 16px;
+    }
+    
+    .btn {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .following-container {
+        padding: 15px 10px;
+    }
+    
+    .header-section {
+        padding: 20px 15px;
+        margin-bottom: 25px;
+    }
+    
+    .brand-icon {
+        font-size: 28px;
+    }
+    
+    .page-title {
+        font-size: 20px;
+    }
+    
+    .page-subtitle {
+        font-size: 12px;
+    }
+    
+    .content-section {
+        padding: 20px 15px;
+    }
+    
+    .following-card {
+        padding: 15px;
+    }
+    
+    .avatar-circle {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .following-name {
+        font-size: 15px;
+    }
+    
+    .following-join-date {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+    
+    .btn {
+        padding: 8px 14px;
+        font-size: 12px;
+        gap: 6px;
+    }
+    
+    .loading-state,
+    .empty-state,
+    .error-state {
+        padding: 60px 20px;
+    }
+    
+    .empty-icon,
+    .error-icon {
+        font-size: 48px;
+    }
+    
+    .loading-state h3,
+    .empty-state h3,
+    .error-state h3 {
+        font-size: 20px;
+    }
+    
+    .loading-state p,
+    .empty-state p,
+    .error-state p {
+        font-size: 14px;
+    }
+}
+
+/* 다크 모드 지원 (미래 확장성) */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    }
+    
+    .header-section,
+    .content-section {
+        background: rgba(45, 55, 72, 0.95);
+        color: #e2e8f0;
+    }
+    
+    .following-card {
+        background: rgba(45, 55, 72, 0.9);
+        border-color: rgba(79, 172, 254, 0.2);
+    }
+    
+    .page-title,
+    .following-name {
+        color: #e2e8f0;
+    }
+    
+    .page-subtitle,
+    .following-join-date {
+        color: #a0aec0;
+    }
+    
+    .following-join-date {
+        background: rgba(26, 32, 44, 0.8);
+    }
+    
+    .btn-back {
+        background: rgba(26, 32, 44, 0.8);
+        color: #e2e8f0;
+        border-color: rgba(79, 172, 254, 0.3);
+    }
+    
+    .btn-unfollow {
+        background: rgba(26, 32, 44, 0.8);
+        color: #e2e8f0;
+        border-color: rgba(229, 62, 62, 0.3);
+    }
+}

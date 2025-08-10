@@ -12,4 +12,9 @@ public class FollowViewController {
     public String followers() {
         return "profile/followers";
     }
+
+    @GetMapping("/following")
+    public String following() {
+        return "profile/following";
+    }
 }

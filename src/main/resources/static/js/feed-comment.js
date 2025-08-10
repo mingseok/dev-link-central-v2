@@ -3,11 +3,11 @@ class FeedCommentManager {
         this.feedId = feedId;
         this.currentUserId = this.getCurrentUserId();
         this.isSubmitting = false; // 중복 제출 방지 플래그
-        
+
         if (typeof AuthManager === 'undefined' && typeof jwt !== 'undefined') {
             this.jwt = jwt;
         }
-        
+
         this.initializeEventListeners();
         this.loadComments();
     }
@@ -39,13 +39,13 @@ class FeedCommentManager {
                 ...this.getAuthHeaders(),
                 ...(options.headers || {})
             };
-            
+
             const config = {
                 ...options,
                 headers,
                 credentials: 'include'
             };
-            
+
             const response = await fetch(url, config);
             return response;
         }
@@ -81,7 +81,7 @@ class FeedCommentManager {
         try {
             const response = await this.makeRequest("/api/v1/feeds/" + this.feedId + "/comments");
             const result = await response.json();
-            
+
             if (result.status === 'SUCCESS') {
                 this.renderComments(result.data);
             } else {
@@ -95,11 +95,11 @@ class FeedCommentManager {
     async handleCommentSubmit(e) {
         e.preventDefault();
         e.stopPropagation();
-        
+
         if (this.isSubmitting) return;
         const form = e.target;
         const content = $(form).find('textarea[name="content"]').val().trim();
-        
+
         if (!content) {
             Swal.fire("알림", "댓글 내용을 입력해주세요.", "warning");
             return;
@@ -117,17 +117,17 @@ class FeedCommentManager {
             });
 
             const result = await response.json();
-            
+
             if (result.status === 'SUCCESS') {
                 $(form)[0].reset();
                 this.loadComments();
-                
-                Swal.fire({
-                    title: "댓글 작성 완료",
-                    icon: "success",
-                    timer: 1000,
-                    showConfirmButton: false
-                });
+
+                // Swal.fire({
+                //     title: "댓글 작성 완료",
+                //     icon: "success",
+                //     timer: 1000,
+                //     showConfirmButton: false
+                // });
             } else {
                 Swal.fire("오류", result.message || "댓글 작성에 실패했습니다.", "error");
             }
@@ -142,13 +142,13 @@ class FeedCommentManager {
     async handleReplySubmit(e) {
         e.preventDefault();
         e.stopPropagation();
-        
+
         if (this.isSubmitting) return;
-        
+
         const form = e.target;
         const content = $(form).find('textarea[name="content"]').val().trim();
         const parentId = $(form).find('input[name="parentId"]').val();
-        
+
         if (!content) {
             Swal.fire("알림", "답글 내용을 입력해주세요.", "warning");
             return;
@@ -166,18 +166,12 @@ class FeedCommentManager {
             });
 
             const result = await response.json();
-            
+
             if (result.status === 'SUCCESS') {
                 $(form)[0].reset();
                 this.hideReplyForm(parentId);
                 this.loadComments();
-                
-                Swal.fire({
-                    title: "답글 작성 완료",
-                    icon: "success",
-                    timer: 1000,
-                    showConfirmButton: false
-                });
+
             } else {
                 Swal.fire("오류", result.message || "답글 작성에 실패했습니다.", "error");
             }
@@ -211,16 +205,16 @@ class FeedCommentManager {
             });
 
             const apiResult = await response.json();
-            
+
             if (apiResult.status === 'SUCCESS') {
                 this.loadComments();
-                
-                Swal.fire({
-                    title: "댓글 삭제 완료",
-                    icon: "success",
-                    timer: 1000,
-                    showConfirmButton: false
-                });
+
+                // Swal.fire({
+                //     title: "댓글 삭제 완료",
+                //     icon: "success",
+                //     timer: 1000,
+                //     showConfirmButton: false
+                // });
             } else {
                 Swal.fire("오류", apiResult.message || "댓글 삭제에 실패했습니다.", "error");
             }
@@ -246,9 +240,9 @@ class FeedCommentManager {
         sortedComments.forEach(comment => {
             html += this.renderComment(comment, false);
         });
-        
+
         container.html(html);
-        
+
         // 댓글 수 업데이트
         const count = this.countTotalComments(comments);
         $(`.show-comments-btn[data-feed-id="${this.feedId}"]`).text(`💬 댓글 ${count}`);
@@ -259,24 +253,39 @@ class FeedCommentManager {
         console.log("댓글 렌더링: ", comment);
         console.log("writerId:", comment.writerId, "currentUserId:", this.currentUserId);
 
-        let html = `<div class="comment ${isReply ? 'reply' : ''}" data-comment-id="${comment.id}">
+        // 프로필 이미지 처리
+        let profileImageHtml = '';
+        if (comment.writerProfileImageUrl && comment.writerProfileImageUrl !== '/images/default.png') {
+            profileImageHtml = `<img src="${comment.writerProfileImageUrl}" alt="프로필 이미지" class="comment-author-image">`;
+        } else {
+            profileImageHtml = '<img src="/images/default.png" alt="기본 프로필 이미지" class="comment-author-image">';
+        }
+
+        let html = `
+        <div class="comment-item ${isReply ? 'reply' : ''}" data-comment-id="${comment.id}">
             <div class="comment-header">
-                <span class="comment-author">${this.escapeHtml(comment.writer)}</span>
-                <span class="comment-time">${this.formatTime(comment.createdAt)}</span>
-            </div>
-            <div class="comment-content">${this.escapeHtml(comment.content)}</div>
-            <div class="comment-actions">`;
-                
+                <div class="comment-author" onclick="goToProfile(${comment.writerId})">
+                    ${profileImageHtml}
+                    <div class="comment-author-info">
+                        <div class="comment-author-name">${this.escapeHtml(comment.writer)}</div>
+                        <div class="comment-date">${this.formatTime(comment.createdAt)}</div>
+                    </div>
+                </div>
+                <div class="comment-actions">`;
+
         // 답글이 아닌 경우에만 답글 버튼 표시 (1뎁스 제한)
         if (!isReply) {
             html += `<button type="button" class="reply-btn" data-comment-id="${comment.id}">💬 답글</button>`;
         }
-        
+
         if (isMyComment) {
-            html += `<button type="button" class="delete-comment-btn" data-comment-id="${comment.id}">🗑️ 삭제</button>`;
+            html += `<button type="button" class="comment-delete-btn delete-comment-btn" data-comment-id="${comment.id}">🗑️ 삭제</button>`;
         }
-        
-        html += `</div>`;
+
+        html += `
+                </div>
+            </div>
+            <div class="comment-content">${this.escapeHtml(comment.content)}</div>`;
 
         // 답글이 아닌 경우에만 답글 작성 폼 표시 (1뎁스 제한)
         if (!isReply) {
@@ -292,7 +301,9 @@ class FeedCommentManager {
                 </form>
             </div>`;
         }
-        
+
+        html += '</div>';
+
         // 1뎁스 답글만 표시 (답글의 답글은 표시하지 않음)
         if (comment.children && comment.children.length > 0 && !isReply) {
             html += '<div class="replies">';
@@ -301,14 +312,13 @@ class FeedCommentManager {
             });
             html += '</div>';
         }
-        
-        html += '</div>';
+
         return html;
     }
 
     showReplyForm(commentId) {
         $('.reply-form-container').hide();
-        
+
         const replyForm = $(`#replyForm-${commentId}`);
         replyForm.show();
         replyForm.find('textarea').focus();
@@ -345,7 +355,7 @@ class FeedCommentManager {
         const now = new Date();
         const diffMs = now - date;
         const diffMins = Math.floor(diffMs / 60000);
-        
+
         if (diffMins < 1) return '방금 전';
         if (diffMins < 60) return `${diffMins}분 전`;
         if (diffMins < 1440) return `${Math.floor(diffMins / 60)}시간 전`;
@@ -365,17 +375,17 @@ $(document).ready(function() {
     $(document).off('click', '.show-comments-btn').on('click', '.show-comments-btn', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        
+
         const feedId = $(this).data('feed-id');
         const commentsSection = $(`#comments-${feedId}`);
-        
+
         if (commentsSection.is(':visible')) {
             commentsSection.hide();
             $(this).text($(this).text().replace('숨기기', '보기'));
         } else {
             commentsSection.show();
             $(this).text($(this).text().replace('보기', '숨기기'));
-            
+
             if (!window.feedCommentManagers.has(feedId)) {
                 const manager = new FeedCommentManager(feedId);
                 window.feedCommentManagers.set(feedId, manager);
