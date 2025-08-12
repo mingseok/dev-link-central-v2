@@ -36,9 +36,9 @@ public class ArticleViewBatchUpdater {
             parameterSources.add(source);
         }
         
-        for (int i = 0; i < parameterSources.size(); i += BATCH_SIZE) {
-            int endIndex = Math.min(i + BATCH_SIZE, parameterSources.size());
-            List<MapSqlParameterSource> batch = parameterSources.subList(i, endIndex);
+        for (int startIndex = 0; startIndex < parameterSources.size(); startIndex += BATCH_SIZE) {
+            int endIndex = Math.min(startIndex + BATCH_SIZE, parameterSources.size());
+            List<MapSqlParameterSource> batch = parameterSources.subList(startIndex, endIndex);
             namedJdbcTemplate.batchUpdate(sql, batch.toArray(new MapSqlParameterSource[0]));
         }
     }
