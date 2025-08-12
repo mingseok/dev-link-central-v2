@@ -1,6 +1,5 @@
 package dev.devlink.article.service;
 
-import dev.devlink.article.repository.ArticleRepository;
 import dev.devlink.common.redis.RedisConstants;
 import dev.devlink.common.redis.RedisKey;
 import lombok.RequiredArgsConstructor;
@@ -8,18 +7,17 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.concurrent.TimeUnit;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
 public class ArticleViewService {
 
     private final StringRedisTemplate redisTemplate;
-    private final ArticleRepository articleRepository;
-    private final ArticleViewBatchUpdater batchUpdater;
+    private final ArticleViewBatchUpdater articleViewBatchUpdater;
 
     public void increaseViewCount(Long articleId, Long memberId) {
         String key = RedisKey.getViewedMembersKey(articleId);
@@ -48,32 +46,28 @@ public class ArticleViewService {
     @Transactional
     public void bulkUpdateViewCounts() {
         Set<String> articleIds = redisTemplate.opsForSet().members(RedisKey.articlesSaveDbKey());
-        if (articleIds == null || articleIds.isEmpty()) return;
+        if (articleIds == null) return;
 
-        List<Object[]> batchArgs = new ArrayList<>();
-        List<Long> cacheRemoveIds = new ArrayList<>();
-        
+        Map<Long, Long> viewCounts = new HashMap<>();
         for (String articleIdStr : articleIds) {
             Long articleId = Long.parseLong(articleIdStr);
             String viewCountValue = redisTemplate.opsForValue()
                     .get(RedisKey.getArticleViewKey(articleId));
-            
+
             if (viewCountValue != null) {
-                Long viewCount = Long.parseLong(viewCountValue);
-                batchArgs.add(new Object[]{viewCount, articleId});
-                cacheRemoveIds.add(articleId);
+                viewCounts.put(articleId, Long.parseLong(viewCountValue));
             }
         }
 
-        if (batchArgs.isEmpty()) {
+        if (viewCounts.isEmpty()) {
             return;
         }
-        batchUpdater.batchUpdate(batchArgs);
-        clearViewCountCache(cacheRemoveIds);
+        articleViewBatchUpdater.batchUpdate(viewCounts);
+        clearViewCountCache(viewCounts);
     }
 
-    private void clearViewCountCache(List<Long> updatedArticleIds) {
-        for (Long articleId : updatedArticleIds) {
+    private void clearViewCountCache(Map<Long, Long> viewCounts) {
+        for (Long articleId : viewCounts.keySet()) {
             redisTemplate.delete(RedisKey.getArticleViewKey(articleId));
             redisTemplate.opsForSet().remove(RedisKey.articlesSaveDbKey(), articleId.toString());
         }
