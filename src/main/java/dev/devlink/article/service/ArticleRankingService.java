@@ -56,7 +56,9 @@ public class ArticleRankingService {
         List<String> topArticleIds = redisTemplate.opsForList()
                 .range(key, RedisConstants.START_INDEX, RedisConstants.TOP_LIMIT - 1);
 
-        if (topArticleIds == null) return List.of();
+        if (topArticleIds == null) {
+            return List.of();
+        }
 
         return topArticleIds.stream()
                 .map(Long::parseLong)

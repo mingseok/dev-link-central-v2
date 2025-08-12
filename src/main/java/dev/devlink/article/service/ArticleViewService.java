@@ -47,16 +47,18 @@ public class ArticleViewService {
     @Transactional
     public void bulkUpdateViewCounts() {
         Set<String> articleIds = redisTemplate.opsForSet().members(RedisKey.articlesSaveDbKey());
-        if (articleIds == null) return;
+        if (articleIds == null) {
+            return;
+        }
 
         List<ViewCountUpdateDto> updateList = new ArrayList<>();
         List<Long> cacheRemoveIds = new ArrayList<>();
-        
+
         for (String articleIdStr : articleIds) {
             Long articleId = Long.parseLong(articleIdStr);
             String viewCountValue = redisTemplate.opsForValue()
                     .get(RedisKey.getArticleViewKey(articleId));
-            
+
             if (viewCountValue != null) {
                 Long viewCount = Long.parseLong(viewCountValue);
                 updateList.add(new ViewCountUpdateDto(articleId, viewCount));
