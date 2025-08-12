@@ -1,6 +1,6 @@
 package dev.devlink.article.service;
 
-import dev.devlink.article.repository.ArticleRepository;
+import dev.devlink.article.service.dto.ViewCountUpdateDto;
 import dev.devlink.common.redis.RedisConstants;
 import dev.devlink.common.redis.RedisKey;
 import lombok.RequiredArgsConstructor;
@@ -8,17 +8,16 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.concurrent.TimeUnit;
-import java.util.Set;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
 public class ArticleViewService {
 
     private final StringRedisTemplate redisTemplate;
-    private final ArticleRepository articleRepository;
     private final ArticleViewBatchUpdater batchUpdater;
 
     public void increaseViewCount(Long articleId, Long memberId) {
@@ -48,27 +47,29 @@ public class ArticleViewService {
     @Transactional
     public void bulkUpdateViewCounts() {
         Set<String> articleIds = redisTemplate.opsForSet().members(RedisKey.articlesSaveDbKey());
-        if (articleIds == null || articleIds.isEmpty()) return;
+        if (articleIds == null) {
+            return;
+        }
 
-        List<Object[]> batchArgs = new ArrayList<>();
+        List<ViewCountUpdateDto> updateList = new ArrayList<>();
         List<Long> cacheRemoveIds = new ArrayList<>();
-        
+
         for (String articleIdStr : articleIds) {
             Long articleId = Long.parseLong(articleIdStr);
             String viewCountValue = redisTemplate.opsForValue()
                     .get(RedisKey.getArticleViewKey(articleId));
-            
+
             if (viewCountValue != null) {
                 Long viewCount = Long.parseLong(viewCountValue);
-                batchArgs.add(new Object[]{viewCount, articleId});
+                updateList.add(new ViewCountUpdateDto(articleId, viewCount));
                 cacheRemoveIds.add(articleId);
             }
         }
 
-        if (batchArgs.isEmpty()) {
+        if (updateList.isEmpty()) {
             return;
         }
-        batchUpdater.batchUpdate(batchArgs);
+        batchUpdater.batchUpdate(updateList);
         clearViewCountCache(cacheRemoveIds);
     }
 
