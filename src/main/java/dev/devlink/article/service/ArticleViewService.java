@@ -1,5 +1,6 @@
 package dev.devlink.article.service;
 
+import dev.devlink.article.service.dto.ViewCountUpdateDto;
 import dev.devlink.common.redis.RedisConstants;
 import dev.devlink.common.redis.RedisKey;
 import lombok.RequiredArgsConstructor;
@@ -7,8 +8,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class ArticleViewService {
 
     private final StringRedisTemplate redisTemplate;
-    private final ArticleViewBatchUpdater articleViewBatchUpdater;
+    private final ArticleViewBatchUpdater batchUpdater;
 
     public void increaseViewCount(Long articleId, Long memberId) {
         String key = RedisKey.getViewedMembersKey(articleId);
@@ -48,26 +49,30 @@ public class ArticleViewService {
         Set<String> articleIds = redisTemplate.opsForSet().members(RedisKey.articlesSaveDbKey());
         if (articleIds == null) return;
 
-        Map<Long, Long> viewCounts = new HashMap<>();
+        List<ViewCountUpdateDto> updateList = new ArrayList<>();
+        List<Long> cacheRemoveIds = new ArrayList<>();
+        
         for (String articleIdStr : articleIds) {
             Long articleId = Long.parseLong(articleIdStr);
             String viewCountValue = redisTemplate.opsForValue()
                     .get(RedisKey.getArticleViewKey(articleId));
-
+            
             if (viewCountValue != null) {
-                viewCounts.put(articleId, Long.parseLong(viewCountValue));
+                Long viewCount = Long.parseLong(viewCountValue);
+                updateList.add(new ViewCountUpdateDto(articleId, viewCount));
+                cacheRemoveIds.add(articleId);
             }
         }
 
-        if (viewCounts.isEmpty()) {
+        if (updateList.isEmpty()) {
             return;
         }
-        articleViewBatchUpdater.batchUpdate(viewCounts);
-        clearViewCountCache(viewCounts);
+        batchUpdater.batchUpdate(updateList);
+        clearViewCountCache(cacheRemoveIds);
     }
 
-    private void clearViewCountCache(Map<Long, Long> viewCounts) {
-        for (Long articleId : viewCounts.keySet()) {
+    private void clearViewCountCache(List<Long> updatedArticleIds) {
+        for (Long articleId : updatedArticleIds) {
             redisTemplate.delete(RedisKey.getArticleViewKey(articleId));
             redisTemplate.opsForSet().remove(RedisKey.articlesSaveDbKey(), articleId.toString());
         }
