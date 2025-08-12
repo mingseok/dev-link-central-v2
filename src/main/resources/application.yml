@@ -9,7 +9,7 @@ spring:
     filter:
       enabled: true
   datasource:
-    url: jdbc:mysql://localhost:3306/logbook?useUnicode=true&serverTimezone=Asia/Seoul&autoReconnect=true&rewriteBatchedStatements=true
+    url: jdbc:mysql://localhost:3306/logbook?useUnicode=true&serverTimezone=Asia/Seoul&autoReconnect=true&allowMultiQueries=true
     username: seok
     password: 1234
   jpa:
