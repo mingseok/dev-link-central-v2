@@ -49,11 +49,11 @@ public class FeedController {
     }
 
     @PostMapping("/{id}/like")
-    public ResponseEntity<ApiResponse<FeedLikeResponse>> likeOrCancel(
+    public ResponseEntity<ApiResponse<FeedLikeResponse>> likeOrUnlike(
             @PathVariable Long id,
             @AuthMemberId Long memberId
     ) {
-        FeedLikeResponse response = feedLikeService.likeOrCancel(memberId, id);
+        FeedLikeResponse response = feedLikeService.likeOrUnlike(memberId, id);
         return ResponseEntity.ok(ApiResponse.success(response));
     }
 }
