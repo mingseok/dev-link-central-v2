@@ -101,6 +101,17 @@ https://github.com/user-attachments/assets/9dceb731-c221-4d3a-96ac-0dfff541e264
 - [2. 인기글 조회를 위한 MySQL 정렬 쿼리 개선](https://mingseok-blog.vercel.app/blog/TIL/2025-02/%EC%9D%B8%EA%B8%B0%EA%B8%80_%EC%A1%B0%ED%9A%8C%EB%A5%BC_%EC%9C%84%ED%95%9C_MySQL_%EC%A0%95%EB%A0%AC_%EC%BF%BC%EB%A6%AC_%EA%B0%9C%EC%84%A0)
 
 
+<br/>
 
 
-  
+## 🔖 ER 다이어그램
+
+<img width="753" height="566" alt="스크린샷 2025-08-20 오전 2 23 40" src="https://github.com/user-attachments/assets/88ea856a-15f6-4c6d-865d-45cd39eb5000" />
+
+
+
+
+
+
+
+
