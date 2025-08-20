@@ -88,6 +88,21 @@ https://github.com/user-attachments/assets/9dceb731-c221-4d3a-96ac-0dfff541e264
 <img width="1276" height="1485" alt="image" src="https://github.com/user-attachments/assets/350cf836-da81-4510-a524-71d81265f4e9" />
 
 
+<br/>
+
+<br/>
+
+## 📚 조회수 기능 Flow
+
+<img width="5923" height="2891" alt="image" src="https://github.com/user-attachments/assets/56cd2584-77e4-4d48-818c-148c914ceeea" />
+
+<br/> <br/>
+
+## 📚 인기글 기능 Flow
+
+<img width="6629" height="2890" alt="image" src="https://github.com/user-attachments/assets/0405a0da-de3f-44d3-aa07-8c6d324b77e7" />
+
+
 
 <br/>
 
