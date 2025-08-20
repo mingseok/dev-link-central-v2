@@ -22,13 +22,21 @@
 
 ## 🚀 프로젝트 목표
 
-- 많은 사용자가 동시에 접속해도 안정적으로 동작하는 서비스를 구현하기 위해 성능 개선에 집중하였습니다.
+- 조회수/랭킹 기능을 구현하면서 `“실시간 vs 배치 처리”`의 경계를 고민했고, 실시간성과 지연 반영 사이에서 최적의 균형을 찾고자 했습니다.
 
-- 읽기 쉽고 이해하기 쉬운 코드 작성을 위해 지속적인 리팩토링과 코드 개선을 진행중 입니다.
-- 단순한 기술 도입이 아닌, 명확한 목적과 근거를 바탕으로 한 기술 선택을 지향합니다.
-- 객체지향 설계 원칙을 바탕으로 확장 가능하고 유지보수가 용이한 구조 설계에 중점을 두었습니다.
-- 정상적인 경우뿐만 아니라 예외 상황까지 고려한 실용적인 테스트 코드 작성을 지향하였습니다.
+- 트래픽이 같은 게시글에 집중될 때 DB에 부하를 주지 않고 조회수를 관리하기 위해, `Redis 캐싱`과 `배치 업데이트` 방식을 도입하며 시스템 구현을 했습니다.
 
+- 인기글 Top 5 계산에서 매번 전체 데이터를 정렬하는 비효율을 개선하고자, 스케줄러 기반 캐싱으로 `O(1) 조회가 가능한 구조`를 설계했습니다.
+
+
+
+<br/>
+
+## 💭 프로젝트를 진행하며 했던 고민
+
+- [1. MySQL 부하를 줄이는 실시간 조회수 업데이트 개선](https://mingseok-blog.vercel.app/blog/TIL/2025-02/MySQL_%EB%B6%80%ED%95%98%EB%A5%BC_%EC%A4%84%EC%9D%B4%EB%8A%94_%EC%8B%A4%EC%8B%9C%EA%B0%84_%EC%A1%B0%ED%9A%8C%EC%88%98_%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8_%EA%B0%9C%EC%84%A0)
+
+- [2. 인기글 조회를 위한 MySQL 정렬 쿼리 개선](https://mingseok-blog.vercel.app/blog/TIL/2025-02/%EC%9D%B8%EA%B8%B0%EA%B8%80_%EC%A1%B0%ED%9A%8C%EB%A5%BC_%EC%9C%84%ED%95%9C_MySQL_%EC%A0%95%EB%A0%AC_%EC%BF%BC%EB%A6%AC_%EA%B0%9C%EC%84%A0)
 
 
 <br/>
@@ -106,17 +114,6 @@ https://github.com/user-attachments/assets/9dceb731-c221-4d3a-96ac-0dfff541e264
 
 <br/>
 
-<br/>
-
-
-# 💭 프로젝트를 진행하며 했던 고민
-
-- [1. MySQL 부하를 줄이는 실시간 조회수 업데이트 개선](https://mingseok-blog.vercel.app/blog/TIL/2025-02/MySQL_%EB%B6%80%ED%95%98%EB%A5%BC_%EC%A4%84%EC%9D%B4%EB%8A%94_%EC%8B%A4%EC%8B%9C%EA%B0%84_%EC%A1%B0%ED%9A%8C%EC%88%98_%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8_%EA%B0%9C%EC%84%A0)
-
-- [2. 인기글 조회를 위한 MySQL 정렬 쿼리 개선](https://mingseok-blog.vercel.app/blog/TIL/2025-02/%EC%9D%B8%EA%B8%B0%EA%B8%80_%EC%A1%B0%ED%9A%8C%EB%A5%BC_%EC%9C%84%ED%95%9C_MySQL_%EC%A0%95%EB%A0%AC_%EC%BF%BC%EB%A6%AC_%EA%B0%9C%EC%84%A0)
-
-
-<br/>
 
 
 ## 🔖 ER 다이어그램
