@@ -1,4 +1,4 @@
-# dev-link-central 프로젝트
+# DevLink 프로젝트
 
 <img width="988" height="785" alt="스크린샷 2025-08-20 오전 12 21 18" src="https://github.com/user-attachments/assets/6043c0a1-901c-4e6d-b4c3-f58dc646b2b0" />
 
