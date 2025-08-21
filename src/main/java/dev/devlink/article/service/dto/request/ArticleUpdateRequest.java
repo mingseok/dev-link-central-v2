@@ -2,11 +2,13 @@ package dev.devlink.article.service.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ArticleUpdateRequest {
 
     @NotBlank(message = "게시글 제목은 필수입니다.")

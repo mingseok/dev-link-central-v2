@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("날짜 유틸리티 테스트")
 class DateUtilsTest {
 
     @Test
