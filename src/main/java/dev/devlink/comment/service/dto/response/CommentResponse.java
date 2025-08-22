@@ -2,6 +2,7 @@ package dev.devlink.comment.service.dto.response;
 
 import dev.devlink.comment.entity.ArticleComment;
 import dev.devlink.comment.entity.FeedComment;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,13 +22,15 @@ public class CommentResponse {
     private List<CommentResponse> children = new ArrayList<>();
     private LocalDateTime createdAt;
 
+    @Builder
     private CommentResponse(
             Long id,
             String content,
             String writer,
             Long writerId,
             Long parentId,
-            LocalDateTime createdAt
+            LocalDateTime createdAt,
+            List<CommentResponse> children
     ) {
         this.id = id;
         this.content = content;
@@ -35,7 +38,10 @@ public class CommentResponse {
         this.writerId = writerId;
         this.parentId = parentId;
         this.createdAt = createdAt;
-        this.children = new ArrayList<>();
+        
+        if (children != null) {
+            this.children = children;
+        }
     }
 
     public static CommentResponse from(ArticleComment comment) {
@@ -45,7 +51,8 @@ public class CommentResponse {
                 comment.getWriterNickname(),
                 comment.getWriter().getId(),
                 comment.getParentId(),
-                comment.getCreatedAt()
+                comment.getCreatedAt(),
+                new ArrayList<>()
         );
     }
 
@@ -56,7 +63,8 @@ public class CommentResponse {
                 comment.getWriterNickname(),
                 comment.getWriter().getId(),
                 comment.getParentId(),
-                comment.getCreatedAt()
+                comment.getCreatedAt(),
+                new ArrayList<>()
         );
     }
 

@@ -1,8 +1,8 @@
 package dev.devlink.comment.entity;
 
-import dev.devlink.article.entity.Article;
 import dev.devlink.comment.exception.CommentError;
 import dev.devlink.comment.exception.CommentException;
+import dev.devlink.feed.entity.Feed;
 import dev.devlink.member.entity.Member;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,34 +14,34 @@ import org.springframework.test.util.ReflectionTestUtils;
 import static org.assertj.core.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class ArticleCommentTest {
+class FeedCommentTest {
 
     private Member member;
-    private Article article;
+    private Feed feed;
 
     @BeforeEach
     void setUp() {
         member = Member.create("testName", "test@example.com", "testNickname", "password123");
         ReflectionTestUtils.setField(member, "id", 1L);
         
-        article = Article.create(member, "Test Article", "Test content");
-        ReflectionTestUtils.setField(article, "id", 1L);
+        feed = Feed.create(member, "Test feed content", null);
+        ReflectionTestUtils.setField(feed, "id", 1L);
     }
 
     @Test
-    @DisplayName("아티클 댓글을 정상적으로 생성한다")
-    void createArticleComment() {
+    @DisplayName("피드 댓글을 정상적으로 생성한다")
+    void createFeedComment() {
         // given
         String content = "테스트 댓글입니다.";
         Long parentId = null;
 
         // when
-        ArticleComment comment = ArticleComment.create(article, member, parentId, content);
+        FeedComment comment = FeedComment.create(feed, member, parentId, content);
 
         // then
         assertThat(comment.getContent()).isEqualTo(content);
         assertThat(comment.getMember()).isEqualTo(member);
-        assertThat(comment.getArticle()).isEqualTo(article);
+        assertThat(comment.getFeed()).isEqualTo(feed);
         assertThat(comment.getParentId()).isNull();
     }
 
@@ -53,7 +53,7 @@ class ArticleCommentTest {
         Long parentId = 1L;
 
         // when
-        ArticleComment comment = ArticleComment.create(article, member, parentId, content);
+        FeedComment comment = FeedComment.create(feed, member, parentId, content);
 
         // then
         assertThat(comment.getContent()).isEqualTo(content);
@@ -61,10 +61,23 @@ class ArticleCommentTest {
     }
 
     @Test
+    @DisplayName("피드 ID를 정상적으로 반환한다")
+    void getFeedId() {
+        // given
+        FeedComment comment = FeedComment.create(feed, member, null, "테스트 댓글");
+
+        // when
+        Long feedId = comment.getFeedId();
+
+        // then
+        assertThat(feedId).isEqualTo(feed.getId());
+    }
+
+    @Test
     @DisplayName("작성자 닉네임을 정상적으로 반환한다")
     void getWriterNickname() {
         // given
-        ArticleComment comment = ArticleComment.create(article, member, null, "테스트 댓글");
+        FeedComment comment = FeedComment.create(feed, member, null, "테스트 댓글");
 
         // when
         String nickname = comment.getWriterNickname();
@@ -77,7 +90,7 @@ class ArticleCommentTest {
     @DisplayName("작성자를 정상적으로 반환한다")
     void getWriter() {
         // given
-        ArticleComment comment = ArticleComment.create(article, member, null, "테스트 댓글");
+        FeedComment comment = FeedComment.create(feed, member, null, "테스트 댓글");
 
         // when
         Member writer = comment.getWriter();
@@ -90,7 +103,7 @@ class ArticleCommentTest {
     @DisplayName("작성자가 일치하면 권한 검증을 통과한다")
     void checkAuthor_Success() {
         // given
-        ArticleComment comment = ArticleComment.create(article, member, null, "테스트 댓글");
+        FeedComment comment = FeedComment.create(feed, member, null, "테스트 댓글");
 
         // when & then
         assertThatCode(() -> comment.checkAuthor(member.getId()))
@@ -101,51 +114,12 @@ class ArticleCommentTest {
     @DisplayName("작성자가 일치하지 않으면 권한 없음 예외가 발생한다")
     void checkAuthor_NoPermission() {
         // given
-        ArticleComment comment = ArticleComment.create(article, member, null, "테스트 댓글");
+        FeedComment comment = FeedComment.create(feed, member, null, "테스트 댓글");
         Long differentMemberId = 999L;
 
         // when & then
         assertThatThrownBy(() -> comment.checkAuthor(differentMemberId))
                 .isInstanceOf(CommentException.class)
                 .hasMessage(CommentError.NO_PERMISSION.getMessage());
-    }
-
-    @Test
-    @DisplayName("Builder 패턴으로 ArticleComment를 생성한다")
-    void builderPattern() {
-        // given
-        String content = "빌더로 생성한 댓글";
-        Long parentId = 1L;
-
-        // when
-        ArticleComment comment = ArticleComment.builder()
-                .article(article)
-                .member(member)
-                .content(content)
-                .parentId(parentId)
-                .build();
-
-        // then
-        assertThat(comment.getArticle()).isEqualTo(article);
-        assertThat(comment.getMember()).isEqualTo(member);
-        assertThat(comment.getContent()).isEqualTo(content);
-        assertThat(comment.getParentId()).isEqualTo(parentId);
-    }
-
-    @Test
-    @DisplayName("create 정적 메서드로 ArticleComment를 생성한다")
-    void createStaticMethod() {
-        // given
-        String content = "정적 메서드로 생성한 댓글";
-        Long parentId = 2L;
-
-        // when
-        ArticleComment comment = ArticleComment.create(article, member, parentId, content);
-
-        // then
-        assertThat(comment.getArticle()).isEqualTo(article);
-        assertThat(comment.getMember()).isEqualTo(member);
-        assertThat(comment.getContent()).isEqualTo(content);
-        assertThat(comment.getParentId()).isEqualTo(parentId);
     }
 }
